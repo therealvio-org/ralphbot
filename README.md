@@ -26,13 +26,13 @@ Ultimately it is up to you how you want to define the environment variable, thou
 
 ## Working with the container
 
-Assuming you have Docker (or any appropriate containerisation tool) installed, and ready to go, the commands are pretty trivial:
+Assuming you have Docker (or any appropriate containerisation tool) installed, and your `$(pwd)` is `src/`, the basic commands are:
 
 ### Build the Image locally
 
 ```sh
 docker build \
--t "<name-for-container>:<tag>"
+-t "<name-for-container>:<tag>" .
 #e.g. docker build -t "ralphbot-test:unstable"
 ```
 
