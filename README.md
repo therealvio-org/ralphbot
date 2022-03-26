@@ -44,4 +44,7 @@ docker run -it \
 <name-for-container>:<tag>
 ```
 
-_Note_: BOT_TOKEN needs to be defined.
+_Notes_:
+
+- BOT_TOKEN **needs** to be defined.
+- GUILD_ID can be passed optionally, if you wish to develop slash-commands without making them global by default. Refer to: https://discord.com/developers/docs/interactions/application-commands
