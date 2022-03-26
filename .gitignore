@@ -4,7 +4,18 @@
 .envrc
 .env
 
-#asdf
+# CDK asset staging directory
+.cdk.staging
+cdk.out
+ops/node_modules
+
+# TS
+*.d.ts
+ops/src/**/*.js
+ops/test/**/*.js
+
+# yarn
+yarn-error.log
 
 # Packages #
 ############
