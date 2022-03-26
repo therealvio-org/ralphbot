@@ -1,0 +1,92 @@
+//https://github.com/bwmarrin/discordgo/blob/master/examples/slash_commands/main.go
+
+package guidefetch
+
+import (
+	"fmt"
+	"log"
+
+	"github.com/bwmarrin/discordgo"
+)
+
+var (
+	Commands = []*discordgo.ApplicationCommand{
+		//https://discord.com/developers/docs/interactions/application-commands#slash-commands
+		{
+			Name:        "fetch-guide",
+			Description: "Provides a link to materials for a given Destiny activity",
+			Options: []*discordgo.ApplicationCommandOption{
+				{
+					Name:        "raid-vow",
+					Description: "Vow of the Disciple Raid",
+					Type:        discordgo.ApplicationCommandOptionSubCommand,
+				},
+				{
+					Name:        "raid-vault",
+					Description: "Vault of Glass Raid",
+					Type:        discordgo.ApplicationCommandOptionSubCommand,
+				},
+				{
+					Name:        "raid-crypt",
+					Description: "Deep Stone Crypt Raid",
+					Type:        discordgo.ApplicationCommandOptionSubCommand,
+				},
+				{
+					Name:        "raid-garden",
+					Description: "Garden of Salvation Raid",
+					Type:        discordgo.ApplicationCommandOptionSubCommand,
+				},
+				{
+					Name:        "raid-lastwish",
+					Description: "Last Wish Raid",
+					Type:        discordgo.ApplicationCommandOptionSubCommand,
+				},
+				{
+					Name:        "dungeon-pit",
+					Description: "Pit of Heresy Dungeon",
+					Type:        discordgo.ApplicationCommandOptionSubCommand,
+				},
+			},
+		},
+	}
+
+	CommandHandlers = map[string]func(s *discordgo.Session, i *discordgo.InteractionCreate){
+		"fetch-guide": func(s *discordgo.Session, i *discordgo.InteractionCreate) {
+			content := ""
+			switch i.ApplicationCommandData().Options[0].Name {
+			case "raid-vow":
+				content = guideMessage(i, "Vow of the Disciple") +
+					"https://drive.google.com/drive/folders/1ZAPIXYlSs7yTQEdznQAqz2rOnnvpzwr7?usp=sharing"
+			case "raid-vault":
+				content = guideMessage(i, "Vault of Glass") +
+					"https://drive.google.com/drive/folders/1HLx6nVIji_3OcwnzaLeSoksspa4pfdjD?usp=sharing"
+			case "raid-crypt":
+				content = guideMessage(i, "Deep Stone Crypt") +
+					"https://drive.google.com/drive/folders/1YKU4_-hInHQ3rVEAvqIjdJaT25oQvmYc?usp=sharing"
+			case "raid-garden":
+				content = guideMessage(i, "Garden of Salvation") +
+					"https://drive.google.com/drive/folders/1pPdtAptJMaaDYRv2i-8bfaL6l3I0WTsT?usp=sharing"
+			case "raid-lastwish":
+				content = guideMessage(i, "Last Wish") +
+					"https://drive.google.com/drive/folders/1d_WEa84KuX1_9hPTwgFhl651IwywHeOg?usp=sharing"
+			case "dungeon-pit":
+				content = guideMessage(i, "Pit of Heresy") +
+					"https://drive.google.com/drive/folders/17lB7m9KQMwzBb6UHfoBt9ZEA82haD2Fd?usp=sharing"
+			default:
+				content = "Oops, something has gone wrong!\n"
+				log.Printf("fetch-guide has ran into `default` in switch statement! Value: %v", i.ApplicationCommandData().Options[0].Name)
+			}
+			s.InteractionRespond(i.Interaction, &discordgo.InteractionResponse{
+				Type: discordgo.InteractionResponseChannelMessageWithSource,
+				Data: &discordgo.InteractionResponseData{
+					Content: content,
+				},
+			})
+		},
+	}
+)
+
+func guideMessage(i *discordgo.InteractionCreate, activity string) string {
+	result := fmt.Sprintf("%s, here is your requested %s supplementary material!\n", i.Member.Mention(), activity)
+	return result
+}
