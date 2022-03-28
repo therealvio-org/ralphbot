@@ -8,13 +8,22 @@
     "build": "tsc",
     "watch": "tsc -w",
     "test": "jest",
-    "cdk": "cdk"
+    "cdk": "cdk",
+    "rimraf": "./node_modules/rimfra/bin.js",
+    "clean": "rimraf ./lib/*.js && rimraf ./lib/*.d.ts && rimraf ./src/*.js && rimraf ./src/*.d.ts && rimraf ./src/**/*.js && rimraf ./src/**/*.d.ts",
+    "eslint": "eslint . --ext .ts --ignore-pattern '*.d.ts'",
+    "prettier": "prettier --check '**/*'",
+    "lint": "yarn -s eslint && yarn -s prettier",
+    "lint:fix": "tsc && yarn -s eslint --fix && yarn -s prettier --write",
+    "deploy": "cdk deploy '*' --require-approval never",
+    "ci-deploy": "cdk deploy '*' --require-approval never --progress events"
   },
   "devDependencies": {
     "@types/jest": "^26.0.10",
     "@types/node": "10.17.27",
     "@typescript-eslint/eslint-plugin": "^4.8.1",
     "@typescript-eslint/parser": "^4.8.1",
+    "aws-cdk": "2.17.0",
     "eslint": "^7.13.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.22.1",
@@ -22,8 +31,8 @@
     "eslint-plugin-sort-imports-es6-autofix": "^0.6.0",
     "jest": "^26.4.2",
     "prettier": "^2.1.2",
+    "rimraf": "^3.0.1",
     "ts-jest": "^26.2.0",
-    "aws-cdk": "2.17.0",
     "ts-node": "^9.0.0",
     "typescript": "^4.0.5"
   },
