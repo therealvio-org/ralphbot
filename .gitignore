@@ -4,10 +4,11 @@
 .envrc
 .env
 
-# CDK asset staging directory
+# CDK, and CDK asset staging directory
 .cdk.staging
 cdk.out
 ops/node_modules
+cdk.context.json
 
 # TS
 *.d.ts
