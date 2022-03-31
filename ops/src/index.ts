@@ -3,7 +3,7 @@ import "source-map-support/register"
 import * as cdk from "aws-cdk-lib"
 import { AppExtension } from "./app"
 import { RalphbotEcrStack } from "./stacks/ralphbot-ecr-stack"
-import { RalphbotStack } from "./stacks/ralphbot-stack"
+import { RalphbotStack } from "./stacks/ralphbot-ops-stack"
 
 const {
   COMMIT: commit,
