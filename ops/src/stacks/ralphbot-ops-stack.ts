@@ -1,6 +1,7 @@
 import { AppExtensionProps } from "../app"
 import { Construct } from "constructs"
 import { Stack, StackProps } from "aws-cdk-lib"
+import { aws_ec2 as ec2 } from "aws-cdk-lib"
 import { aws_ecr as ecr } from "aws-cdk-lib"
 import { aws_ecs as ecs } from "aws-cdk-lib"
 import { aws_iam as iam } from "aws-cdk-lib"
@@ -17,6 +18,10 @@ export class RalphbotStack extends Stack {
   ) {
     super(scope, id, props)
 
+    const vpc = new ec2.Vpc(this, "vpc", {
+      maxAzs: 1
+    })
+
     const repositoryRef = ecr.Repository.fromRepositoryArn(
       this,
       "ralphbotECRRepositoryRef",
@@ -28,7 +33,9 @@ export class RalphbotStack extends Stack {
       extendedProps?.version
     )
 
-    const cluster = new ecs.Cluster(this, "Cluster")
+    const cluster = new ecs.Cluster(this, "Cluster", {
+      vpc: vpc
+    })
     const taskDefinition = new ecs.FargateTaskDefinition(
       this,
       "TaskDefinition",
@@ -72,6 +79,7 @@ export class RalphbotStack extends Stack {
       cluster,
       taskDefinition,
       circuitBreaker: { rollback: true },
+      vpcSubnets: vpc.selectSubnets({subnetType: ec2.SubnetType.PRIVATE_WITH_NAT})
     })
   }
 }
