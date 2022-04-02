@@ -19,7 +19,7 @@ export class RalphbotStack extends Stack {
     super(scope, id, props)
 
     const vpc = new ec2.Vpc(this, "vpc", {
-      maxAzs: 1
+      maxAzs: 1,
     })
 
     const repositoryRef = ecr.Repository.fromRepositoryArn(
@@ -34,7 +34,7 @@ export class RalphbotStack extends Stack {
     )
 
     const cluster = new ecs.Cluster(this, "Cluster", {
-      vpc: vpc
+      vpc: vpc,
     })
     const taskDefinition = new ecs.FargateTaskDefinition(
       this,
@@ -79,7 +79,9 @@ export class RalphbotStack extends Stack {
       cluster,
       taskDefinition,
       circuitBreaker: { rollback: true },
-      vpcSubnets: vpc.selectSubnets({subnetType: ec2.SubnetType.PRIVATE_WITH_NAT})
+      vpcSubnets: vpc.selectSubnets({
+        subnetType: ec2.SubnetType.PRIVATE_WITH_NAT,
+      }),
     })
   }
 }
