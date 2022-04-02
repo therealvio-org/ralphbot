@@ -20,11 +20,11 @@ if (!environment) {
 }
 
 if (!commit) {
-  throw new Error("ENVIRONMENT environment variable must be supplied")
+  throw new Error("COMMIT environment variable must be supplied")
 }
 
 if (!version) {
-  throw new Error("ENVIRONMENT environment variable must be supplied")
+  throw new Error("VERSION environment variable must be supplied")
 }
 
 const extendedProperties = new AppExtension({
