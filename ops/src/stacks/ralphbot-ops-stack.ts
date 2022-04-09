@@ -20,7 +20,7 @@ export class RalphbotStack extends Stack {
 
     const vpc = new ec2.Vpc(this, "vpc", {
       maxAzs: 1,
-      natGateways: 0
+      natGateways: 0,
     })
 
     const repositoryRef = ecr.Repository.fromRepositoryArn(
