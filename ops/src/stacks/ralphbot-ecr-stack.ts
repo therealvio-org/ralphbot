@@ -9,7 +9,7 @@ export class RalphbotEcrStack extends Stack {
     new ecr.Repository(this, "ralphbotECRRepository", {
       lifecycleRules: [
         {
-          maxImageCount: 5,
+          maxImageCount: 10,
         },
       ],
       repositoryName: "ralphbot/master",
