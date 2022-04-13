@@ -11,35 +11,6 @@ env:
   ENVIRONMENT: production-global
 
 jobs:
-  cdk-test: #Tweak PR workflow to just "on PR, on push to master so this job block can be dropped"
-    defaults:
-      run:
-        working-directory: ./ops/
-    name: ralphbot-cdk-stack-test
-    runs-on: ubuntu-latest
-    steps:
-      - 
-        uses: actions/checkout@v3
-      -
-        name: Set VERSION env #Use a bash expression to define a variable for job
-        run: echo "VERSION=$(date '+%Y.%m.%d'.${GITHUB_SHA::6})" >> $GITHUB_ENV
-      - 
-        name: "Build CDK App"
-        run: |
-          docker build --tag ${{ env.CDK_IMAGE_NAMETAG }}:$VERSION .
-      -
-        name: "Run prettier"
-        run: |
-          docker run -i ${{ env.CDK_IMAGE_NAMETAG }}:$VERSION prettier
-      -
-        name: "Run eslint"
-        run: |
-          docker run -i ${{ env.CDK_IMAGE_NAMETAG }}:$VERSION eslint
-      -
-        name: "Run tsc"
-        run: |
-          docker run -i ${{ env.CDK_IMAGE_NAMETAG }}:$VERSION tsc
-
   #Publish CDK Stack Container Image
   cdk-publish:
     defaults:
@@ -47,7 +18,7 @@ jobs:
         working-directory: ./ops/
     environment: production-global
     name: ralphbot-cdk-stack-publish
-    needs: cdk-test
+    #needs: cdk-test
     runs-on: ubuntu-latest
     steps:
       - 
@@ -83,7 +54,7 @@ jobs:
           docker push ${{ steps.aws-login.outputs.aws-account-id }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/${{ env.ECR_NAME }}/master:cdk-$VERSION
   
   #Build and Publish Ralphbot Container Image
-  ralphbot-build-publish:
+  ralphbot-publish:
     defaults:
       run:
         working-directory: ./src/
@@ -128,9 +99,9 @@ jobs:
   cdk-deploy:
     environment: production-global
     name: ralphbot-cdk-stack-deploy
-    needs:
-      - ralphbot-build-publish
-      - cdk-publish
+    #needs:
+    #  - ralphbot-build-publish
+    #  - cdk-publish
     runs-on: ubuntu-latest
     steps:
       -

@@ -1,0 +1,43 @@
+name: Ralphbot Test Actions
+on:
+  pull_request:
+    branches: 
+      - "*"
+    paths:
+      - ./ops/
+  push:
+    branches: [master]
+
+env:
+  COMMIT: ${GITHUB_SHA}
+  CDK_IMAGE_NAMETAG: cdk-ralphbot
+
+jobs:
+  cdk-test: #Tweak PR workflow to just "on PR, on push to master so this job block can be dropped"
+    defaults:
+      run:
+        working-directory: ./ops/
+    name: ralphbot-cdk-stack-test
+    runs-on: ubuntu-latest
+    steps:
+      - 
+        uses: actions/checkout@v3
+      -
+        name: Set VERSION env #Use a bash expression to define a variable for job
+        run: echo "VERSION=$(date '+%Y.%m.%d'.${GITHUB_SHA::6})" >> $GITHUB_ENV
+      - 
+        name: "Build CDK App"
+        run: |
+          docker build --tag ${{ env.CDK_IMAGE_NAMETAG }}:$VERSION .
+      -
+        name: "Run prettier"
+        run: |
+          docker run -i ${{ env.CDK_IMAGE_NAMETAG }}:$VERSION prettier
+      -
+        name: "Run eslint"
+        run: |
+          docker run -i ${{ env.CDK_IMAGE_NAMETAG }}:$VERSION eslint
+      -
+        name: "Run tsc"
+        run: |
+          docker run -i ${{ env.CDK_IMAGE_NAMETAG }}:$VERSION tsc
