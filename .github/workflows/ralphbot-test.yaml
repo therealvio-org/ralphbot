@@ -46,19 +46,7 @@ jobs:
       -
         run: |
           docker run -i ${{ env.CDK_IMAGE_NAMETAG }}:$VERSION ${{ matrix.task }}
-      #-
-      #  name: "Run prettier"
-      #  run: |
-      #    docker run -i ${{ env.CDK_IMAGE_NAMETAG }}:$VERSION prettier
-      #-
-      #  name: "Run eslint"
-      #  run: |
-      #    docker run -i ${{ env.CDK_IMAGE_NAMETAG }}:$VERSION eslint
-      #-
-      #  name: "Run tsc"
-      #  run: |
-      #    docker run -i ${{ env.CDK_IMAGE_NAMETAG }}:$VERSION tsc
-  ralphbot-build:
+  ralphbot-test:
     defaults:
       run:
         working-directory: ./src/
