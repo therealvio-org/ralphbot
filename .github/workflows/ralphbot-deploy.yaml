@@ -127,7 +127,7 @@ jobs:
         with:
           registry: ${{ steps.aws-login.outputs.aws-account-id }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com
       -
-        name: "Pull Ralphbot Container Image to Ralphbot ECR"
+        name: "Pull Ralphbot CDK App Image from Ralphbot ECR"
         id: pull-image
         run: |
           docker pull ${{ steps.aws-login.outputs.aws-account-id }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/${{ env.ECR_NAME }}/master:cdk-$VERSION
