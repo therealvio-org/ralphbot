@@ -106,7 +106,7 @@ jobs:
     environment: production-global
     name: ralphbot-cdk-stack-deploy
     needs:
-      - ralphbot-build-publish
+      - ralphbot-publish
       - cdk-publish
     runs-on: ubuntu-latest
     steps:
