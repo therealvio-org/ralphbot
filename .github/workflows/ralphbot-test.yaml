@@ -12,7 +12,6 @@ env:
 
 jobs:
   cdk-test:
-    environment: development
     defaults:
       run:
         working-directory: ./ops/
@@ -53,11 +52,10 @@ jobs:
         run: |
           docker run -i ${{ env.CDK_IMAGE_NAMETAG }}:$VERSION tsc
   ralphbot-build:
-    environment: development
     defaults:
       run:
         working-directory: ./src/
-    name: ralphbot-container-build
+    name: ralphbot-container-test
     runs-on: ubuntu-latest
     steps:
       - 
