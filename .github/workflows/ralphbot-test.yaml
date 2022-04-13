@@ -1,19 +1,17 @@
 name: Ralphbot Test Actions
 on:
   pull_request:
-    branches: 
-      - "*"
-    paths:
-      - ./ops/
   push:
-    branches: [master]
+    branches: 
+      - master
 
 env:
   COMMIT: ${GITHUB_SHA}
+  APP_IMAGE_NAMETAG: ralphbot
   CDK_IMAGE_NAMETAG: cdk-ralphbot
 
 jobs:
-  cdk-test: #Tweak PR workflow to just "on PR, on push to master so this job block can be dropped"
+  cdk-test:
     defaults:
       run:
         working-directory: ./ops/
@@ -41,3 +39,19 @@ jobs:
         name: "Run tsc"
         run: |
           docker run -i ${{ env.CDK_IMAGE_NAMETAG }}:$VERSION tsc
+  ralphbot-build:
+    defaults:
+      run:
+        working-directory: ./src/
+    name: ralphbot-container-build
+    runs-on: ubuntu-latest
+    steps:
+      - 
+        uses: actions/checkout@v3
+      -
+        name: Set VERSION env #Use a bash expression to define a variable for job
+        run: echo "VERSION=$(date '+%Y.%m.%d'.${GITHUB_SHA::6})" >> $GITHUB_ENV
+      - 
+        name: "Build Ralphbot Container Image"
+        run: |
+          docker build --tag ${{ env.APP_IMAGE_NAMETAG }}:$VERSION .
