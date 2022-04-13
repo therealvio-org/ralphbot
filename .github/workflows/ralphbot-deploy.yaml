@@ -65,7 +65,7 @@ jobs:
       run:
         working-directory: ./src/
     environment: production-global
-    name: ralphbot-container-build-publish
+    name: ralphbot-container-publish
     runs-on: ubuntu-latest
     steps:
       - 
