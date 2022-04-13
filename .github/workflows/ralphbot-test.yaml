@@ -12,6 +12,10 @@ env:
 
 jobs:
   cdk-test:
+    strategy:
+      fail-fast: true
+      matrix:
+        task: [prettier, eslint, tsc]
     defaults:
       run:
         working-directory: ./ops/
@@ -40,17 +44,20 @@ jobs:
         run: |
           docker build --tag ${{ env.CDK_IMAGE_NAMETAG }}:$VERSION .
       -
-        name: "Run prettier"
         run: |
-          docker run -i ${{ env.CDK_IMAGE_NAMETAG }}:$VERSION prettier
-      -
-        name: "Run eslint"
-        run: |
-          docker run -i ${{ env.CDK_IMAGE_NAMETAG }}:$VERSION eslint
-      -
-        name: "Run tsc"
-        run: |
-          docker run -i ${{ env.CDK_IMAGE_NAMETAG }}:$VERSION tsc
+          docker run -i ${{ env.CDK_IMAGE_NAMETAG }}:$VERSION ${{ matrix.task }}
+      #-
+      #  name: "Run prettier"
+      #  run: |
+      #    docker run -i ${{ env.CDK_IMAGE_NAMETAG }}:$VERSION prettier
+      #-
+      #  name: "Run eslint"
+      #  run: |
+      #    docker run -i ${{ env.CDK_IMAGE_NAMETAG }}:$VERSION eslint
+      #-
+      #  name: "Run tsc"
+      #  run: |
+      #    docker run -i ${{ env.CDK_IMAGE_NAMETAG }}:$VERSION tsc
   ralphbot-build:
     defaults:
       run:
