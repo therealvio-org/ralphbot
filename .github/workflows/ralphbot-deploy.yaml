@@ -2,10 +2,8 @@ name: Ralphbot Master Actions
 on: 
   workflow_run:
     workflows:
-      - Ralphbot Source Code Test Actions
-      - Ralphbot CDK Test Actions
+      - Ralphbot Test Actions
     branches:
-      - extend-cicd
       - master
     types:
       - completed
