@@ -56,6 +56,16 @@ Ralphbot's infrastructure stack is defined in `./ops`. This is an AWS CDK Stack.
 
 If you intend on forking, or cloning this project for your own use, you do not necessarily need to use the CDK Stack, and can define your own infrastructure stack as you please (that's why containers are awesome!).
 
+Below is a diagram of the infrastructure stack defined in `./ops` (this may not be up to date as the CDK stack updates, but gives a general idea on how it all comes together):
+
+![aws-infrastructure-diagram](./doc/res/infra-diagram.svg)
+
+### Regarding CDK Stack as a Container Image
+
+By creating the CDK stack as a container image, it allows the CDK stack to be run in a vacuum since all the necessary `nodejs` modules, toolings, e.t.c. to be available as a portable means to deploy the CDK stack on its own. That way, to deploy the CDK stack, all that needs to be done is having a valid AWS session, and passing some environment variables into `docker run`, referencing the CDK Stack iamge along with a `ci-deploy` argument.
+
+This is especially handy when using hosted CI/CD services like Github Actions where toolings need to be specified as arguments, that can all be managed within the container - it's just a matter of telling the CI/CD services to run Docker as before (which is almost guaranteed to be available these days).
+
 ### Handling BOT_TOKEN as an AWS Secrets Manager secret
 
 It is important to note, that there are some limitations with AWS CDK when it comes to interacting with Secrets manager:
