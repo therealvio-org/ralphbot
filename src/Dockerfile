@@ -12,4 +12,5 @@ RUN CGO_ENABLED=0 go build -v -o /tmp/build/ralphbot/ ./...
 FROM public.ecr.aws/docker/library/golang:1.17.8-alpine
 WORKDIR /app
 COPY --from=build_image /tmp/build/ralphbot/ ./
+COPY --from=build_image /app/internal/dadjoke/jokes.json ./
 CMD [ "./ralphbot" ]
