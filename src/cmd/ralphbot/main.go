@@ -7,7 +7,8 @@ import (
 	"os/signal"
 
 	"github.com/bwmarrin/discordgo"
-	guidefetch "github.com/ralphbot/internal"
+	"github.com/ralphbot/internal/dadjoke"
+	"github.com/ralphbot/internal/guidefetch"
 )
 
 //Bot Parameters
@@ -29,12 +30,6 @@ func init() {
 	if err != nil {
 		log.Fatalf("Invalid bot parameters: %v", err)
 	}
-
-	s.AddHandler(func(s *discordgo.Session, i *discordgo.InteractionCreate) {
-		if h, ok := guidefetch.CommandHandlers[i.ApplicationCommandData().Name]; ok {
-			h(s, i)
-		}
-	})
 }
 
 func checkGuildId(id string) {
@@ -62,6 +57,26 @@ func checkGuildId(id string) {
 	}
 }
 
+func registerCommands(commands []*discordgo.ApplicationCommand, handler map[string]func(s *discordgo.Session, i *discordgo.InteractionCreate)) []*discordgo.ApplicationCommand {
+
+	s.AddHandler(func(s *discordgo.Session, i *discordgo.InteractionCreate) {
+		if h, ok := handler[i.ApplicationCommandData().Name]; ok {
+			h(s, i)
+		}
+	})
+
+	registeredCommands := make([]*discordgo.ApplicationCommand, len(commands))
+	for i, v := range commands {
+		cmd, err := s.ApplicationCommandCreate(s.State.User.ID, *GuildID, v)
+		if err != nil {
+			log.Panicf("Cannot create '%v' command: %v", v.Name, err)
+		}
+		registeredCommands[i] = cmd
+	}
+
+	return registeredCommands
+}
+
 func main() {
 	s.AddHandler(func(s *discordgo.Session, r *discordgo.Ready) {
 		log.Printf("Logged in as: %v#%v", s.State.User.Username, s.State.User.Discriminator)
@@ -74,14 +89,8 @@ func main() {
 	checkGuildId(*GuildID)
 
 	log.Println("Adding commands...")
-	registeredCommands := make([]*discordgo.ApplicationCommand, len(guidefetch.Commands))
-	for i, v := range guidefetch.Commands {
-		cmd, err := s.ApplicationCommandCreate(s.State.User.ID, *GuildID, v)
-		if err != nil {
-			log.Panicf("Cannot create '%v' command: %v", v.Name, err)
-		}
-		registeredCommands[i] = cmd
-	}
+	registerCommands(guidefetch.Commands, guidefetch.CommandHandlers)
+	registerCommands(dadjoke.Commands, dadjoke.CommandHandlers)
 
 	defer s.Close()
 
@@ -92,14 +101,15 @@ func main() {
 
 	if *RemoveCommands {
 		log.Println("Removing commands...")
-		// // We need to fetch the commands, since deleting requires the command ID.
-		// // We are doing this from the returned commands on line 375, because using
-		// // this will delete all the commands, which might not be desirable, so we
-		// // are deleting only the commands that we added.
-		// registeredCommands, err := s.ApplicationCommands(s.State.User.ID, *GuildID)
-		// if err != nil {
-		// 	log.Fatalf("Could not fetch registered commands: %v", err)
-		// }
+		// We need to fetch the commands, since deleting requires the command ID.
+		// We are doing this from commands defined in registerCommand() runs, because using
+		// this will delete all the commands, which might not be desirable, so we
+		// are deleting only the commands that we added.
+
+		registeredCommands, err := s.ApplicationCommands(s.State.User.ID, *GuildID)
+		if err != nil {
+			log.Fatalf("Could not fetch registered commands: %v", err)
+		}
 
 		for _, v := range registeredCommands {
 			err := s.ApplicationCommandDelete(s.State.User.ID, *GuildID, v.ID)
