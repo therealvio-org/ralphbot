@@ -42,6 +42,7 @@ docker build \
 ```sh
 docker run -it \
 -e BOT_TOKEN \
+#-e GUILD_ID \ If you're testing, uncomment this line
 <name-for-container>:<tag>
 ```
 
