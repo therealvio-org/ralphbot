@@ -55,23 +55,17 @@ var (
 			content := ""
 			switch i.ApplicationCommandData().Options[0].Name {
 			case "raid-vow":
-				content = guideMessage(i, "Vow of the Disciple") +
-					"https://drive.google.com/drive/folders/1ZAPIXYlSs7yTQEdznQAqz2rOnnvpzwr7?usp=sharing"
+				content = guideGithub(i, "Vow of the Disciple", "https://github.com/therealvio/destiny-guides/tree/master/raids/vow-of-the-disciple", "https://drive.google.com/drive/folders/1ZAPIXYlSs7yTQEdznQAqz2rOnnvpzwr7?usp=sharing")
 			case "raid-vault":
-				content = guideMessage(i, "Vault of Glass") +
-					"https://drive.google.com/drive/folders/1HLx6nVIji_3OcwnzaLeSoksspa4pfdjD?usp=sharing"
+				content = guideMessage(i, "Vault of Glass", "https://drive.google.com/drive/folders/1HLx6nVIji_3OcwnzaLeSoksspa4pfdjD?usp=sharing")
 			case "raid-crypt":
-				content = guideMessage(i, "Deep Stone Crypt") +
-					"https://drive.google.com/drive/folders/1YKU4_-hInHQ3rVEAvqIjdJaT25oQvmYc?usp=sharing"
+				content = guideMessage(i, "Deep Stone Crypt", "https://drive.google.com/drive/folders/1YKU4_-hInHQ3rVEAvqIjdJaT25oQvmYc?usp=sharing")
 			case "raid-garden":
-				content = guideMessage(i, "Garden of Salvation") +
-					"https://drive.google.com/drive/folders/1pPdtAptJMaaDYRv2i-8bfaL6l3I0WTsT?usp=sharing"
+				content = guideMessage(i, "Garden of Salvation", "https://drive.google.com/drive/folders/1pPdtAptJMaaDYRv2i-8bfaL6l3I0WTsT?usp=sharing")
 			case "raid-lastwish":
-				content = guideMessage(i, "Last Wish") +
-					"https://drive.google.com/drive/folders/1d_WEa84KuX1_9hPTwgFhl651IwywHeOg?usp=sharing"
+				content = guideMessage(i, "Last Wish", "https://drive.google.com/drive/folders/1d_WEa84KuX1_9hPTwgFhl651IwywHeOg?usp=sharing")
 			case "dungeon-pit":
-				content = guideMessage(i, "Pit of Heresy") +
-					"https://drive.google.com/drive/folders/17lB7m9KQMwzBb6UHfoBt9ZEA82haD2Fd?usp=sharing"
+				content = guideMessage(i, "Pit of Heresy", "https://drive.google.com/drive/folders/17lB7m9KQMwzBb6UHfoBt9ZEA82haD2Fd?usp=sharing")
 			default:
 				content = "Oops, something has gone wrong!\n"
 				log.Printf("fetch-guide has ran into `default` in switch statement! Value: %v", i.ApplicationCommandData().Options[0].Name)
@@ -86,7 +80,17 @@ var (
 	}
 )
 
-func guideMessage(i *discordgo.InteractionCreate, activity string) string {
-	result := fmt.Sprintf("%s, here is your requested %s supplementary material!\n", i.Member.Mention(), activity)
+func guideMessage(i *discordgo.InteractionCreate, activity string, link string) string {
+	result := fmt.Sprintf("%s, here is your requested %s supplementary material!\n %s", i.Member.Mention(), activity, link)
+	return result
+}
+
+/**
+Testing Github links in tandem with Google Drive links
+Arrow brackets are used to escape the github link to prevent previews
+*/
+
+func guideGithub(i *discordgo.InteractionCreate, activity string, ghubLink string, gdriveLink string) string {
+	result := fmt.Sprintf("%s, here is your requested %s supplementary material!\n\n Github Link: <%s>\n\nGoogle DriveLink: %s", i.Member.Mention(), activity, ghubLink, gdriveLink)
 	return result
 }
