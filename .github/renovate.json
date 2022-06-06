@@ -14,7 +14,8 @@
       "matchManagers": ["gomod"],
       "matchPaths": ["src/"],
       "automerge": true,
-      "automergeType": "branch"
+      "automergeType": "pr",
+      "automergeStrategy": "squash"
     },
     {
       "groupName": "linting dependencies",
@@ -23,28 +24,32 @@
       "matchPackagePrefixes": ["@typescript-eslint/", "eslint"],
       "matchPackagePatterns": ["eslint"],
       "automerge": true,
-      "automergeType": "branch"
+      "automergeType": "pr",
+      "automergeStrategy": "squash"
     },
     {
       "groupName": "testing dependencies",
       "matchDepTypes": ["devDependencies"],
       "matchPackageNames": ["jest", "ts-jest", "@types/jest"],
       "automerge": true,
-      "automergeType": "branch"
+      "automergeType": "pr",
+      "automergeStrategy": "squash"
     },
     {
       "groupName": "nodejs dependencies",
       "matchDepTypes": ["devDependencies"],
       "matchPackageNames": ["@types/node", "ts-node"],
       "automerge": true,
-      "automergeType": "branch"
+      "automergeType": "pr",
+      "automergeStrategy": "squash"
     },
     {
       "groupName": "nodejs runtime",
       "allowedVersions": "^16.0.0",
       "matchPackageNames": ["node"],
       "automerge": true,
-      "automergeType": "branch"
+      "automergeType": "pr",
+      "automergeStrategy": "squash"
     },
     {
       "groupName": "aws cdk dependencies",
