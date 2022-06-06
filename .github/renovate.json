@@ -3,7 +3,6 @@
   "extends": ["config:base", ":dependencyDashboard"],
   "ignorePaths": ["src/Dockerfile", "ops/Dockerfile"],
   "schedule": ["after 7am on Tuesday"],
-  "ignorePresets": [":prHourlyLimit2"],
   "packageRules": [
     {
       "groupName": "ci/cd dependencies",
