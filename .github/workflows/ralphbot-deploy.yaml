@@ -4,7 +4,7 @@ on:
     workflows:
       - Ralphbot Test Actions
     branches:
-      - master
+      - main
     types:
       - completed
 
