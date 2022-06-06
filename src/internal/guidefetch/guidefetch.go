@@ -55,7 +55,7 @@ var (
 			content := ""
 			switch i.ApplicationCommandData().Options[0].Name {
 			case "raid-vow":
-				content = guideGithub(i, "Vow of the Disciple", "https://github.com/therealvio/destiny-guides/tree/master/raids/vow-of-the-disciple", "https://drive.google.com/drive/folders/1ZAPIXYlSs7yTQEdznQAqz2rOnnvpzwr7?usp=sharing")
+				content = guideGithub(i, "Vow of the Disciple", "https://github.com/therealvio/destiny-guides/tree/main/raids/vow-of-the-disciple", "https://drive.google.com/drive/folders/1ZAPIXYlSs7yTQEdznQAqz2rOnnvpzwr7?usp=sharing")
 			case "raid-vault":
 				content = guideMessage(i, "Vault of Glass", "https://drive.google.com/drive/folders/1HLx6nVIji_3OcwnzaLeSoksspa4pfdjD?usp=sharing")
 			case "raid-crypt":
