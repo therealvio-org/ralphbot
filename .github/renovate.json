@@ -1,8 +1,9 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["config:base", ":dependencyDashboard"],
+  "extends": ["config:base", ":dependencyDashboard", ":rebaseStalePrs"],
   "ignorePaths": ["src/Dockerfile", "ops/Dockerfile"],
   "schedule": ["after 7am on Tuesday"],
+  "stabilityDays": 14,
   "packageRules": [
     {
       "groupName": "ci/cd dependencies",
@@ -18,7 +19,7 @@
       "automergeStrategy": "squash"
     },
     {
-      "groupName": "linting dependencies",
+      "groupName": "ts linting dependencies",
       "matchDepTypes": ["devDependencies"],
       "matchPackageNames": ["prettier"],
       "matchPackagePrefixes": ["@typescript-eslint/", "eslint"],
@@ -28,17 +29,9 @@
       "automergeStrategy": "squash"
     },
     {
-      "groupName": "testing dependencies",
+      "groupName": "ts testing dependencies",
       "matchDepTypes": ["devDependencies"],
       "matchPackageNames": ["jest", "ts-jest", "@types/jest"],
-      "automerge": true,
-      "automergeType": "pr",
-      "automergeStrategy": "squash"
-    },
-    {
-      "groupName": "nodejs dependencies",
-      "matchDepTypes": ["devDependencies"],
-      "matchPackageNames": ["@types/node", "ts-node"],
       "automerge": true,
       "automergeType": "pr",
       "automergeStrategy": "squash"
@@ -52,8 +45,24 @@
       "automergeStrategy": "squash"
     },
     {
+      "groupName": "nodejs dependencies",
+      "matchDepTypes": ["devDependencies"],
+      "matchPackageNames": ["@types/node", "ts-node"],
+      "automerge": true,
+      "automergeType": "pr",
+      "automergeStrategy": "squash"
+    },
+    {
       "groupName": "aws cdk dependencies",
       "matchPackageNames": ["constructs", "aws-cdk", "aws-cdk-lib"]
+    },
+    {
+      "matchPackagePatterns": ["*"],
+      "matchUpdateTypes": ["minor", "patch", "digest"],
+      "groupName": "all non-major dependencies",
+      "groupSlug": "all-minor-patch",
+      "automerge": true,
+      "automergeType": "branch"
     }
   ]
 }
