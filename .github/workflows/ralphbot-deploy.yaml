@@ -49,7 +49,7 @@ jobs:
           docker build --tag ${{ env.CDK_IMAGE_NAMETAG }}:$VERSION .
       -
         name: "Login to Ralphbot ECR"
-        uses: docker/login-action@v1
+        uses: docker/login-action@v2
         with:
           registry: ${{ steps.aws-login.outputs.aws-account-id }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com
       -
@@ -92,7 +92,7 @@ jobs:
           docker build --tag ${{ env.APP_IMAGE_NAMETAG }}:$VERSION .
       -
         name: "Login to Ralphbot ECR"
-        uses: docker/login-action@v1
+        uses: docker/login-action@v2
         with:
           registry: ${{ steps.aws-login.outputs.aws-account-id }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com
       -
@@ -123,7 +123,7 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }}
       -
         name: "Login to Ralphbot ECR"
-        uses: docker/login-action@v1
+        uses: docker/login-action@v2
         with:
           registry: ${{ steps.aws-login.outputs.aws-account-id }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com
       -
