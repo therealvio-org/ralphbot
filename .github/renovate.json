@@ -1,0 +1,45 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:base", ":dependencyDashboard"],
+  "ignorePaths": ["src/Dockerfile", "ops/Dockerfile"],
+  "schedule": ["after 7am on Tuesday"],
+  "ignorePresets": [":prHourlyLimit2"],
+  "packageRules": [
+    {
+      "groupName": "ci/cd dependencies",
+      "matchManagers": ["github-actions"],
+      "matchPaths": [".github/workflows/"]
+    },
+    {
+      "groupName": "ralphbot dependencies",
+      "matchManagers": ["gomod"],
+      "matchPaths": ["src/"]
+    },
+    {
+      "groupName": "linting dependencies",
+      "matchDepTypes": ["devDependencies"],
+      "matchPackageNames": ["prettier"],
+      "matchPackagePrefixes": ["@typescript-eslint/", "eslint"],
+      "matchPackagePatterns": ["eslint"]
+    },
+    {
+      "groupName": "testing dependencies",
+      "matchDepTypes": ["devDependencies"],
+      "matchPackageNames": ["jest", "ts-jest", "@types/jest"]
+    },
+    {
+      "groupName": "nodejs dependencies",
+      "matchDepTypes": ["devDependencies"],
+      "matchPackageNames": ["@types/node", "ts-node"]
+    },
+    {
+      "groupName": "nodejs runtime",
+      "allowedVersions": "^16.0.0",
+      "matchPackageNames": ["node"]
+    },
+    {
+      "groupName": "aws cdk dependencies",
+      "matchPackageNames": ["constructs", "aws-cdk", "aws-cdk-lib"]
+    }
+  ]
+}
