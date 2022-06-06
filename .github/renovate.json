@@ -12,29 +12,39 @@
     {
       "groupName": "ralphbot dependencies",
       "matchManagers": ["gomod"],
-      "matchPaths": ["src/"]
+      "matchPaths": ["src/"],
+      "automerge": true,
+      "automergeType": "branch"
     },
     {
       "groupName": "linting dependencies",
       "matchDepTypes": ["devDependencies"],
       "matchPackageNames": ["prettier"],
       "matchPackagePrefixes": ["@typescript-eslint/", "eslint"],
-      "matchPackagePatterns": ["eslint"]
+      "matchPackagePatterns": ["eslint"],
+      "automerge": true,
+      "automergeType": "branch"
     },
     {
       "groupName": "testing dependencies",
       "matchDepTypes": ["devDependencies"],
-      "matchPackageNames": ["jest", "ts-jest", "@types/jest"]
+      "matchPackageNames": ["jest", "ts-jest", "@types/jest"],
+      "automerge": true,
+      "automergeType": "branch"
     },
     {
       "groupName": "nodejs dependencies",
       "matchDepTypes": ["devDependencies"],
-      "matchPackageNames": ["@types/node", "ts-node"]
+      "matchPackageNames": ["@types/node", "ts-node"],
+      "automerge": true,
+      "automergeType": "branch"
     },
     {
       "groupName": "nodejs runtime",
       "allowedVersions": "^16.0.0",
-      "matchPackageNames": ["node"]
+      "matchPackageNames": ["node"],
+      "automerge": true,
+      "automergeType": "branch"
     },
     {
       "groupName": "aws cdk dependencies",
