@@ -31,14 +31,14 @@
     "eslint-plugin-sort-imports-es6-autofix": "^0.6.0",
     "jest": "^26.4.2",
     "prettier": "^2.1.2",
-    "rimraf": "^3.0.1",
+    "rimraf": "3.0.2",
     "ts-jest": "^26.2.0",
     "ts-node": "^9.0.0",
-    "typescript": "^4.0.5"
+    "typescript": "4.6.3"
   },
   "dependencies": {
     "aws-cdk-lib": "2.27.0",
     "constructs": "10.0.96",
-    "source-map-support": "^0.5.16"
+    "source-map-support": "0.5.21"
   }
 }
