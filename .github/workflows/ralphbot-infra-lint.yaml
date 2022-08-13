@@ -1,0 +1,41 @@
+name: Ralphbot Infra Stack Test
+on:
+  push:
+    paths:
+      - "ops/**"
+      - ".github/workflows/ralphbot*.yaml"
+
+env:
+  COMMIT: ${GITHUB_SHA}
+  CDK_IMAGE_NAMETAG: cdk-ralphbot
+
+jobs:
+  cdk-test:
+    strategy:
+      fail-fast: true
+      matrix:
+        task: [prettier, eslint, tsc]
+    defaults:
+      run:
+        working-directory: ./ops/
+    name: ralphbot-cdk-stack-test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set VERSION env #Use a bash expression to define a variable for job
+        run: echo "VERSION=$(date '+%Y.%m.%d'.${GITHUB_SHA::6})" >> $GITHUB_ENV
+      - name: "Configure AWS Credentials"
+        id: aws-login
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+      - name: "Login to Public ECR" #Perform authenticated pulls
+        run: |
+          aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws
+      - name: "Build CDK App"
+        run: |
+          docker build --tag ${{ env.CDK_IMAGE_NAMETAG }}:$VERSION .
+      - run: |
+          docker run -i ${{ env.CDK_IMAGE_NAMETAG }}:$VERSION ${{ matrix.task }}
