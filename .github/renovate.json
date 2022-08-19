@@ -1,9 +1,8 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["config:base", ":dependencyDashboard", ":rebaseStalePrs"],
+  "extends": ["config:base", ":dependencyDashboard"],
   "ignorePaths": ["src/Dockerfile", "ops/Dockerfile"],
   "schedule": ["after 7am on Tuesday"],
-  "stabilityDays": 14,
   "packageRules": [
     {
       "groupName": "ci/cd dependencies",
@@ -19,7 +18,7 @@
       "automergeStrategy": "squash"
     },
     {
-      "groupName": "ts linting dependencies",
+      "groupName": "linting dependencies",
       "matchDepTypes": ["devDependencies"],
       "matchPackageNames": ["prettier"],
       "matchPackagePrefixes": ["@typescript-eslint/", "eslint"],
@@ -29,17 +28,9 @@
       "automergeStrategy": "squash"
     },
     {
-      "groupName": "ts testing dependencies",
+      "groupName": "testing dependencies",
       "matchDepTypes": ["devDependencies"],
       "matchPackageNames": ["jest", "ts-jest", "@types/jest"],
-      "automerge": true,
-      "automergeType": "pr",
-      "automergeStrategy": "squash"
-    },
-    {
-      "groupName": "nodejs runtime",
-      "allowedVersions": "^16.0.0",
-      "matchPackageNames": ["node"],
       "automerge": true,
       "automergeType": "pr",
       "automergeStrategy": "squash"
@@ -53,16 +44,16 @@
       "automergeStrategy": "squash"
     },
     {
-      "groupName": "aws cdk dependencies",
-      "matchPackageNames": ["constructs", "aws-cdk", "aws-cdk-lib"]
+      "groupName": "nodejs runtime",
+      "allowedVersions": "^16.0.0",
+      "matchPackageNames": ["node"],
+      "automerge": true,
+      "automergeType": "pr",
+      "automergeStrategy": "squash"
     },
     {
-      "matchPackagePatterns": ["*"],
-      "matchUpdateTypes": ["minor", "patch", "digest"],
-      "groupName": "all non-major dependencies",
-      "groupSlug": "all-minor-patch",
-      "automerge": true,
-      "automergeType": "branch"
+      "groupName": "aws cdk dependencies",
+      "matchPackageNames": ["constructs", "aws-cdk", "aws-cdk-lib"]
     }
   ]
 }
