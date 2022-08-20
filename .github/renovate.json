@@ -2,7 +2,7 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["config:base", ":dependencyDashboard"],
   "ignorePaths": ["src/Dockerfile", "ops/Dockerfile"],
-  "schedule": ["after 7am on Tuesday"],
+  "schedule": ["after 7am and before 7pm every weekday"],
   "packageRules": [
     {
       "groupName": "ci/cd dependencies",
