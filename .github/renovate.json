@@ -18,7 +18,6 @@
     },
     {
       "groupName": "eslint",
-      "matchDepTypes": ["devDependencies"],
       "matchPackageNames": ["prettier"],
       "matchPackagePrefixes": ["@typescript-eslint/", "eslint"],
       "matchPackagePatterns": ["eslint"],
@@ -27,14 +26,12 @@
     },
     {
       "groupName": "jest",
-      "matchDepTypes": ["devDependencies"],
       "matchPackageNames": ["jest", "ts-jest", "@types/jest"],
       "automergeType": "pr",
       "automergeStrategy": "squash"
     },
     {
       "groupName": "nodejs",
-      "matchDepTypes": ["devDependencies"],
       "matchPackageNames": ["@types/node", "ts-node"],
       "automergeType": "pr",
       "automergeStrategy": "squash"
