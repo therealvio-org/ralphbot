@@ -13,7 +13,6 @@
       "groupName": "ralphbot dependencies",
       "matchManagers": ["gomod"],
       "matchPaths": ["src/"],
-      "automergeType": "pr",
       "automergeStrategy": "squash"
     },
     {
@@ -21,26 +20,22 @@
       "matchPackageNames": ["prettier"],
       "matchPackagePrefixes": ["@typescript-eslint/", "eslint"],
       "matchPackagePatterns": ["eslint"],
-      "automergeType": "pr",
       "automergeStrategy": "squash"
     },
     {
       "groupName": "jest",
       "matchPackageNames": ["jest", "ts-jest", "@types/jest"],
-      "automergeType": "pr",
       "automergeStrategy": "squash"
     },
     {
       "groupName": "nodejs",
       "matchPackageNames": ["@types/node", "ts-node"],
-      "automergeType": "pr",
       "automergeStrategy": "squash"
     },
     {
       "groupName": "nodejs",
       "allowedVersions": "^16.0.0",
       "matchPackageNames": ["node"],
-      "automergeType": "pr",
       "automergeStrategy": "squash"
     },
     {
