@@ -17,7 +17,7 @@
       "automergeStrategy": "squash"
     },
     {
-      "groupName": "linting dependencies",
+      "groupName": "eslint",
       "matchDepTypes": ["devDependencies"],
       "matchPackageNames": ["prettier"],
       "matchPackagePrefixes": ["@typescript-eslint/", "eslint"],
@@ -26,28 +26,28 @@
       "automergeStrategy": "squash"
     },
     {
-      "groupName": "testing dependencies",
+      "groupName": "jest",
       "matchDepTypes": ["devDependencies"],
       "matchPackageNames": ["jest", "ts-jest", "@types/jest"],
       "automergeType": "pr",
       "automergeStrategy": "squash"
     },
     {
-      "groupName": "nodejs dependencies",
+      "groupName": "nodejs",
       "matchDepTypes": ["devDependencies"],
       "matchPackageNames": ["@types/node", "ts-node"],
       "automergeType": "pr",
       "automergeStrategy": "squash"
     },
     {
-      "groupName": "nodejs runtime",
+      "groupName": "nodejs",
       "allowedVersions": "^16.0.0",
       "matchPackageNames": ["node"],
       "automergeType": "pr",
       "automergeStrategy": "squash"
     },
     {
-      "groupName": "aws cdk dependencies",
+      "groupName": "aws cdk",
       "matchPackageNames": ["constructs", "aws-cdk", "aws-cdk-lib"]
     }
   ]
