@@ -7,7 +7,8 @@
     {
       "groupName": "ci/cd dependencies",
       "matchManagers": ["github-actions"],
-      "matchPaths": [".github/workflows/"]
+      "matchPaths": [".github/workflows/"],
+      "automergeStrategy": "squash"
     },
     {
       "groupName": "ralphbot dependencies",
@@ -40,7 +41,8 @@
     },
     {
       "groupName": "aws cdk",
-      "matchPackageNames": ["constructs", "aws-cdk", "aws-cdk-lib"]
+      "matchPackageNames": ["constructs", "aws-cdk", "aws-cdk-lib"],
+      "automergeStrategy": "squash"
     }
   ]
 }
