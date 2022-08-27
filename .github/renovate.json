@@ -15,6 +15,7 @@
       "automergeStrategy": "squash"
     },
     {
+      "groupName": "eslint",
       "matchPackagePrefixes": ["@typescript-eslint/", "eslint"],
       "automergeStrategy": "squash"
     },
