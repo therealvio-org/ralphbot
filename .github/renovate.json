@@ -15,9 +15,7 @@
       "automergeStrategy": "squash"
     },
     {
-      "matchPackageNames": ["prettier"],
       "matchPackagePrefixes": ["@typescript-eslint/", "eslint"],
-      "matchPackagePatterns": ["eslint"],
       "automergeStrategy": "squash"
     },
     {
