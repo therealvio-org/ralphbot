@@ -2,58 +2,40 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["config:base", ":dependencyDashboard"],
   "ignorePaths": ["src/Dockerfile", "ops/Dockerfile"],
-  "schedule": ["after 7am on Tuesday"],
+  "schedule": ["after 7am and before 7pm every weekday"],
   "packageRules": [
     {
-      "groupName": "ci/cd dependencies",
       "matchManagers": ["github-actions"],
-      "matchPaths": [".github/workflows/"]
-    },
-    {
-      "groupName": "ralphbot dependencies",
-      "matchManagers": ["gomod"],
-      "matchPaths": ["src/"],
-      "automerge": true,
-      "automergeType": "pr",
+      "matchPaths": [".github/workflows/"],
       "automergeStrategy": "squash"
     },
     {
-      "groupName": "linting dependencies",
-      "matchDepTypes": ["devDependencies"],
+      "matchManagers": ["gomod"],
+      "matchPaths": ["src/"],
+      "automergeStrategy": "squash"
+    },
+    {
       "matchPackageNames": ["prettier"],
       "matchPackagePrefixes": ["@typescript-eslint/", "eslint"],
       "matchPackagePatterns": ["eslint"],
-      "automerge": true,
-      "automergeType": "pr",
       "automergeStrategy": "squash"
     },
     {
-      "groupName": "testing dependencies",
-      "matchDepTypes": ["devDependencies"],
       "matchPackageNames": ["jest", "ts-jest", "@types/jest"],
-      "automerge": true,
-      "automergeType": "pr",
       "automergeStrategy": "squash"
     },
     {
-      "groupName": "nodejs dependencies",
-      "matchDepTypes": ["devDependencies"],
       "matchPackageNames": ["@types/node", "ts-node"],
-      "automerge": true,
-      "automergeType": "pr",
       "automergeStrategy": "squash"
     },
     {
-      "groupName": "nodejs runtime",
       "allowedVersions": "^16.0.0",
       "matchPackageNames": ["node"],
-      "automerge": true,
-      "automergeType": "pr",
       "automergeStrategy": "squash"
     },
     {
-      "groupName": "aws cdk dependencies",
-      "matchPackageNames": ["constructs", "aws-cdk", "aws-cdk-lib"]
+      "matchPackageNames": ["constructs", "aws-cdk", "aws-cdk-lib"],
+      "automergeStrategy": "squash"
     }
   ]
 }
