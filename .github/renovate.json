@@ -43,6 +43,7 @@
       "automergeStrategy": "squash"
     },
     {
+      "groupName": "aws-cdk",
       "matchPackageNames": ["constructs", "aws-cdk", "aws-cdk-lib"],
       "automergeStrategy": "squash"
     }
