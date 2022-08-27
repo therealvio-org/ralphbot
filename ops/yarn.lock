@@ -1113,25 +1113,25 @@ at-least-node@^1.0.0:
   resolved "https://registry.yarnpkg.com/at-least-node/-/at-least-node-1.0.0.tgz#602cd4b46e844ad4effc92a8011a3c46e0238dc2"
   integrity sha512-+q/t7Ekv1EDY2l6Gda6LLiX14rU9TV20Wa3ofeQmwPFZbOMo9DXrLbOjFaaclkXKWidIaopwAObQDqwWtGUjqg==
 
-aws-cdk-lib@2.27.0:
-  version "2.27.0"
-  resolved "https://registry.yarnpkg.com/aws-cdk-lib/-/aws-cdk-lib-2.27.0.tgz#cfc068618485b07a913f8bc3b8beea9b2d4ca767"
-  integrity sha512-CsTy/+RIBMvP9LlZjkQakkKPpwU50+HAMCMaGOcyIHADDQdXobGcZXTO+Tq00sH2DoQjPV1ZhhBim5z3k/2KXw==
+aws-cdk-lib@2.39.0:
+  version "2.39.0"
+  resolved "https://registry.yarnpkg.com/aws-cdk-lib/-/aws-cdk-lib-2.39.0.tgz#4461deb7f3daac603dc2684d6be4280c38f00489"
+  integrity sha512-YhXSE6bGS8hQxYygftp3VbaFEz19wl4B1tUAjKjW1rNs3ZpNGnW6o1AVA3Yuc5DlaELrIjXxF0/f+5SvSpYkTA==
   dependencies:
     "@balena/dockerignore" "^1.0.2"
     case "1.6.3"
     fs-extra "^9.1.0"
     ignore "^5.2.0"
-    jsonschema "^1.4.0"
+    jsonschema "^1.4.1"
     minimatch "^3.1.2"
     punycode "^2.1.1"
     semver "^7.3.7"
     yaml "1.10.2"
 
-aws-cdk@2.27.0:
-  version "2.27.0"
-  resolved "https://registry.yarnpkg.com/aws-cdk/-/aws-cdk-2.27.0.tgz#e4830b68b5262f43181607a73e4f870afe28744b"
-  integrity sha512-TAKSP4ViFqj+jktFwJl4IE4jZbQCsH32t7L/VcGY71VZV9VqvuzkjF4gGx+hrES+A/dFBtLmPXsumyJu5y0elQ==
+aws-cdk@2.39.0:
+  version "2.39.0"
+  resolved "https://registry.yarnpkg.com/aws-cdk/-/aws-cdk-2.39.0.tgz#9ba44544d97f7d114fc7a358fb17e0e414283ed0"
+  integrity sha512-qoezvJBLSLuUWioxVbxJU8n2BmZH05D9n/b9dgA6pcldchGK+xxvRzWNI2G/nmrT+l5AyPWxq7u0WbmOge6zrw==
   optionalDependencies:
     fsevents "2.3.2"
 
@@ -2683,10 +2683,10 @@ jsonfile@^6.0.1:
   optionalDependencies:
     graceful-fs "^4.1.6"
 
-jsonschema@^1.4.0:
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/jsonschema/-/jsonschema-1.4.0.tgz#1afa34c4bc22190d8e42271ec17ac8b3404f87b2"
-  integrity sha512-/YgW6pRMr6M7C+4o8kS+B/2myEpHCrxO4PEWnqJNBFMjn7EWXqlQ4tGwL6xTHeRplwuZmcAncdvfOad1nT2yMw==
+jsonschema@^1.4.1:
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/jsonschema/-/jsonschema-1.4.1.tgz#cc4c3f0077fb4542982973d8a083b6b34f482dab"
+  integrity sha512-S6cATIPVv1z0IlxdN+zUk5EPjkGCdnhN4wVSBlvoUO1tOLJootbo9CquNJmbIh4yikWHiUedhRYrNPn1arpEmQ==
 
 kleur@^3.0.3:
   version "3.0.3"
