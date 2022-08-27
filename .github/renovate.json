@@ -5,42 +5,35 @@
   "schedule": ["after 7am and before 7pm every weekday"],
   "packageRules": [
     {
-      "groupName": "ci/cd dependencies",
       "matchManagers": ["github-actions"],
       "matchPaths": [".github/workflows/"],
       "automergeStrategy": "squash"
     },
     {
-      "groupName": "ralphbot dependencies",
       "matchManagers": ["gomod"],
       "matchPaths": ["src/"],
       "automergeStrategy": "squash"
     },
     {
-      "groupName": "eslint",
       "matchPackageNames": ["prettier"],
       "matchPackagePrefixes": ["@typescript-eslint/", "eslint"],
       "matchPackagePatterns": ["eslint"],
       "automergeStrategy": "squash"
     },
     {
-      "groupName": "jest",
       "matchPackageNames": ["jest", "ts-jest", "@types/jest"],
       "automergeStrategy": "squash"
     },
     {
-      "groupName": "nodejs",
       "matchPackageNames": ["@types/node", "ts-node"],
       "automergeStrategy": "squash"
     },
     {
-      "groupName": "nodejs",
       "allowedVersions": "^16.0.0",
       "matchPackageNames": ["node"],
       "automergeStrategy": "squash"
     },
     {
-      "groupName": "aws cdk",
       "matchPackageNames": ["constructs", "aws-cdk", "aws-cdk-lib"],
       "automergeStrategy": "squash"
     }
