@@ -11,8 +11,14 @@
       "automergeStrategy": "squash"
     },
     {
+      "groupName": "golang",
       "matchManagers": ["gomod"],
-      "matchPaths": ["src/"],
+      "automergeStrategy": "squash"
+    },
+    {
+      "groupName": "golang",
+      "matchManagers": ["gomod"],
+      "matchPackageNames": ["go"],
       "automergeStrategy": "squash"
     },
     {
