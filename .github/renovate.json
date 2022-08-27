@@ -25,10 +25,12 @@
       "automergeStrategy": "squash"
     },
     {
+      "groupName": "nodejs",
       "matchPackageNames": ["@types/node", "ts-node"],
       "automergeStrategy": "squash"
     },
     {
+      "groupName": "nodejs",
       "allowedVersions": "^16.0.0",
       "matchPackageNames": ["node"],
       "automergeStrategy": "squash"
