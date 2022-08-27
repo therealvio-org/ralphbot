@@ -21,6 +21,7 @@
       "automergeStrategy": "squash"
     },
     {
+      "groupName": "jest",
       "matchPackageNames": ["jest", "ts-jest", "@types/jest"],
       "automergeStrategy": "squash"
     },
