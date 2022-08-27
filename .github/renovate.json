@@ -3,6 +3,7 @@
   "extends": ["config:base", ":dependencyDashboard"],
   "ignorePaths": ["src/Dockerfile", "ops/Dockerfile"],
   "schedule": ["after 7am and before 7pm every weekday"],
+  "postUpdateOptions": ["gomodTidy", "gomodUpdateImportPaths"],
   "packageRules": [
     {
       "matchManagers": ["github-actions"],
@@ -10,25 +11,33 @@
       "automergeStrategy": "squash"
     },
     {
+      "groupName": "golang",
       "matchManagers": ["gomod"],
-      "matchPaths": ["src/"],
       "automergeStrategy": "squash"
     },
     {
-      "matchPackageNames": ["prettier"],
+      "groupName": "golang",
+      "matchManagers": ["gomod"],
+      "matchPackageNames": ["go"],
+      "automergeStrategy": "squash"
+    },
+    {
+      "groupName": "eslint",
       "matchPackagePrefixes": ["@typescript-eslint/", "eslint"],
-      "matchPackagePatterns": ["eslint"],
       "automergeStrategy": "squash"
     },
     {
+      "groupName": "jest",
       "matchPackageNames": ["jest", "ts-jest", "@types/jest"],
       "automergeStrategy": "squash"
     },
     {
+      "groupName": "nodejs",
       "matchPackageNames": ["@types/node", "ts-node"],
       "automergeStrategy": "squash"
     },
     {
+      "groupName": "nodejs",
       "allowedVersions": "^16.0.0",
       "matchPackageNames": ["node"],
       "automergeStrategy": "squash"
