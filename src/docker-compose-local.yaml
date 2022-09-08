@@ -1,0 +1,13 @@
+version: "3.8"
+services:
+  ralphbot:
+    build:
+      context: "${PWD}"
+      dockerfile: Dockerfile
+    container_name: ralphbot
+    environment:
+      - BOT_TOKEN
+      - GUILD_ID
+      - COMMIT
+      - VERSION
+      - ENVIRONMENT

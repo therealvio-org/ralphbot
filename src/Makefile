@@ -11,3 +11,7 @@ mod:
 .PHONY: build
 build: bin mod
 	GOOS=linux CGO_ENABLED=0 go build -v -o bin/ralphbot ./cmd/ralphbot
+
+.PHONY: local
+local: bin mod build
+	docker-compose -f docker-compose-local.yaml up --build
