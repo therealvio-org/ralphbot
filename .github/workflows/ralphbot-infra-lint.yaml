@@ -3,7 +3,7 @@ on:
   push:
     paths:
       - "ops/**"
-      - ".github/workflows/ralphbot*.yaml"
+      - ".github/workflows/ralphbot-infra-lint.yaml"
 
 env:
   COMMIT: ${GITHUB_SHA}
