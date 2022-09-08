@@ -62,5 +62,8 @@ Thumbs.db
 # Output of the go coverage tool, specifically when used with LiteIDE
 *.out
 
+# Build Outputs
+src/bin/
+
 # Dependency directories (remove the comment below to include it)
 # vendor/
