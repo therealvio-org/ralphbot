@@ -17,6 +17,11 @@ var (
 			Description: "Provides a link to materials for a given Destiny activity",
 			Options: []*discordgo.ApplicationCommandOption{
 				{
+					Name:        "raid-kingsfall",
+					Description: "Vow of the Disciple Raid",
+					Type:        discordgo.ApplicationCommandOptionSubCommand,
+				},
+				{
 					Name:        "raid-vow",
 					Description: "Vow of the Disciple Raid",
 					Type:        discordgo.ApplicationCommandOptionSubCommand,
@@ -54,6 +59,8 @@ var (
 		"fetch-guide": func(s *discordgo.Session, i *discordgo.InteractionCreate) {
 			content := ""
 			switch i.ApplicationCommandData().Options[0].Name {
+			case "raid-kingsfall":
+				content = guideMessage(i, "Kings Fall", "https://drive.google.com/drive/folders/1tsOVCy2SwP0rLUDQUJaDIFh5y-O0DoKn")
 			case "raid-vow":
 				content = guideGithub(i, "Vow of the Disciple", "https://github.com/therealvio/destiny-guides/tree/main/raids/vow-of-the-disciple", "https://drive.google.com/drive/folders/1ZAPIXYlSs7yTQEdznQAqz2rOnnvpzwr7?usp=sharing")
 			case "raid-vault":
