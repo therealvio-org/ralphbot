@@ -15,41 +15,45 @@ For programming language, and other tools, check out `.tool-versions` (I tend to
 - Golang Standards: https://github.com/golang-standards/project-layout
 - How do I structure my go project?: https://www.wolfe.id.au/2020/03/10/how-do-i-structure-my-go-project/
 
-## Use of BOT_TOKEN
+## Environment Variables
 
-Within the source code, you may have noticed that BOT_TOKEN is retrieving an environment variable. Personally, I use `direnv` (read more [here](https://direnv.net/)) installed via `asdf` and place a `.envrc` file in the root of the repository and work from that.
+Personally, I use `direnv` (read more [here](https://direnv.net/)) to manage my environment variables via a `.envrc` file in my projects, including this one.
 
-When deployed in "production", because the bot is running as a containerised app, the environment variable can just be passed through a secrets manager tool, like in [AWS ECS](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data-secrets.html#secrets-envvar).
+Check out `.envrc_example` for getting an idea on what environment variables you should set up for local development purposes. The sub-sections here elaborate on specific variables that are worth calling out.
+
+### Use of BOT_TOKEN
+
+This environment variable **needs** to be defined for the bot to come online. It is up to you if you want to have different tokens for different versions of the bot (e.g. `development` and `production`).
+
+When deployed in "production", because the bot is running as a containerised app, the environment variable can be passed through a secrets manager tool, like in [AWS ECS](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data-secrets.html#secrets-envvar).
 
 All in all, this makes local development portable, and doesn't require production-specific logic to be put in place.
 
 Ultimately it is up to you how you want to define the environment variable, though you need to make sure not to leak any tokens in source code :^)
 
+### Use of GUILD_ID
+
+GUILD_ID is the [ID of your discord server](https://support.discord.com/hc/en-us/articles/206346498). This value can be passed optionally.
+The benefit of passing this value as an environment variable into the bot is that command registration happens instantly for that server. This is incredibly useful for developing commands getting a faster feedback loop. When this value isn't passed, then the command is registered `globally`, meaning that it needs to propage to Discord's endpoints and can take between 40 minutes to an hour.
+
+For more details, refer to the [Discord docs on this](https://discord.com/developers/docs/interactions/application-commands#making-a-guild-command)
+
 ## Working with the container
 
-Assuming you have Docker (or any appropriate containerisation tool) installed, and your `$(pwd)` is `src/`, the basic commands are:
+Before getting started make sure:
 
-### Build the Image locally
+- You have Docker (or any appropriate containerisation tool) installed;
+- Have `make` installed;
+- You have `direnv` installed, and a `.envrc` file defined as per `.envrc_example`; and
+- Your `$(pwd)` is set to `src/`;
 
-```sh
-docker build \
--t "<name-for-container>:<tag>" .
-#e.g. docker build -t "ralphbot-test:unstable"
-```
-
-### Run the container
+you only really need to use:
 
 ```sh
-docker run -it \
--e BOT_TOKEN \
-#-e GUILD_ID \ If you're testing, uncomment this line
-<name-for-container>:<tag>
+make local
 ```
 
-_Notes_:
-
-- BOT_TOKEN **needs** to be defined.
-- GUILD_ID can be passed optionally, if you wish to develop slash-commands without making them global by default. Refer to: https://discord.com/developers/docs/interactions/application-commands
+In the `./src/Makefile`, you can see the requisite targets that are used prior to running the `docker-compose` command.
 
 ## Infrastructure
 
