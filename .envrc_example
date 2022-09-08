@@ -1,0 +1,10 @@
+#!/bin/bash
+
+#Local Development for ralphbot
+export BOT_TOKEN=""
+export GUILD_ID=""
+
+#CDK Stack Specifics
+export COMMIT=""
+export VERSION=""
+export ENVIRONMENT=""
