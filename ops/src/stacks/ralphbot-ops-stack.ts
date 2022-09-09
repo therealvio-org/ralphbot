@@ -43,6 +43,9 @@ export class RalphbotStack extends Stack {
       {
         cpu: 256,
         memoryLimitMiB: 512,
+        runtimePlatform: {
+          cpuArchitecture: ecs.CpuArchitecture.ARM64,
+        },
       }
     )
 
