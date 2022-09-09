@@ -135,9 +135,6 @@ Object {
         "RequiresCompatibilities": Array [
           "FARGATE",
         ],
-        "RuntimePlatform": Object {
-          "CpuArchitecture": "ARM64",
-        },
         "TaskRoleArn": Object {
           "Fn::GetAtt": Array [
             "TaskDefinitionTaskRoleFD40A61D",
