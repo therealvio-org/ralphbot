@@ -4,6 +4,7 @@ on:
     paths:
       - "ops/**"
       - ".github/workflows/ralphbot-infra-lint.yaml"
+      - "src/**" #Temporary hack, until golang source code linting has been added.
 
 env:
   COMMIT: ${GITHUB_SHA}

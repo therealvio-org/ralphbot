@@ -15,7 +15,7 @@ build: bin mod
 #https://stackoverflow.com/a/36308464
 
 .PHONY: build-deployment-binary
-build-fargate: bin mod
+build-deployment-binary: bin mod
 	GOARCH=arm64 GOOS=linux CGO_ENABLED=0 go build -v -o bin/ralphbot ./cmd/ralphbot
 
 .PHONY: local
