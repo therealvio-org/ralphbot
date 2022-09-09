@@ -1,101 +1,101 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Retrieve ralphbot ECR Stack Synths and snapshots 1`] = `
-Object {
-  "Parameters": Object {
-    "BootstrapVersion": Object {
+{
+  "Parameters": {
+    "BootstrapVersion": {
       "Default": "/cdk-bootstrap/hnb659fds/version",
       "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]",
       "Type": "AWS::SSM::Parameter::Value<String>",
     },
-    "SsmParameterValueralphbottokenarnsuffixC96584B6F00A464EAD1953AFF4B05118Parameter": Object {
+    "SsmParameterValueralphbottokenarnsuffixC96584B6F00A464EAD1953AFF4B05118Parameter": {
       "Default": "/ralphbot/token/arn-suffix",
       "Type": "AWS::SSM::Parameter::Value<String>",
     },
   },
-  "Resources": Object {
-    "ClusterEB0386A7": Object {
+  "Resources": {
+    "ClusterEB0386A7": {
       "Type": "AWS::ECS::Cluster",
     },
-    "ServiceD69D759B": Object {
-      "Properties": Object {
-        "Cluster": Object {
+    "ServiceD69D759B": {
+      "Properties": {
+        "Cluster": {
           "Ref": "ClusterEB0386A7",
         },
-        "DeploymentConfiguration": Object {
-          "DeploymentCircuitBreaker": Object {
+        "DeploymentConfiguration": {
+          "DeploymentCircuitBreaker": {
             "Enable": true,
             "Rollback": true,
           },
           "MaximumPercent": 200,
           "MinimumHealthyPercent": 50,
         },
-        "DeploymentController": Object {
+        "DeploymentController": {
           "Type": "ECS",
         },
         "EnableECSManagedTags": false,
         "LaunchType": "FARGATE",
-        "NetworkConfiguration": Object {
-          "AwsvpcConfiguration": Object {
+        "NetworkConfiguration": {
+          "AwsvpcConfiguration": {
             "AssignPublicIp": "ENABLED",
-            "SecurityGroups": Array [
-              Object {
-                "Fn::GetAtt": Array [
+            "SecurityGroups": [
+              {
+                "Fn::GetAtt": [
                   "ServiceSecurityGroupC96ED6A7",
                   "GroupId",
                 ],
               },
             ],
-            "Subnets": Array [
-              Object {
+            "Subnets": [
+              {
                 "Ref": "vpcPublicSubnet1Subnet2E65531E",
               },
             ],
           },
         },
-        "TaskDefinition": Object {
+        "TaskDefinition": {
           "Ref": "TaskDefinitionB36D86D9",
         },
       },
       "Type": "AWS::ECS::Service",
     },
-    "ServiceSecurityGroupC96ED6A7": Object {
-      "Properties": Object {
+    "ServiceSecurityGroupC96ED6A7": {
+      "Properties": {
         "GroupDescription": "ralphbot-ops/Service/SecurityGroup",
-        "SecurityGroupEgress": Array [
-          Object {
+        "SecurityGroupEgress": [
+          {
             "CidrIp": "0.0.0.0/0",
             "Description": "Allow all outbound traffic by default",
             "IpProtocol": "-1",
           },
         ],
-        "VpcId": Object {
+        "VpcId": {
           "Ref": "vpcA2121C38",
         },
       },
       "Type": "AWS::EC2::SecurityGroup",
     },
-    "TaskDefinitionB36D86D9": Object {
-      "Properties": Object {
-        "ContainerDefinitions": Array [
-          Object {
+    "TaskDefinitionB36D86D9": {
+      "Properties": {
+        "ContainerDefinitions": [
+          {
             "Essential": true,
-            "Image": Object {
-              "Fn::Join": Array [
+            "Image": {
+              "Fn::Join": [
                 "",
-                Array [
+                [
                   "12345678901234.dkr.ecr.foo-bar-1.",
-                  Object {
+                  {
                     "Ref": "AWS::URLSuffix",
                   },
                   "/ralphbot/master:2.0.20",
                 ],
               ],
             },
-            "LogConfiguration": Object {
+            "LogConfiguration": {
               "LogDriver": "awslogs",
-              "Options": Object {
-                "awslogs-group": Object {
+              "Options": {
+                "awslogs-group": {
                   "Ref": "TaskDefinitionralphbotContainerLogGroup2050EE52",
                 },
                 "awslogs-region": "foo-bar-1",
@@ -103,15 +103,15 @@ Object {
               },
             },
             "Name": "ralphbotContainer",
-            "Secrets": Array [
-              Object {
+            "Secrets": [
+              {
                 "Name": "BOT_TOKEN",
-                "ValueFrom": Object {
-                  "Fn::Join": Array [
+                "ValueFrom": {
+                  "Fn::Join": [
                     "",
-                    Array [
+                    [
                       "arn:",
-                      Object {
+                      {
                         "Ref": "AWS::Partition",
                       },
                       ":secretsmanager:foo-bar-1:12345678901234:secret:ralphbot/token:token::",
@@ -123,8 +123,8 @@ Object {
           },
         ],
         "Cpu": "256",
-        "ExecutionRoleArn": Object {
-          "Fn::GetAtt": Array [
+        "ExecutionRoleArn": {
+          "Fn::GetAtt": [
             "TaskDefinitionExecutionRole8D61C2FB",
             "Arn",
           ],
@@ -132,14 +132,14 @@ Object {
         "Family": "ralphbotopsTaskDefinition7E1521A2",
         "Memory": "512",
         "NetworkMode": "awsvpc",
-        "RequiresCompatibilities": Array [
+        "RequiresCompatibilities": [
           "FARGATE",
         ],
-        "RuntimePlatform": Object {
+        "RuntimePlatform": {
           "CpuArchitecture": "ARM64",
         },
-        "TaskRoleArn": Object {
-          "Fn::GetAtt": Array [
+        "TaskRoleArn": {
+          "Fn::GetAtt": [
             "TaskDefinitionTaskRoleFD40A61D",
             "Arn",
           ],
@@ -147,14 +147,14 @@ Object {
       },
       "Type": "AWS::ECS::TaskDefinition",
     },
-    "TaskDefinitionExecutionRole8D61C2FB": Object {
-      "Properties": Object {
-        "AssumeRolePolicyDocument": Object {
-          "Statement": Array [
-            Object {
+    "TaskDefinitionExecutionRole8D61C2FB": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
               "Action": "sts:AssumeRole",
               "Effect": "Allow",
-              "Principal": Object {
+              "Principal": {
                 "Service": "ecs-tasks.amazonaws.com",
               },
             },
@@ -164,34 +164,34 @@ Object {
       },
       "Type": "AWS::IAM::Role",
     },
-    "TaskDefinitionExecutionRoleDefaultPolicy1F3406F5": Object {
-      "Properties": Object {
-        "PolicyDocument": Object {
-          "Statement": Array [
-            Object {
-              "Action": Array [
+    "TaskDefinitionExecutionRoleDefaultPolicy1F3406F5": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
                 "secretsmanager:GetSecretValue",
                 "secretsmanager:DescribeSecret",
               ],
               "Effect": "Allow",
-              "Resource": Object {
-                "Fn::Join": Array [
+              "Resource": {
+                "Fn::Join": [
                   "",
-                  Array [
+                  [
                     "arn:",
-                    Object {
+                    {
                       "Ref": "AWS::Partition",
                     },
                     ":secretsmanager:foo-bar-1:12345678901234:secret:ralphbot/token-",
-                    Object {
+                    {
                       "Ref": "SsmParameterValueralphbottokenarnsuffixC96584B6F00A464EAD1953AFF4B05118Parameter",
                     },
                   ],
                 ],
               },
             },
-            Object {
-              "Action": Array [
+            {
+              "Action": [
                 "ecr:BatchCheckLayerAvailability",
                 "ecr:GetDownloadUrlForLayer",
                 "ecr:BatchGetImage",
@@ -199,36 +199,36 @@ Object {
               "Effect": "Allow",
               "Resource": "arn:aws:ecr:foo-bar-1:12345678901234:repository/ralphbot/master",
             },
-            Object {
+            {
               "Action": "ecr:GetAuthorizationToken",
               "Effect": "Allow",
               "Resource": "*",
             },
-            Object {
-              "Action": Array [
+            {
+              "Action": [
                 "logs:CreateLogStream",
                 "logs:PutLogEvents",
               ],
               "Effect": "Allow",
-              "Resource": Object {
-                "Fn::GetAtt": Array [
+              "Resource": {
+                "Fn::GetAtt": [
                   "TaskDefinitionralphbotContainerLogGroup2050EE52",
                   "Arn",
                 ],
               },
             },
-            Object {
-              "Action": Array [
+            {
+              "Action": [
                 "secretsmanager:GetSecretValue",
                 "secretsmanager:DescribeSecret",
               ],
               "Effect": "Allow",
-              "Resource": Object {
-                "Fn::Join": Array [
+              "Resource": {
+                "Fn::Join": [
                   "",
-                  Array [
+                  [
                     "arn:",
-                    Object {
+                    {
                       "Ref": "AWS::Partition",
                     },
                     ":secretsmanager:foo-bar-1:12345678901234:secret:ralphbot/token-??????",
@@ -240,22 +240,22 @@ Object {
           "Version": "2012-10-17",
         },
         "PolicyName": "TaskDefinitionExecutionRoleDefaultPolicy1F3406F5",
-        "Roles": Array [
-          Object {
+        "Roles": [
+          {
             "Ref": "TaskDefinitionExecutionRole8D61C2FB",
           },
         ],
       },
       "Type": "AWS::IAM::Policy",
     },
-    "TaskDefinitionTaskRoleFD40A61D": Object {
-      "Properties": Object {
-        "AssumeRolePolicyDocument": Object {
-          "Statement": Array [
-            Object {
+    "TaskDefinitionTaskRoleFD40A61D": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
               "Action": "sts:AssumeRole",
               "Effect": "Allow",
-              "Principal": Object {
+              "Principal": {
                 "Service": "ecs-tasks.amazonaws.com",
               },
             },
@@ -265,22 +265,22 @@ Object {
       },
       "Type": "AWS::IAM::Role",
     },
-    "TaskDefinitionralphbotContainerLogGroup2050EE52": Object {
+    "TaskDefinitionralphbotContainerLogGroup2050EE52": {
       "DeletionPolicy": "Retain",
-      "Properties": Object {
+      "Properties": {
         "RetentionInDays": 7,
       },
       "Type": "AWS::Logs::LogGroup",
       "UpdateReplacePolicy": "Retain",
     },
-    "vpcA2121C38": Object {
-      "Properties": Object {
+    "vpcA2121C38": {
+      "Properties": {
         "CidrBlock": "10.0.0.0/16",
         "EnableDnsHostnames": true,
         "EnableDnsSupport": true,
         "InstanceTenancy": "default",
-        "Tags": Array [
-          Object {
+        "Tags": [
+          {
             "Key": "Name",
             "Value": "ralphbot-ops/vpc",
           },
@@ -288,10 +288,10 @@ Object {
       },
       "Type": "AWS::EC2::VPC",
     },
-    "vpcIGWE57CBDCA": Object {
-      "Properties": Object {
-        "Tags": Array [
-          Object {
+    "vpcIGWE57CBDCA": {
+      "Properties": {
+        "Tags": [
+          {
             "Key": "Name",
             "Value": "ralphbot-ops/vpc",
           },
@@ -299,149 +299,149 @@ Object {
       },
       "Type": "AWS::EC2::InternetGateway",
     },
-    "vpcIsolatedSubnet1RouteTable0D6B2D3D": Object {
-      "Properties": Object {
-        "Tags": Array [
-          Object {
+    "vpcIsolatedSubnet1RouteTable0D6B2D3D": {
+      "Properties": {
+        "Tags": [
+          {
             "Key": "Name",
             "Value": "ralphbot-ops/vpc/IsolatedSubnet1",
           },
         ],
-        "VpcId": Object {
+        "VpcId": {
           "Ref": "vpcA2121C38",
         },
       },
       "Type": "AWS::EC2::RouteTable",
     },
-    "vpcIsolatedSubnet1RouteTableAssociation172210D4": Object {
-      "Properties": Object {
-        "RouteTableId": Object {
+    "vpcIsolatedSubnet1RouteTableAssociation172210D4": {
+      "Properties": {
+        "RouteTableId": {
           "Ref": "vpcIsolatedSubnet1RouteTable0D6B2D3D",
         },
-        "SubnetId": Object {
+        "SubnetId": {
           "Ref": "vpcIsolatedSubnet1Subnet8B28CEB3",
         },
       },
       "Type": "AWS::EC2::SubnetRouteTableAssociation",
     },
-    "vpcIsolatedSubnet1Subnet8B28CEB3": Object {
-      "Properties": Object {
+    "vpcIsolatedSubnet1Subnet8B28CEB3": {
+      "Properties": {
         "AvailabilityZone": "dummy1a",
         "CidrBlock": "10.0.128.0/17",
         "MapPublicIpOnLaunch": false,
-        "Tags": Array [
-          Object {
+        "Tags": [
+          {
             "Key": "aws-cdk:subnet-name",
             "Value": "Isolated",
           },
-          Object {
+          {
             "Key": "aws-cdk:subnet-type",
             "Value": "Isolated",
           },
-          Object {
+          {
             "Key": "Name",
             "Value": "ralphbot-ops/vpc/IsolatedSubnet1",
           },
         ],
-        "VpcId": Object {
+        "VpcId": {
           "Ref": "vpcA2121C38",
         },
       },
       "Type": "AWS::EC2::Subnet",
     },
-    "vpcPublicSubnet1DefaultRoute10708846": Object {
-      "DependsOn": Array [
+    "vpcPublicSubnet1DefaultRoute10708846": {
+      "DependsOn": [
         "vpcVPCGW7984C166",
       ],
-      "Properties": Object {
+      "Properties": {
         "DestinationCidrBlock": "0.0.0.0/0",
-        "GatewayId": Object {
+        "GatewayId": {
           "Ref": "vpcIGWE57CBDCA",
         },
-        "RouteTableId": Object {
+        "RouteTableId": {
           "Ref": "vpcPublicSubnet1RouteTable48A2DF9B",
         },
       },
       "Type": "AWS::EC2::Route",
     },
-    "vpcPublicSubnet1RouteTable48A2DF9B": Object {
-      "Properties": Object {
-        "Tags": Array [
-          Object {
+    "vpcPublicSubnet1RouteTable48A2DF9B": {
+      "Properties": {
+        "Tags": [
+          {
             "Key": "Name",
             "Value": "ralphbot-ops/vpc/PublicSubnet1",
           },
         ],
-        "VpcId": Object {
+        "VpcId": {
           "Ref": "vpcA2121C38",
         },
       },
       "Type": "AWS::EC2::RouteTable",
     },
-    "vpcPublicSubnet1RouteTableAssociation5D3F4579": Object {
-      "Properties": Object {
-        "RouteTableId": Object {
+    "vpcPublicSubnet1RouteTableAssociation5D3F4579": {
+      "Properties": {
+        "RouteTableId": {
           "Ref": "vpcPublicSubnet1RouteTable48A2DF9B",
         },
-        "SubnetId": Object {
+        "SubnetId": {
           "Ref": "vpcPublicSubnet1Subnet2E65531E",
         },
       },
       "Type": "AWS::EC2::SubnetRouteTableAssociation",
     },
-    "vpcPublicSubnet1Subnet2E65531E": Object {
-      "Properties": Object {
+    "vpcPublicSubnet1Subnet2E65531E": {
+      "Properties": {
         "AvailabilityZone": "dummy1a",
         "CidrBlock": "10.0.0.0/17",
         "MapPublicIpOnLaunch": true,
-        "Tags": Array [
-          Object {
+        "Tags": [
+          {
             "Key": "aws-cdk:subnet-name",
             "Value": "Public",
           },
-          Object {
+          {
             "Key": "aws-cdk:subnet-type",
             "Value": "Public",
           },
-          Object {
+          {
             "Key": "Name",
             "Value": "ralphbot-ops/vpc/PublicSubnet1",
           },
         ],
-        "VpcId": Object {
+        "VpcId": {
           "Ref": "vpcA2121C38",
         },
       },
       "Type": "AWS::EC2::Subnet",
     },
-    "vpcVPCGW7984C166": Object {
-      "Properties": Object {
-        "InternetGatewayId": Object {
+    "vpcVPCGW7984C166": {
+      "Properties": {
+        "InternetGatewayId": {
           "Ref": "vpcIGWE57CBDCA",
         },
-        "VpcId": Object {
+        "VpcId": {
           "Ref": "vpcA2121C38",
         },
       },
       "Type": "AWS::EC2::VPCGatewayAttachment",
     },
   },
-  "Rules": Object {
-    "CheckBootstrapVersion": Object {
-      "Assertions": Array [
-        Object {
-          "Assert": Object {
-            "Fn::Not": Array [
-              Object {
-                "Fn::Contains": Array [
-                  Array [
+  "Rules": {
+    "CheckBootstrapVersion": {
+      "Assertions": [
+        {
+          "Assert": {
+            "Fn::Not": [
+              {
+                "Fn::Contains": [
+                  [
                     "1",
                     "2",
                     "3",
                     "4",
                     "5",
                   ],
-                  Object {
+                  {
                     "Ref": "BootstrapVersion",
                   },
                 ],
