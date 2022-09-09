@@ -10,7 +10,7 @@ const {
   ENVIRONMENT: environment,
   VERSION: version,
   AWS_ACCOUNT_ID: accountId,
-  REGION: region,
+  AWS_REGION: region,
 } = process.env
 
 const projectName = `ralphbot`
