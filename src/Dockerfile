@@ -1,16 +1,13 @@
 FROM public.ecr.aws/docker/library/golang:1.18.3 as build_image
 
-#Build the fargate binary when the "build-deployment-binary" argument is passed, or use "make build" target by default
-#This argument shouldn't need to be used in a local development context unless testing the use of the argument
-ARG MAKE_TARGET="build"
-
 WORKDIR /app
 
 COPY . ./
 
 RUN go mod download && go mod verify
-
-RUN make ${MAKE_TARGET}
+RUN GOOS=linux CGO_ENABLED=0 go build -v -o bin/ralphbot ./cmd/ralphbot
+#CGO_ENABLED=0 to force a static build. Next stage of build uses an image that has libraries in different locations
+#https://stackoverflow.com/a/36308464
 
 FROM public.ecr.aws/docker/library/golang:1.18.3-alpine
 WORKDIR /app
