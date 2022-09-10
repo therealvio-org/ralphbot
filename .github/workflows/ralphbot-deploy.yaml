@@ -28,8 +28,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Set VERSION env
-        run: echo "VERSION=$(date '+%Y.%m.%d'.${GITHUB_SHA::6})" >> $GITHUB_ENV
+      - name: Set IMAGE_TAG env
+        run: |
+          echo "IMAGE_TAG="cdk-$(date '+%Y.%m.%d'.${GITHUB_SHA::6})"" >> $GITHUB_ENV
 
       - name: "Configure AWS Credentials"
         uses: aws-actions/configure-aws-credentials@v1
@@ -45,7 +46,7 @@ jobs:
 
       - name: "Build Ralphbot CDK Stack Container Image"
         run: |
-          docker build --tag ${{ env.CDK_IMAGE_NAMETAG }}:$VERSION .
+          docker build --tag ${{ env.CDK_IMAGE_NAMETAG }}:$IMAGE_TAG .
 
       - name: "Configure AWS Credentials - Change Region to Deployment Region"
         uses: aws-actions/configure-aws-credentials@v1
@@ -75,8 +76,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Set VERSION env #Use a bash expression to define a variable for job
-        run: echo "VERSION=$(date '+%Y.%m.%d'.${GITHUB_SHA::6})" >> $GITHUB_ENV
+      - name: Set IMAGE_TAG env
+        run: |
+          echo "IMAGE_TAG="$(date '+%Y.%m.%d'.${GITHUB_SHA::6})"" >> $GITHUB_ENV
 
       - name: "Configure AWS Credentials"
         uses: aws-actions/configure-aws-credentials@v1
@@ -92,7 +94,7 @@ jobs:
 
       - name: "Build Ralphbot Container Image"
         run: |
-          docker build --build-arg MAKE_TARGET=build-deployment-binary --tag ${{ env.APP_IMAGE_NAMETAG }}:$VERSION .
+          docker build --build-arg MAKE_TARGET=build-deployment-binary --tag ${{ env.APP_IMAGE_NAMETAG }}:$IMAGE_TAG .
 
       - name: "Configure AWS Credentials - Change Region to Deployment Region"
         uses: aws-actions/configure-aws-credentials@v1
@@ -119,8 +121,10 @@ jobs:
       - cdk-publish
     runs-on: ubuntu-latest
     steps:
-      - name: Set VERSION env
-        run: echo "VERSION=$(date '+%Y.%m.%d'.${GITHUB_SHA::6})" >> $GITHUB_ENV
+      - name: Set Job envs
+        run: |
+          echo "VERSION=$(date '+%Y.%m.%d'.${GITHUB_SHA::6})" >> $GITHUB_ENV
+          echo "IMAGE_TAG="cdk-$(date '+%Y.%m.%d'.${GITHUB_SHA::6})"" >> $GITHUB_ENV
 
       - name: "Configure AWS Credentials"
         id: aws-login
