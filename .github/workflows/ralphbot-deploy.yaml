@@ -32,30 +32,36 @@ jobs:
         run: echo "VERSION=$(date '+%Y.%m.%d'.${GITHUB_SHA::6})" >> $GITHUB_ENV
 
       - name: "Configure AWS Credentials"
-        id: aws-login
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ secrets.AWS_REGION }}
+          aws-region: us-east-1
 
-      - name: "Login to Public ECR"
-        run: |
-          aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws
+      - name: "Login to Amazon Public ECR"
+        uses: aws-actions/amazon-ecr-login@v1
+        with:
+          registry-type: public
 
       - name: "Build Ralphbot CDK Stack Container Image"
         run: |
           docker build --tag ${{ env.CDK_IMAGE_NAMETAG }}:$VERSION .
 
-      - name: "Login to Ralphbot ECR"
-        uses: docker/login-action@v2
+      - name: "Configure AWS Credentials - Change Region to Deployment Region"
+        uses: aws-actions/configure-aws-credentials@v1
         with:
-          registry: ${{ steps.aws-login.outputs.aws-account-id }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: "Login to Ralphbot ECR"
+        id: login-ralphbot-ecr
+        uses: aws-actions/amazon-ecr-login@v1
 
       - name: "Push Ralphbot CDK Stack Image to Ralphbot ECR"
+        env:
+          REGISTRY: ${{ steps.login-ralphbot-ecr.outputs.registry }}
         run: |
-          docker tag ${{ env.CDK_IMAGE_NAMETAG }}:$VERSION ${{ steps.aws-login.outputs.aws-account-id }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/$REPOSITORY:cdk-$VERSION
-          docker push ${{ steps.aws-login.outputs.aws-account-id }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/$REPOSITORY:cdk-$VERSION
+          docker tag ${{ env.CDK_IMAGE_NAMETAG }}:$IMAGE_TAG $REGISTRY/${{ env.REPOSITORY }}:$IMAGE_TAG
+          docker push $REGISTRY/${{ env.REPOSITORY }}:$IMAGE_TAG
 
   #Build and Publish Ralphbot Container Image
   ralphbot-publish:
@@ -72,33 +78,37 @@ jobs:
       - name: Set VERSION env #Use a bash expression to define a variable for job
         run: echo "VERSION=$(date '+%Y.%m.%d'.${GITHUB_SHA::6})" >> $GITHUB_ENV
 
-      - #Login to ECR first (this prevents rate-limiting when accessing the public ECR gallery)
-        #Configure ECR Creds
-        name: "Configure AWS Credentials"
-        id: aws-login
+      - name: "Configure AWS Credentials"
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ secrets.AWS_REGION }}
+          aws-region: us-east-1
 
-      - name: "Login to Public ECR" #Perform authenticated pulls
-        run: |
-          aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws
+      - name: "Login to Amazon Public ECR"
+        uses: aws-actions/amazon-ecr-login@v1
+        with:
+          registry-type: public
 
       - name: "Build Ralphbot Container Image"
         run: |
           docker build --build-arg MAKE_TARGET=build-deployment-binary --tag ${{ env.APP_IMAGE_NAMETAG }}:$VERSION .
 
-      - name: "Login to Ralphbot ECR"
-        uses: docker/login-action@v2
+      - name: "Configure AWS Credentials - Change Region to Deployment Region"
+        uses: aws-actions/configure-aws-credentials@v1
         with:
-          registry: ${{ steps.aws-login.outputs.aws-account-id }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: "Login to Ralphbot ECR"
+        id: login-ralphbot-ecr
+        uses: aws-actions/amazon-ecr-login@v1
 
       - name: "Push Ralphbot Container Image to Ralphbot ECR"
+        env:
+          REGISTRY: ${{ steps.login-ralphbot-ecr.outputs.registry }}
         run: |
-          docker tag ${{ env.APP_IMAGE_NAMETAG }}:$VERSION ${{ steps.aws-login.outputs.aws-account-id }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/${{ env.APP_IMAGE_NAMETAG }}/master:$VERSION
-          docker push ${{ steps.aws-login.outputs.aws-account-id }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/${{ env.APP_IMAGE_NAMETAG }}/master:$VERSION
+          docker tag ${{ env.APP_IMAGE_NAMETAG }}:$IMAGE_TAG $REGISTRY/${{ env.REPOSITORY }}:$IMAGE_TAG
+          docker push $REGISTRY/${{ env.REPOSITORY }}:$IMAGE_TAG
 
   #Deploy CDK Stack
   cdk-deploy:
@@ -121,15 +131,16 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }}
 
       - name: "Login to Ralphbot ECR"
-        uses: docker/login-action@v2
-        with:
-          registry: ${{ steps.aws-login.outputs.aws-account-id }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com
+        id: login-ralphbot-ecr
+        uses: aws-actions/amazon-ecr-login@v1
 
       - name: "Pull Ralphbot CDK App Image from Ralphbot ECR"
         id: pull-image
+        env:
+          REGISTRY: ${{ steps.login-ralphbot-ecr.outputs.registry }}
         run: |
-          docker pull ${{ steps.aws-login.outputs.aws-account-id }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/$REPOSITORY:cdk-$VERSION
-          echo "::set-output name=cdk-image::${{ steps.aws-login.outputs.aws-account-id }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/$REPOSITORY:cdk-$VERSION"
+          docker pull $REGISTRY/${{ env.REPOSITORY }}:$IMAGE_TAG
+          echo "::set-output name=cdk-image::$REGISTRY/${{ env.REPOSITORY }}:$IMAGE_TAG"
 
       - name: "Run CDK Deploy"
         run: |
