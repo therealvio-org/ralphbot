@@ -13,7 +13,7 @@ cdk.context.json
 # TS
 *.d.ts
 ops/src/**/*.js
-ops/test/**/*.js
+ops/__tests__/**/*.js
 
 # yarn
 yarn-error.log
