@@ -29,7 +29,6 @@ jobs:
           echo "IMAGE_TAG="$(date '+%Y.%m.%d'.${GITHUB_SHA::6})"" >> $GITHUB_ENV
 
       - name: "Configure AWS Credentials"
-        id: aws-login
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
