@@ -1102,10 +1102,10 @@ at-least-node@^1.0.0:
   resolved "https://registry.yarnpkg.com/at-least-node/-/at-least-node-1.0.0.tgz#602cd4b46e844ad4effc92a8011a3c46e0238dc2"
   integrity sha512-+q/t7Ekv1EDY2l6Gda6LLiX14rU9TV20Wa3ofeQmwPFZbOMo9DXrLbOjFaaclkXKWidIaopwAObQDqwWtGUjqg==
 
-aws-cdk-lib@2.39.0:
-  version "2.39.0"
-  resolved "https://registry.yarnpkg.com/aws-cdk-lib/-/aws-cdk-lib-2.39.0.tgz#4461deb7f3daac603dc2684d6be4280c38f00489"
-  integrity sha512-YhXSE6bGS8hQxYygftp3VbaFEz19wl4B1tUAjKjW1rNs3ZpNGnW6o1AVA3Yuc5DlaELrIjXxF0/f+5SvSpYkTA==
+aws-cdk-lib@2.41.0:
+  version "2.41.0"
+  resolved "https://registry.yarnpkg.com/aws-cdk-lib/-/aws-cdk-lib-2.41.0.tgz#5bcff1b075dd8eb3df6346ba11940a1d75d993d5"
+  integrity sha512-wh6lDaarzb8B+43TMxEBg+yHcXU9omlUGJz9zSdgjrmeQWBV8SD0jIvrERhDFvQLmRY4Vzy7FXxkI0mU+adDHQ==
   dependencies:
     "@balena/dockerignore" "^1.0.2"
     case "1.6.3"
@@ -1117,10 +1117,10 @@ aws-cdk-lib@2.39.0:
     semver "^7.3.7"
     yaml "1.10.2"
 
-aws-cdk@2.39.0:
-  version "2.39.0"
-  resolved "https://registry.yarnpkg.com/aws-cdk/-/aws-cdk-2.39.0.tgz#9ba44544d97f7d114fc7a358fb17e0e414283ed0"
-  integrity sha512-qoezvJBLSLuUWioxVbxJU8n2BmZH05D9n/b9dgA6pcldchGK+xxvRzWNI2G/nmrT+l5AyPWxq7u0WbmOge6zrw==
+aws-cdk@2.41.0:
+  version "2.41.0"
+  resolved "https://registry.yarnpkg.com/aws-cdk/-/aws-cdk-2.41.0.tgz#b9952fa985a4e02b04b566bb41defc68178f5c91"
+  integrity sha512-Ubko4X8VcbaLzcXvCQZPKBtgwBq033m5sSWtdrbdlDp7s2J4uWtY6KdO1uYKAvHyWjm7kGVmDyL1Wj1zx3TPUg==
   optionalDependencies:
     fsevents "2.3.2"
 
@@ -1363,10 +1363,10 @@ concat-map@0.0.1:
   resolved "https://registry.yarnpkg.com/concat-map/-/concat-map-0.0.1.tgz#d8a96bd77fd68df7793a73036a3ba0d5405d477b"
   integrity sha1-2Klr13/Wjfd5OnMDajug1UBdR3s=
 
-constructs@10.1.88:
-  version "10.1.88"
-  resolved "https://registry.yarnpkg.com/constructs/-/constructs-10.1.88.tgz#9dc000cf1904ef8c8bf8b977294e63a1f023fe35"
-  integrity sha512-aKQ0y5qfMeyAn+mL90qG2a47uxqKjOoZNWUrh9idltIvN0aTJtsgunmdwLswHAgRQqfDakw5+tHknutsQ1uatQ==
+constructs@10.1.98:
+  version "10.1.98"
+  resolved "https://registry.yarnpkg.com/constructs/-/constructs-10.1.98.tgz#2d4ef8a2853f95b8353625295a3cece476555bc8"
+  integrity sha512-N4YzJ0PcQcW1WUVL5Cx6Ht+YgyI5Bnz7QRFryotsydKEQ93hsgcf8VJ/5vx02eLssD/vxLvAa3IVfonDII1F0A==
 
 convert-source-map@^1.4.0, convert-source-map@^1.6.0, convert-source-map@^1.7.0:
   version "1.8.0"
