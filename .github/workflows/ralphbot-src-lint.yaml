@@ -23,3 +23,20 @@ jobs:
       - name: Check 'go mod tidy' was run
         working-directory: ${{env.WORK_DIR}}
         run: make deps
+
+  go-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install Go
+        uses: actions/setup-go@v3
+        with:
+          go-version-file: ${{env.WORK_DIR}}/go.mod
+          cache-dependency-path: ${{env.WORK_DIR}}/go.sum
+
+      - name: Lint
+        uses: golangci/golangci-lint-action@v3
+        with:
+          working-directory: ${{env.WORK_DIR}}
+          args: "--timeout=5m"
