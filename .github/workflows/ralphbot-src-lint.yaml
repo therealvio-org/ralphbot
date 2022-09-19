@@ -1,0 +1,25 @@
+name: Ralphbot Bot Source Code Test
+on:
+  push:
+    paths:
+      - "src/**"
+      - ".github/workflows/ralphbot-src-lint.yaml"
+
+env:
+  WORK_DIR: ./src
+
+jobs:
+  check-tidy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install Go
+        uses: actions/setup-go@v3
+        with:
+          go-version-file: ${{env.WORK_DIR}}/go.mod
+          cache-dependency-path: ${{env.WORK_DIR}}/go.sum
+
+      - name: Check 'go mod tidy' was run
+        working-directory: ${{env.WORK_DIR}}
+        run: make deps
