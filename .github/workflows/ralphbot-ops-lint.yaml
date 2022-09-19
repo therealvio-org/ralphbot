@@ -3,7 +3,7 @@ on:
   push:
     paths:
       - "ops/**"
-      - ".github/workflows/ralphbot-infra-lint.yaml"
+      - ".github/workflows/ralphbot-ops-lint.yaml"
       - "src/**" #Temporary hack, until golang source code linting has been added.
 
 env:
