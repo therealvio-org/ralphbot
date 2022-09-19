@@ -3,6 +3,7 @@ on:
   workflow_run:
     workflows:
       - Ralphbot Infra Stack Test
+      - Ralphbot Bot Source Code Test
     branches:
       - main
     types:
