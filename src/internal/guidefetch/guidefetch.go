@@ -77,12 +77,15 @@ var (
 				content = "Oops, something has gone wrong!\n"
 				log.Printf("fetch-guide has ran into `default` in switch statement! Value: %v", i.ApplicationCommandData().Options[0].Name)
 			}
-			s.InteractionRespond(i.Interaction, &discordgo.InteractionResponse{
+			err := s.InteractionRespond(i.Interaction, &discordgo.InteractionResponse{
 				Type: discordgo.InteractionResponseChannelMessageWithSource,
 				Data: &discordgo.InteractionResponseData{
 					Content: content,
 				},
 			})
+			if err != nil {
+				log.Printf("Failed to respond to interaction: %v", err)
+			}
 		},
 	}
 )

@@ -23,12 +23,15 @@ var (
 
 	CommandHandlers = map[string]func(s *discordgo.Session, i *discordgo.InteractionCreate){
 		"dad-joke": func(s *discordgo.Session, i *discordgo.InteractionCreate) {
-			s.InteractionRespond(i.Interaction, &discordgo.InteractionResponse{
+			err := s.InteractionRespond(i.Interaction, &discordgo.InteractionResponse{
 				Type: discordgo.InteractionResponseChannelMessageWithSource,
 				Data: &discordgo.InteractionResponseData{
 					Content: dadJoke(i, jokes),
 				},
 			})
+			if err != nil {
+				log.Printf("Failed to respond to interaction: %v", err)
+			}
 		},
 	}
 )
@@ -46,7 +49,10 @@ func getJokes() []string {
 
 	jokeArray := StructJokes{}
 
-	json.Unmarshal([]byte(jokesFile), &jokeArray)
+	err = json.Unmarshal([]byte(jokesFile), &jokeArray)
+	if err != nil {
+		log.Printf("Unable to Unmarshal : %v", err)
+	}
 
 	return jokeArray.Jokes //json.Unmarshal([]byte(jokesFile), StructJokes)
 
