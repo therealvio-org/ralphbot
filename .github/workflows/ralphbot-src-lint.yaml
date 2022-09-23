@@ -1,4 +1,4 @@
-name: Ralphbot Bot Source Code Test
+name: Ralphbot Bot Source Code Linting
 on:
   push:
     paths:
