@@ -2,7 +2,8 @@ name: Ralphbot Deploy Actions
 on:
   workflow_run:
     workflows:
-      - Ralphbot Infra Stack Test
+      - Ralphbot Infra Stack Linting & Testing
+      - Ralphbot Bot Source Code Linting
     branches:
       - main
     types:

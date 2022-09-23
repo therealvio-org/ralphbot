@@ -8,6 +8,10 @@ clean:
 mod:
 	go mod download
 
+deps: mod
+	go mod tidy
+	git diff --exit-code
+
 .PHONY: build
 build: bin mod
 	GOOS=linux CGO_ENABLED=0 go build -v -o bin/ralphbot ./cmd/ralphbot
