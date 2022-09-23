@@ -1,10 +1,9 @@
-name: Ralphbot Infra Stack Test
+name: Ralphbot Infra Stack Linting & Testing
 on:
   push:
     paths:
       - "ops/**"
-      - ".github/workflows/ralphbot-infra-lint.yaml"
-      - "src/**" #Temporary hack, until golang source code linting has been added.
+      - ".github/workflows/ralphbot-ops-lint.yaml"
 
 env:
   COMMIT: ${GITHUB_SHA}
