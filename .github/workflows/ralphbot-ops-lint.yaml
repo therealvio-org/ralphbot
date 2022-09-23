@@ -1,4 +1,4 @@
-name: Ralphbot Infra Stack Test
+name: Ralphbot Infra Stack Linting & Testing
 on:
   push:
     paths:
