@@ -23,11 +23,11 @@ func StartBotService(s *discordgo.Session, env *config.EnvConfig) {
 	}
 	defer s.Close()
 
-	_, err = RegisterCommand(s, env.GuildID, guidefetch.Commands, guidefetch.CommandHandlers)
+	_, err = registerCommand(s, env.GuildID, guidefetch.Commands, guidefetch.CommandHandlers)
 	if err != nil {
 		fmt.Printf("error: %v", err)
 	}
-	_, err = RegisterCommand(s, env.GuildID, dadjoke.Commands, dadjoke.CommandHandlers)
+	_, err = registerCommand(s, env.GuildID, dadjoke.Commands, dadjoke.CommandHandlers)
 	if err != nil {
 		fmt.Printf("error: %v", err)
 	}
@@ -38,7 +38,7 @@ func StartBotService(s *discordgo.Session, env *config.EnvConfig) {
 	<-stop
 
 	if env.RemoveCommands {
-		DeregisterCommand(s, env)
+		deregisterCommand(s, env)
 	}
 
 	log.Println("Shutting down gracefully...")
