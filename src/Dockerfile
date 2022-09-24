@@ -12,7 +12,7 @@ RUN go mod download && go mod verify
 
 RUN make ${MAKE_TARGET}
 
-FROM public.ecr.aws/docker/library/golang:1.19-alpine
+FROM public.ecr.aws/docker/library/alpine:latest
 WORKDIR /app
 COPY --from=build_image /app/bin/ralphbot ./
 COPY --from=build_image /app/internal/dadjoke/jokes.json ./
