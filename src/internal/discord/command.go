@@ -11,7 +11,7 @@ import (
 //Registers commands for `ralphbot` service.
 //If `GUILD_ID` is passed, then the command is set as a guild command, and will not be registered globally. However, it will be immediately registered exclusively
 //to the Discord server (guild). If `GUILD_ID` is not passed, then the command is registered globally.
-func RegisterCommand(s *discordgo.Session, id string, commands []*discordgo.ApplicationCommand, handler map[string]func(s *discordgo.Session, i *discordgo.InteractionCreate)) ([]*discordgo.ApplicationCommand, error) {
+func registerCommand(s *discordgo.Session, id string, commands []*discordgo.ApplicationCommand, handler map[string]func(s *discordgo.Session, i *discordgo.InteractionCreate)) ([]*discordgo.ApplicationCommand, error) {
 	s.AddHandler(func(s *discordgo.Session, i *discordgo.InteractionCreate) {
 		if h, ok := handler[i.ApplicationCommandData().Name]; ok {
 			h(s, i)
@@ -31,7 +31,7 @@ func RegisterCommand(s *discordgo.Session, id string, commands []*discordgo.Appl
 	return registeredCommands, nil
 }
 
-func DeregisterCommand(s *discordgo.Session, env *config.EnvConfig) {
+func deregisterCommand(s *discordgo.Session, env *config.EnvConfig) {
 	log.Println("Removing commands...")
 	// We need to fetch the commands, since deleting requires the command ID.
 	// We are doing this from commands defined in registerCommand() runs, because using
