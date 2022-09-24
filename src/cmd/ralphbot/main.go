@@ -1,40 +1,33 @@
 package main
 
 import (
-	"flag"
 	"log"
 	"os"
 	"os/signal"
 
 	"github.com/bwmarrin/discordgo"
+	"github.com/ralphbot/internal/config"
 	"github.com/ralphbot/internal/dadjoke"
 	"github.com/ralphbot/internal/guidefetch"
 )
 
-//Bot Parameters
 var (
-	GuildID        = flag.String("guild", os.Getenv("GUILD_ID"), "Test guild ID. If not passed - bot registers commands globally")
-	BotToken       = flag.String("token", os.Getenv("BOT_TOKEN"), "Bot access token")
-	RemoveCommands = flag.Bool("rmcmd", true, "Remove all commands after shutdowning or not")
+	env = config.New()
 )
 
 var s *discordgo.Session
 
 func init() {
-	flag.Parse()
-}
-
-func init() {
 	var err error
-	s, err = discordgo.New("Bot " + *BotToken)
+	s, err = discordgo.New("Bot " + env.BotToken)
 	if err != nil {
-		log.Fatalf("Invalid bot parameters: %v", err)
+		log.Fatalf("Error creating new Discord session: %v", err)
 	}
 }
 
 func checkGuildId(id string) {
 	doFail := false
-	if *GuildID != "" {
+	if id != "" {
 		log.Printf("Checking for GuildID variable validity against current server (if it matches, we're okay)...")
 
 		g, err := s.Guild(id)
@@ -42,7 +35,7 @@ func checkGuildId(id string) {
 			log.Fatalf("Cannot retrieve Guild Id from server: %v", err)
 		}
 
-		if *GuildID == g.ID {
+		if id == g.ID {
 			log.Printf("GuildID is valid...")
 			log.Printf("GuildID is defined - ralphbot is running in development mode, Guild commands are available...")
 		} else {
@@ -52,6 +45,7 @@ func checkGuildId(id string) {
 	} else {
 		doFail = true
 	}
+
 	if doFail {
 		log.Printf("GuildID is undefined - ralphbot is running in production mode, only Global commands are available...")
 	}
@@ -67,7 +61,7 @@ func registerCommands(commands []*discordgo.ApplicationCommand, handler map[stri
 
 	registeredCommands := make([]*discordgo.ApplicationCommand, len(commands))
 	for i, v := range commands {
-		cmd, err := s.ApplicationCommandCreate(s.State.User.ID, *GuildID, v)
+		cmd, err := s.ApplicationCommandCreate(s.State.User.ID, env.GuildID, v)
 		if err != nil {
 			log.Panicf("Cannot create '%v' command: %v", v.Name, err)
 		}
@@ -86,7 +80,7 @@ func main() {
 		log.Fatalf("Cannot open the session: %v", err)
 	}
 
-	checkGuildId(*GuildID)
+	checkGuildId(env.GuildID)
 
 	log.Println("Adding commands...")
 	registerCommands(guidefetch.Commands, guidefetch.CommandHandlers)
@@ -99,20 +93,20 @@ func main() {
 	log.Println("Press Ctrl+C/Cmd+C to exit")
 	<-stop
 
-	if *RemoveCommands {
+	if env.RemoveCommands {
 		log.Println("Removing commands...")
 		// We need to fetch the commands, since deleting requires the command ID.
 		// We are doing this from commands defined in registerCommand() runs, because using
 		// this will delete all the commands, which might not be desirable, so we
 		// are deleting only the commands that we added.
 
-		registeredCommands, err := s.ApplicationCommands(s.State.User.ID, *GuildID)
+		registeredCommands, err := s.ApplicationCommands(s.State.User.ID, env.GuildID)
 		if err != nil {
 			log.Fatalf("Could not fetch registered commands: %v", err)
 		}
 
 		for _, v := range registeredCommands {
-			err := s.ApplicationCommandDelete(s.State.User.ID, *GuildID, v.ID)
+			err := s.ApplicationCommandDelete(s.State.User.ID, env.GuildID, v.ID)
 			if err != nil {
 				log.Panicf("Cannot delete '%v' command: %v", v.Name, err)
 			}
