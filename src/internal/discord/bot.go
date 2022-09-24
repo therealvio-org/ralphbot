@@ -21,6 +21,7 @@ func StartBotService(s *discordgo.Session, env *config.EnvConfig) {
 	if err != nil {
 		log.Fatalf("Cannot open the session: %v", err)
 	}
+	defer s.Close()
 
 	_, err = RegisterCommand(s, env.GuildID, guidefetch.Commands, guidefetch.CommandHandlers)
 	if err != nil {
@@ -30,8 +31,6 @@ func StartBotService(s *discordgo.Session, env *config.EnvConfig) {
 	if err != nil {
 		fmt.Printf("error: %v", err)
 	}
-
-	defer s.Close()
 
 	stop := make(chan os.Signal, 1)
 	signal.Notify(stop, os.Interrupt)
