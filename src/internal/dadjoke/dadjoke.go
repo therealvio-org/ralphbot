@@ -2,9 +2,9 @@ package dadjoke
 
 import (
 	"encoding/json"
-	"io/ioutil"
 	"log"
 	"math/rand"
+	"os"
 	"time"
 
 	"github.com/bwmarrin/discordgo"
@@ -41,10 +41,9 @@ type StructJokes struct {
 }
 
 func getJokes() []string {
-	jokesFile, err := ioutil.ReadFile("jokes.json")
-
+	jokesFile, err := os.ReadFile("jokes.json")
 	if err != nil {
-		log.Fatal("Unable to open jokesFile!")
+		log.Fatal("Unable to read jokesFile!")
 	}
 
 	jokeArray := StructJokes{}
@@ -54,7 +53,7 @@ func getJokes() []string {
 		log.Printf("Unable to Unmarshal : %v", err)
 	}
 
-	return jokeArray.Jokes //json.Unmarshal([]byte(jokesFile), StructJokes)
+	return jokeArray.Jokes
 
 }
 
