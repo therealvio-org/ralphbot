@@ -16,7 +16,7 @@ var (
 			Options: []*discordgo.ApplicationCommandOption{
 				{
 					Name:        "raid-kingsfall",
-					Description: "Vow of the Disciple Raid",
+					Description: "King's Fall Raid",
 					Type:        discordgo.ApplicationCommandOptionSubCommand,
 				},
 				{
