@@ -21,7 +21,7 @@ TAGS=$(printf '[
     },
 ]' "$ENVIRONMENT") 
 
-#Create MongoDB Atlas offsite-backup API Keypair
+#Create Secret
 aws secretsmanager create-secret \
 --name "ralphbot/token" \
 --description 'Ralphbot Discord API Token' \

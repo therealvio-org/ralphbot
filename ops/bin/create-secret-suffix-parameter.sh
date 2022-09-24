@@ -21,7 +21,7 @@ TAGS=$(printf '[
     },
 ]' "$ENVIRONMENT") 
 
-#Create MongoDB Atlas offsite-backup API Keypair
+#Create Secret
 aws ssm put-parameter \
 --name "/ralphbot/token/arn-suffix" \
 --description "The ARN suffix for Ralphbot's Secrets Manager secret. This is due to CDK not \"knowing\" what the full ARN is for a Secrets Manager secret by design." \
