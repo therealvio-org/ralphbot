@@ -10,7 +10,7 @@ ENVIRONMENT='xxx'
 # the following commands are prefixed with whitespace
  SECRET_ARN_SUFFIX='xxx'
 
- BOT_TOKEN_SECRET=$(printf '{
+ SECRET_ARN_SUFFIX=$(printf '{
      "token": "%s",
      }' "$BOT_TOKEN")
 
