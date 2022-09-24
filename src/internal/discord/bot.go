@@ -7,9 +7,9 @@ import (
 	"os/signal"
 
 	"github.com/bwmarrin/discordgo"
+	"github.com/ralphbot/internal/command/dadjoke"
+	"github.com/ralphbot/internal/command/guidefetch"
 	"github.com/ralphbot/internal/config"
-	"github.com/ralphbot/internal/dadjoke"
-	"github.com/ralphbot/internal/guidefetch"
 )
 
 //Starts the `ralphbot` service
