@@ -1,5 +1,3 @@
-//https://github.com/bwmarrin/discordgo/blob/master/examples/slash_commands/main.go
-
 package guidefetch
 
 import (
@@ -18,7 +16,7 @@ var (
 			Options: []*discordgo.ApplicationCommandOption{
 				{
 					Name:        "raid-kingsfall",
-					Description: "Vow of the Disciple Raid",
+					Description: "King's Fall Raid",
 					Type:        discordgo.ApplicationCommandOptionSubCommand,
 				},
 				{
