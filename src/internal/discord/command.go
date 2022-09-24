@@ -5,6 +5,7 @@ import (
 	"log"
 
 	"github.com/bwmarrin/discordgo"
+	"github.com/ralphbot/internal/config"
 )
 
 //Registers commands for `ralphbot` service.
@@ -28,4 +29,24 @@ func RegisterCommand(s *discordgo.Session, id string, commands []*discordgo.Appl
 	}
 
 	return registeredCommands, nil
+}
+
+func DeregisterCommand(s *discordgo.Session, env *config.EnvConfig) {
+	log.Println("Removing commands...")
+	// We need to fetch the commands, since deleting requires the command ID.
+	// We are doing this from commands defined in registerCommand() runs, because using
+	// this will delete all the commands, which might not be desirable, so we
+	// are deleting only the commands that we added.
+
+	registeredCommands, err := s.ApplicationCommands(s.State.User.ID, env.GuildID)
+	if err != nil {
+		log.Fatalf("Could not fetch registered commands: %v", err)
+	}
+
+	for _, v := range registeredCommands {
+		err := s.ApplicationCommandDelete(s.State.User.ID, env.GuildID, v.ID)
+		if err != nil {
+			log.Panicf("Cannot delete '%v' command: %v", v.Name, err)
+		}
+	}
 }
