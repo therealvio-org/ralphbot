@@ -1,5 +1,3 @@
-//https://github.com/bwmarrin/discordgo/blob/master/examples/slash_commands/main.go
-
 package guidefetch
 
 import (
