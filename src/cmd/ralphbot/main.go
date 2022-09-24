@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"os"
 	"os/signal"
@@ -26,28 +27,8 @@ func init() {
 	}
 }
 
-func registerCommands(commands []*discordgo.ApplicationCommand, handler map[string]func(s *discordgo.Session, i *discordgo.InteractionCreate)) []*discordgo.ApplicationCommand {
-
-	s.AddHandler(func(s *discordgo.Session, i *discordgo.InteractionCreate) {
-		if h, ok := handler[i.ApplicationCommandData().Name]; ok {
-			h(s, i)
-		}
-	})
-
-	registeredCommands := make([]*discordgo.ApplicationCommand, len(commands))
-	for i, v := range commands {
-		cmd, err := s.ApplicationCommandCreate(s.State.User.ID, env.GuildID, v)
-		if err != nil {
-			log.Panicf("Cannot create '%v' command: %v", v.Name, err)
-		}
-		registeredCommands[i] = cmd
-	}
-
-	return registeredCommands
-}
-
 func main() {
-	discord.CheckGuildId(env.GuildID, s)
+	discord.CheckGuildId(s, env.GuildID)
 
 	s.AddHandler(func(s *discordgo.Session, r *discordgo.Ready) {
 		log.Printf("Logged in as: %v#%v", s.State.User.Username, s.State.User.Discriminator)
@@ -57,9 +38,14 @@ func main() {
 		log.Fatalf("Cannot open the session: %v", err)
 	}
 
-	log.Println("Adding commands...")
-	registerCommands(guidefetch.Commands, guidefetch.CommandHandlers)
-	registerCommands(dadjoke.Commands, dadjoke.CommandHandlers)
+	_, err = discord.RegisterCommands(s, env.GuildID, guidefetch.Commands, guidefetch.CommandHandlers)
+	if err != nil {
+		fmt.Printf("error: %v", err)
+	}
+	_, err = discord.RegisterCommands(s, env.GuildID, dadjoke.Commands, dadjoke.CommandHandlers)
+	if err != nil {
+		fmt.Printf("error: %v", err)
+	}
 
 	defer s.Close()
 
