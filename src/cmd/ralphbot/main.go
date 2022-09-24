@@ -8,6 +8,7 @@ import (
 	"github.com/bwmarrin/discordgo"
 	"github.com/ralphbot/internal/config"
 	"github.com/ralphbot/internal/dadjoke"
+	"github.com/ralphbot/internal/discord"
 	"github.com/ralphbot/internal/guidefetch"
 )
 
@@ -22,32 +23,6 @@ func init() {
 	s, err = discordgo.New("Bot " + env.BotToken)
 	if err != nil {
 		log.Fatalf("Error creating new Discord session: %v", err)
-	}
-}
-
-func checkGuildId(id string) {
-	doFail := false
-	if id != "" {
-		log.Printf("Checking for GuildID variable validity against current server (if it matches, we're okay)...")
-
-		g, err := s.Guild(id)
-		if err != nil {
-			log.Fatalf("Cannot retrieve Guild Id from server: %v", err)
-		}
-
-		if id == g.ID {
-			log.Printf("GuildID is valid...")
-			log.Printf("GuildID is defined - ralphbot is running in development mode, Guild commands are available...")
-		} else {
-			log.Printf("GuildID is invalid...")
-			doFail = true
-		}
-	} else {
-		doFail = true
-	}
-
-	if doFail {
-		log.Printf("GuildID is undefined - ralphbot is running in production mode, only Global commands are available...")
 	}
 }
 
@@ -72,6 +47,8 @@ func registerCommands(commands []*discordgo.ApplicationCommand, handler map[stri
 }
 
 func main() {
+	discord.CheckGuildId(env.GuildID, s)
+
 	s.AddHandler(func(s *discordgo.Session, r *discordgo.Ready) {
 		log.Printf("Logged in as: %v#%v", s.State.User.Username, s.State.User.Discriminator)
 	})
@@ -79,8 +56,6 @@ func main() {
 	if err != nil {
 		log.Fatalf("Cannot open the session: %v", err)
 	}
-
-	checkGuildId(env.GuildID)
 
 	log.Println("Adding commands...")
 	registerCommands(guidefetch.Commands, guidefetch.CommandHandlers)
