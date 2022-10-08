@@ -4,13 +4,14 @@ import (
 	"fmt"
 	"log"
 
+	"ralphbot/internal/config"
+
 	"github.com/bwmarrin/discordgo"
-	"github.com/ralphbot/internal/config"
 )
 
-//Registers commands for `ralphbot` service.
-//If `GUILD_ID` is passed, then the command is set as a guild command, and will not be registered globally. However, it will be immediately registered exclusively
-//to the Discord server (guild). If `GUILD_ID` is not passed, then the command is registered globally.
+// Registers commands for `ralphbot` service.
+// If `GUILD_ID` is passed, then the command is set as a guild command, and will not be registered globally. However, it will be immediately registered exclusively
+// to the Discord server (guild). If `GUILD_ID` is not passed, then the command is registered globally.
 func registerCommand(s *discordgo.Session, id string, commands []*discordgo.ApplicationCommand, handler map[string]func(s *discordgo.Session, i *discordgo.InteractionCreate)) ([]*discordgo.ApplicationCommand, error) {
 	s.AddHandler(func(s *discordgo.Session, i *discordgo.InteractionCreate) {
 		if h, ok := handler[i.ApplicationCommandData().Name]; ok {

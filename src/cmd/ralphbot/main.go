@@ -3,9 +3,10 @@ package main
 import (
 	"log"
 
+	"ralphbot/internal/config"
+	"ralphbot/internal/discord"
+
 	"github.com/bwmarrin/discordgo"
-	"github.com/ralphbot/internal/config"
-	"github.com/ralphbot/internal/discord"
 )
 
 var (
