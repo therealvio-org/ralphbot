@@ -6,13 +6,14 @@ import (
 	"os"
 	"os/signal"
 
+	"ralphbot/internal/command/dadjoke"
+	"ralphbot/internal/command/guidefetch"
+	"ralphbot/internal/config"
+
 	"github.com/bwmarrin/discordgo"
-	"github.com/ralphbot/internal/command/dadjoke"
-	"github.com/ralphbot/internal/command/guidefetch"
-	"github.com/ralphbot/internal/config"
 )
 
-//Starts the `ralphbot` service
+// Starts the `ralphbot` service
 func StartBotService(s *discordgo.Session, env *config.EnvConfig) {
 	s.AddHandler(func(s *discordgo.Session, r *discordgo.Ready) {
 		log.Printf("Logged in as: %v#%v", s.State.User.Username, s.State.User.Discriminator)
