@@ -3,6 +3,7 @@
   "extends": ["config:base", ":dependencyDashboard"],
   "ignorePaths": ["src/Dockerfile", "ops/Dockerfile"],
   "schedule": ["after 7am and before 7pm every weekday"],
+  "automergeSchedule": ["after 7am and before 7pm every weekday"],
   "postUpdateOptions": ["gomodTidy", "gomodUpdateImportPaths"],
   "lockFileMaintenance": {
     "enabled": true,
