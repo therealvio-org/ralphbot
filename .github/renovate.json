@@ -15,6 +15,9 @@
     {
       "matchManagers": ["github-actions"],
       "matchPaths": [".github/workflows/"],
+      "automerge": true,
+      "automergeType": "pr",
+      "platformAutomerge": true,
       "automergeStrategy": "squash"
     },
     {
