@@ -4,6 +4,13 @@
   "ignorePaths": ["src/Dockerfile", "ops/Dockerfile"],
   "schedule": ["after 7am and before 7pm every weekday"],
   "postUpdateOptions": ["gomodTidy", "gomodUpdateImportPaths"],
+  "lockFileMaintenance": {
+    "enabled": true,
+    "automerge": true,
+    "automergeType": "pr",
+    "platformAutomerge": true,
+    "automergeStrategy": "squash"
+  },
   "packageRules": [
     {
       "matchManagers": ["github-actions"],
