@@ -144,7 +144,7 @@ jobs:
           REGISTRY: ${{ steps.login-ralphbot-ecr.outputs.registry }}
         run: |
           docker pull $REGISTRY/${{ env.REPOSITORY }}:$IMAGE_TAG
-          echo "::set-output name=cdk-image::$REGISTRY/${{ env.REPOSITORY }}:$IMAGE_TAG"
+          echo "cdk-image="$REGISTRY/${{ env.REPOSITORY }}:$IMAGE_TAG"" >> $GITHUB_OUTPUT
 
       - name: "Run CDK Deploy"
         run: |
