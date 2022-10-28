@@ -4,10 +4,20 @@
   "ignorePaths": ["src/Dockerfile", "ops/Dockerfile"],
   "schedule": ["after 7am and before 7pm every weekday"],
   "postUpdateOptions": ["gomodTidy", "gomodUpdateImportPaths"],
+  "lockFileMaintenance": {
+    "enabled": true,
+    "automerge": true,
+    "automergeType": "pr",
+    "platformAutomerge": true,
+    "automergeStrategy": "squash"
+  },
   "packageRules": [
     {
       "matchManagers": ["github-actions"],
       "matchPaths": [".github/workflows/"],
+      "automerge": true,
+      "automergeType": "pr",
+      "platformAutomerge": true,
       "automergeStrategy": "squash"
     },
     {
@@ -23,27 +33,44 @@
     {
       "groupName": "eslint",
       "matchPackagePrefixes": ["@typescript-eslint/", "eslint"],
+      "automerge": true,
+      "automergeType": "pr",
+      "platformAutomerge": true,
       "automergeStrategy": "squash"
     },
     {
       "groupName": "jest",
       "matchPackageNames": ["jest", "ts-jest", "@types/jest"],
+      "automerge": true,
+      "automergeType": "pr",
+      "platformAutomerge": true,
       "automergeStrategy": "squash"
     },
     {
       "groupName": "nodejs",
       "matchPackageNames": ["@types/node", "ts-node"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "automerge": true,
+      "automergeType": "pr",
+      "platformAutomerge": true,
       "automergeStrategy": "squash"
     },
     {
       "groupName": "nodejs",
-      "allowedVersions": "^16.0.0",
+      "allowedVersions": "^18.0.0",
       "matchPackageNames": ["node"],
+      "automerge": true,
+      "automergeType": "pr",
+      "platformAutomerge": true,
       "automergeStrategy": "squash"
     },
     {
       "groupName": "aws-cdk",
       "matchPackageNames": ["constructs", "aws-cdk", "aws-cdk-lib"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "automerge": true,
+      "automergeType": "pr",
+      "platformAutomerge": true,
       "automergeStrategy": "squash"
     }
   ]
