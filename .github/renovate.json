@@ -46,12 +46,19 @@
     {
       "groupName": "nodejs",
       "matchPackageNames": ["@types/node", "ts-node"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "automerge": true,
+      "automergeType": "pr",
+      "platformAutomerge": true,
       "automergeStrategy": "squash"
     },
     {
       "groupName": "nodejs",
       "allowedVersions": "^18.0.0",
       "matchPackageNames": ["node"],
+      "automerge": true,
+      "automergeType": "pr",
+      "platformAutomerge": true,
       "automergeStrategy": "squash"
     },
     {
