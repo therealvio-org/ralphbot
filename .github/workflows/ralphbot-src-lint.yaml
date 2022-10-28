@@ -18,6 +18,7 @@ jobs:
         uses: actions/setup-go@v3
         with:
           go-version-file: ${{env.WORK_DIR}}/go.mod
+          cache: true
           cache-dependency-path: ${{env.WORK_DIR}}/go.sum
 
       - name: Check 'go mod tidy' was run
@@ -33,6 +34,7 @@ jobs:
         uses: actions/setup-go@v3
         with:
           go-version-file: ${{env.WORK_DIR}}/go.mod
+          cache: true
           cache-dependency-path: ${{env.WORK_DIR}}/go.sum
 
       - name: Lint
