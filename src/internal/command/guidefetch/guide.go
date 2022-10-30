@@ -8,16 +8,6 @@ type Guide struct {
 	GHUrl          string
 }
 
-//type Guides struct {
-//	Crypt     GuideDetails
-//	Garden    GuideDetails
-//	KingsFall GuideDetails
-//	Pit       GuideDetails
-//	Vault     GuideDetails
-//	Vow       GuideDetails
-//	Wish      GuideDetails
-//}
-
 var (
 	crypt = &Guide{
 		Name:           "Deep Stone Crypt",
@@ -67,5 +57,15 @@ var (
 		SubCommandName: "raid-lastwish",
 		Description:    "Last Wish Raid",
 		GDriveUrl:      "https://drive.google.com/drive/folders/1d_WEa84KuX1_9hPTwgFhl651IwywHeOg?usp=sharing",
+	}
+
+	guides = []Guide{
+		*crypt,
+		*garden,
+		*kingsfall,
+		*pit,
+		*vault,
+		*vow,
+		*wish,
 	}
 )
