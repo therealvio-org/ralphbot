@@ -15,38 +15,38 @@ var (
 			Description: "Provides a link to materials for a given Destiny activity",
 			Options: []*discordgo.ApplicationCommandOption{
 				{
-					Name:        "raid-kingsfall",
-					Description: "King's Fall Raid",
+					Name:        kingsfall.SubCommandName,
+					Description: kingsfall.Description,
 					Type:        discordgo.ApplicationCommandOptionSubCommand,
 				},
 				{
-					Name:        "raid-vow",
-					Description: "Vow of the Disciple Raid",
+					Name:        vow.SubCommandName,
+					Description: vow.Description,
 					Type:        discordgo.ApplicationCommandOptionSubCommand,
 				},
 				{
-					Name:        "raid-vault",
-					Description: "Vault of Glass Raid",
+					Name:        vault.SubCommandName,
+					Description: vault.Description,
 					Type:        discordgo.ApplicationCommandOptionSubCommand,
 				},
 				{
-					Name:        "raid-crypt",
-					Description: "Deep Stone Crypt Raid",
+					Name:        crypt.SubCommandName,
+					Description: crypt.Description,
 					Type:        discordgo.ApplicationCommandOptionSubCommand,
 				},
 				{
-					Name:        "raid-garden",
-					Description: "Garden of Salvation Raid",
+					Name:        garden.SubCommandName,
+					Description: garden.Description,
 					Type:        discordgo.ApplicationCommandOptionSubCommand,
 				},
 				{
-					Name:        "raid-lastwish",
-					Description: "Last Wish Raid",
+					Name:        wish.SubCommandName,
+					Description: wish.Description,
 					Type:        discordgo.ApplicationCommandOptionSubCommand,
 				},
 				{
-					Name:        "dungeon-pit",
-					Description: "Pit of Heresy Dungeon",
+					Name:        pit.SubCommandName,
+					Description: pit.Description,
 					Type:        discordgo.ApplicationCommandOptionSubCommand,
 				},
 			},
@@ -57,20 +57,20 @@ var (
 		"fetch-guide": func(s *discordgo.Session, i *discordgo.InteractionCreate) {
 			content := ""
 			switch i.ApplicationCommandData().Options[0].Name {
-			case "raid-kingsfall":
-				content = guideMessage(i, "Kings Fall", "https://drive.google.com/drive/folders/1tsOVCy2SwP0rLUDQUJaDIFh5y-O0DoKn")
-			case "raid-vow":
-				content = guideGithub(i, "Vow of the Disciple", "https://github.com/therealvio/destiny-guides/tree/main/raids/vow-of-the-disciple", "https://drive.google.com/drive/folders/1ZAPIXYlSs7yTQEdznQAqz2rOnnvpzwr7?usp=sharing")
-			case "raid-vault":
-				content = guideMessage(i, "Vault of Glass", "https://drive.google.com/drive/folders/1HLx6nVIji_3OcwnzaLeSoksspa4pfdjD?usp=sharing")
-			case "raid-crypt":
-				content = guideMessage(i, "Deep Stone Crypt", "https://drive.google.com/drive/folders/1YKU4_-hInHQ3rVEAvqIjdJaT25oQvmYc?usp=sharing")
-			case "raid-garden":
-				content = guideMessage(i, "Garden of Salvation", "https://drive.google.com/drive/folders/1pPdtAptJMaaDYRv2i-8bfaL6l3I0WTsT?usp=sharing")
-			case "raid-lastwish":
-				content = guideMessage(i, "Last Wish", "https://drive.google.com/drive/folders/1d_WEa84KuX1_9hPTwgFhl651IwywHeOg?usp=sharing")
-			case "dungeon-pit":
-				content = guideMessage(i, "Pit of Heresy", "https://drive.google.com/drive/folders/17lB7m9KQMwzBb6UHfoBt9ZEA82haD2Fd?usp=sharing")
+			case kingsfall.SubCommandName:
+				content = guideMessage(i, kingsfall.Name, kingsfall.GDriveUrl)
+			case vow.SubCommandName:
+				content = guideGithub(i, vow.Name, vow.GHUrl, vow.GDriveUrl)
+			case vault.SubCommandName:
+				content = guideMessage(i, vault.Name, vault.GDriveUrl)
+			case crypt.SubCommandName:
+				content = guideMessage(i, crypt.Name, crypt.GDriveUrl)
+			case garden.SubCommandName:
+				content = guideMessage(i, garden.Name, garden.GDriveUrl)
+			case wish.SubCommandName:
+				content = guideMessage(i, wish.Name, wish.GDriveUrl)
+			case pit.SubCommandName:
+				content = guideMessage(i, pit.Name, pit.GDriveUrl)
 			default:
 				content = "Oops, something has gone wrong!\n"
 				log.Printf("fetch-guide has ran into `default` in switch statement! Value: %v", i.ApplicationCommandData().Options[0].Name)
@@ -99,6 +99,6 @@ Arrow brackets are used to escape the github link to prevent previews
 */
 
 func guideGithub(i *discordgo.InteractionCreate, activity string, ghubLink string, gdriveLink string) string {
-	result := fmt.Sprintf("%s, here is your requested %s supplementary material!\n\n Github Link: <%s>\n\nGoogle DriveLink: %s", i.Member.Mention(), activity, ghubLink, gdriveLink)
+	result := fmt.Sprintf("%s, here is your requested %s supplementary material!\n\n Github Link: <%s>\n\nGoogle Drive Link: %s", i.Member.Mention(), activity, ghubLink, gdriveLink)
 	return result
 }
