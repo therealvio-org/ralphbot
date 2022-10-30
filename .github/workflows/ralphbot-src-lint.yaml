@@ -42,3 +42,20 @@ jobs:
         with:
           working-directory: ${{env.WORK_DIR}}
           args: "--timeout=5m"
+
+  go-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install Go
+        uses: actions/setup-go@v3
+        with:
+          go-version-file: ${{env.WORK_DIR}}/go.mod
+          cache: true
+          cache-dependency-path: ${{env.WORK_DIR}}/go.sum
+
+      - name: Test
+        working-directory: ${{env.WORK_DIR}}
+        run: |
+          go test ./...
