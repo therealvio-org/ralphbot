@@ -8,48 +8,14 @@ import (
 )
 
 var (
+	commandOptions = generateCommandOptions(guides)
+
 	Commands = []*discordgo.ApplicationCommand{
 		//https://discord.com/developers/docs/interactions/application-commands#slash-commands
 		{
 			Name:        "fetch-guide",
 			Description: "Provides a link to materials for a given Destiny activity",
-			Options: []*discordgo.ApplicationCommandOption{
-				{
-					Name:        kingsfall.SubCommandName,
-					Description: kingsfall.Description,
-					Type:        discordgo.ApplicationCommandOptionSubCommand,
-				},
-				{
-					Name:        vow.SubCommandName,
-					Description: vow.Description,
-					Type:        discordgo.ApplicationCommandOptionSubCommand,
-				},
-				{
-					Name:        vault.SubCommandName,
-					Description: vault.Description,
-					Type:        discordgo.ApplicationCommandOptionSubCommand,
-				},
-				{
-					Name:        crypt.SubCommandName,
-					Description: crypt.Description,
-					Type:        discordgo.ApplicationCommandOptionSubCommand,
-				},
-				{
-					Name:        garden.SubCommandName,
-					Description: garden.Description,
-					Type:        discordgo.ApplicationCommandOptionSubCommand,
-				},
-				{
-					Name:        wish.SubCommandName,
-					Description: wish.Description,
-					Type:        discordgo.ApplicationCommandOptionSubCommand,
-				},
-				{
-					Name:        pit.SubCommandName,
-					Description: pit.Description,
-					Type:        discordgo.ApplicationCommandOptionSubCommand,
-				},
-			},
+			Options:     commandOptions,
 		},
 	}
 
@@ -87,6 +53,20 @@ var (
 		},
 	}
 )
+
+func generateCommandOptions(g []Guide) []*discordgo.ApplicationCommandOption {
+	var subCommands []*discordgo.ApplicationCommandOption
+
+	for _, s := range g {
+		subCommands = append(subCommands, &discordgo.ApplicationCommandOption{
+			Name:        s.SubCommandName,
+			Description: s.Description,
+			Type:        discordgo.ApplicationCommandOptionSubCommand,
+		})
+	}
+
+	return subCommands
+}
 
 func guideMessage(i *discordgo.InteractionCreate, activity string, link string) string {
 	result := fmt.Sprintf("%s, here is your requested %s supplementary material!\n %s", i.Member.Mention(), activity, link)
