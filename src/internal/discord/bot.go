@@ -8,6 +8,7 @@ import (
 
 	"ralphbot/internal/command/dadjoke"
 	"ralphbot/internal/command/guidefetch"
+	"ralphbot/internal/command/linkdump"
 	"ralphbot/internal/config"
 
 	"github.com/bwmarrin/discordgo"
@@ -29,6 +30,10 @@ func StartBotService(s *discordgo.Session, env *config.EnvConfig) {
 		fmt.Printf("error: %v", err)
 	}
 	_, err = registerCommand(s, env.GuildID, dadjoke.Commands, dadjoke.CommandHandlers)
+	if err != nil {
+		fmt.Printf("error: %v", err)
+	}
+	_, err = registerCommand(s, env.GuildID, linkdump.Commands, linkdump.CommandHandlers)
 	if err != nil {
 		fmt.Printf("error: %v", err)
 	}
