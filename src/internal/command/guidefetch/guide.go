@@ -24,7 +24,7 @@ var (
 	}
 
 	kingsfall = &Guide{
-		Name:           "Kings Fall",
+		Name:           "King's Fall",
 		SubCommandName: "raid-kingsfall",
 		Description:    "King's Fall Raid",
 		GDriveUrl:      "https://drive.google.com/drive/folders/1tsOVCy2SwP0rLUDQUJaDIFh5y-O0DoKn",
