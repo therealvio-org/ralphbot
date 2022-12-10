@@ -1,4 +1,4 @@
 direnv 2.32.2
-golang 1.19.3
+golang 1.19.4
 yarn 1.22.19
 nodejs 18.12.1
