@@ -37,6 +37,13 @@ var (
 		GDriveUrl:      "https://drive.google.com/drive/folders/17lB7m9KQMwzBb6UHfoBt9ZEA82haD2Fd?usp=sharing",
 	}
 
+	spire = &Guide{
+		Name:           "Spire of the Watcher",
+		SubCommandName: "dungeon-spire",
+		Description:    "Spire of the Watcher Dungeon",
+		GDriveUrl:      "https://drive.google.com/drive/folders/1Xu_8NfiPFnknocqdR8p9adWPF-qiHmxo?usp=share_link",
+	}
+
 	vault = &Guide{
 		Name:           "Vault of Glass",
 		SubCommandName: "raid-vault",
@@ -64,6 +71,7 @@ var (
 		*garden,
 		*kingsfall,
 		*pit,
+		*spire,
 		*vault,
 		*vow,
 		*wish,
