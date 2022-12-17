@@ -37,6 +37,8 @@ var (
 				content = guideMessage(i, wish.Name, wish.GDriveUrl)
 			case pit.SubCommandName:
 				content = guideMessage(i, pit.Name, pit.GDriveUrl)
+			case spire.SubCommandName:
+				content = guideMessage(i, spire.Name, spire.GDriveUrl)
 			default:
 				content = "Oops, something has gone wrong!\n"
 				log.Printf("fetch-guide has ran into `default` in switch statement! Value: %v", i.ApplicationCommandData().Options[0].Name)
