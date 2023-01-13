@@ -39,8 +39,8 @@
       "automergeStrategy": "squash"
     },
     {
-      "groupName": "eslint",
-      "matchPackagePrefixes": ["@typescript-eslint/", "eslint"],
+      "matchDepTypes": ["devDependencies"],
+      "matchPackagePatterns": ["lint", "prettier"],
       "automerge": true,
       "automergeType": "pr",
       "platformAutomerge": true,
@@ -56,17 +56,8 @@
     },
     {
       "groupName": "nodejs",
-      "matchPackageNames": ["@types/node", "ts-node"],
-      "matchUpdateTypes": ["minor", "patch"],
-      "automerge": true,
-      "automergeType": "pr",
-      "platformAutomerge": true,
-      "automergeStrategy": "squash"
-    },
-    {
-      "groupName": "nodejs",
       "allowedVersions": "^18.0.0",
-      "matchPackageNames": ["node"],
+      "matchPackageNames": ["node", "@types/node"],
       "automerge": true,
       "automergeType": "pr",
       "platformAutomerge": true,
