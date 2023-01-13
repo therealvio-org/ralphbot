@@ -30,10 +30,12 @@
     },
     {
       "matchManagers": ["gomod"],
+      "automerge": false,
       "automergeStrategy": "squash"
     },
     {
       "groupName": "golang",
+      "automerge": false,
       "matchManagers": ["gomod"],
       "matchPackageNames": ["go"],
       "automergeStrategy": "squash"
