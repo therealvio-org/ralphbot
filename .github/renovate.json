@@ -36,8 +36,9 @@
     {
       "groupName": "golang",
       "automerge": false,
-      "matchManagers": ["gomod"],
-      "matchPackageNames": ["go"],
+      "allowedVersions": "^1.19.0",
+      "matchManagers": ["dockerfile", "gomod"],
+      "matchPackageNames": ["go", "public.ecr.aws/docker/library/golang"],
       "automergeStrategy": "squash"
     },
     {
