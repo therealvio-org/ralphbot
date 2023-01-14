@@ -60,7 +60,8 @@
     {
       "groupName": "nodejs",
       "allowedVersions": "^18.0.0",
-      "matchPackageNames": ["node", "@types/node"],
+      "matchPackageNames": ["node", "@types/node", "node.js"],
+      "matchManagers": ["dockerfile", "npm"],
       "automerge": true,
       "automergeType": "pr",
       "platformAutomerge": true,
