@@ -60,7 +60,12 @@
     {
       "groupName": "nodejs",
       "allowedVersions": "^18.0.0",
-      "matchPackageNames": ["node", "@types/node"],
+      "matchPackageNames": [
+        "@types/node",
+        "node",
+        "public.ecr.aws/docker/library/node"
+      ],
+      "matchManagers": ["dockerfile", "npm"],
       "automerge": true,
       "automergeType": "pr",
       "platformAutomerge": true,
