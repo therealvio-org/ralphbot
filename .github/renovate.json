@@ -41,6 +41,7 @@
       "automergeStrategy": "squash"
     },
     {
+      "groupName": "linting-specific dependencies",
       "matchDepTypes": ["devDependencies"],
       "matchPackagePatterns": ["lint", "prettier"],
       "automerge": true,
