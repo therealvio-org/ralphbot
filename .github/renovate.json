@@ -1,8 +1,9 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["config:base", ":dependencyDashboard"],
-  "schedule": ["after 8pm and before 8am every weekday"],
-  "automergeSchedule": ["after 8pm and before 8am every weekday"],
+  "ignorePaths": ["src/Dockerfile", "ops/Dockerfile"],
+  "schedule": ["after 7am and before 7pm every weekday"],
+  "automergeSchedule": ["after 7am and before 7pm every weekday"],
   "postUpdateOptions": ["gomodTidy", "gomodUpdateImportPaths"],
   "lockFileMaintenance": {
     "enabled": true,
@@ -12,57 +13,74 @@
     "platformAutomerge": true,
     "automergeStrategy": "squash"
   },
-  "platformAutomerge": true,
-  "automergeStrategy": "squash",
-  "automergeType": "pr",
   "packageRules": [
     {
       "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
-      "automerge": true
+      "automerge": true,
+      "automergeType": "pr",
+      "platformAutomerge": true,
+      "automergeStrategy": "squash"
     },
     {
       "matchManagers": ["github-actions"],
-      "matchFiles": [".github/workflows/"],
-      "automerge": true
+      "matchPaths": [".github/workflows/"],
+      "automerge": true,
+      "automergeType": "pr",
+      "platformAutomerge": true,
+      "automergeStrategy": "squash"
     },
     {
       "matchManagers": ["gomod"],
-      "automerge": false
+      "automergeStrategy": "squash"
     },
     {
       "groupName": "golang",
-      "automerge": false,
-      "allowedVersions": "^1.19.0",
-      "matchManagers": ["dockerfile", "gomod"],
-      "matchPackageNames": ["go", "public.ecr.aws/docker/library/golang"]
+      "matchManagers": ["gomod"],
+      "matchPackageNames": ["go"],
+      "automergeStrategy": "squash"
     },
     {
-      "groupName": "linting-specific dependencies",
-      "matchDepTypes": ["devDependencies"],
-      "matchPackagePatterns": ["lint", "prettier"],
-      "automerge": true
+      "groupName": "eslint",
+      "matchPackagePrefixes": ["@typescript-eslint/", "eslint"],
+      "automerge": true,
+      "automergeType": "pr",
+      "platformAutomerge": true,
+      "automergeStrategy": "squash"
     },
     {
       "groupName": "jest",
       "matchPackageNames": ["jest", "ts-jest", "@types/jest"],
-      "automerge": true
+      "automerge": true,
+      "automergeType": "pr",
+      "platformAutomerge": true,
+      "automergeStrategy": "squash"
+    },
+    {
+      "groupName": "nodejs",
+      "matchPackageNames": ["@types/node", "ts-node"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "automerge": true,
+      "automergeType": "pr",
+      "platformAutomerge": true,
+      "automergeStrategy": "squash"
     },
     {
       "groupName": "nodejs",
       "allowedVersions": "^18.0.0",
-      "matchPackageNames": [
-        "@types/node",
-        "node",
-        "public.ecr.aws/docker/library/node"
-      ],
-      "matchManagers": ["dockerfile", "npm"],
-      "automerge": true
+      "matchPackageNames": ["node"],
+      "automerge": true,
+      "automergeType": "pr",
+      "platformAutomerge": true,
+      "automergeStrategy": "squash"
     },
     {
       "groupName": "aws-cdk",
       "matchPackageNames": ["constructs", "aws-cdk", "aws-cdk-lib"],
       "matchUpdateTypes": ["minor", "patch"],
-      "automerge": true
+      "automerge": true,
+      "automergeType": "pr",
+      "platformAutomerge": true,
+      "automergeStrategy": "squash"
     }
   ]
 }
