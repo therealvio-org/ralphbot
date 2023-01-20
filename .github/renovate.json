@@ -23,7 +23,7 @@
     },
     {
       "matchManagers": ["github-actions"],
-      "matchPaths": [".github/workflows/"],
+      "matchFiles": [".github/workflows/"],
       "automerge": true,
       "automergeType": "pr",
       "platformAutomerge": true,
