@@ -13,21 +13,18 @@
     "platformAutomerge": true,
     "automergeStrategy": "squash"
   },
+  "platformAutomerge": true,
+  "automergeStrategy": "squash",
+  "automergeType": "pr",
   "packageRules": [
     {
       "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
-      "automerge": true,
-      "automergeType": "pr",
-      "platformAutomerge": true,
-      "automergeStrategy": "squash"
+      "automerge": true
     },
     {
       "matchManagers": ["github-actions"],
       "matchFiles": [".github/workflows/"],
-      "automerge": true,
-      "automergeType": "pr",
-      "platformAutomerge": true,
-      "automergeStrategy": "squash"
+      "automerge": true
     },
     {
       "matchManagers": ["gomod"],
@@ -48,36 +45,24 @@
         "eslint-plugin-import",
         "prettier"
       ],
-      "automerge": true,
-      "automergeType": "pr",
-      "platformAutomerge": true,
-      "automergeStrategy": "squash"
+      "automerge": true
     },
     {
       "groupName": "jest",
       "matchPackageNames": ["jest", "ts-jest", "@types/jest"],
-      "automerge": true,
-      "automergeType": "pr",
-      "platformAutomerge": true,
-      "automergeStrategy": "squash"
+      "automerge": true
     },
     {
       "groupName": "nodejs",
       "allowedVersions": "^18.0.0",
       "matchPackageNames": ["node", "@types/node"],
-      "automerge": true,
-      "automergeType": "pr",
-      "platformAutomerge": true,
-      "automergeStrategy": "squash"
+      "automerge": true
     },
     {
       "groupName": "aws-cdk",
       "matchPackageNames": ["constructs", "aws-cdk", "aws-cdk-lib"],
       "matchUpdateTypes": ["minor", "patch"],
-      "automerge": true,
-      "automergeType": "pr",
-      "platformAutomerge": true,
-      "automergeStrategy": "squash"
+      "automerge": true
     }
   ]
 }
