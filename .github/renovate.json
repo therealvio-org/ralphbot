@@ -28,13 +28,13 @@
     },
     {
       "matchManagers": ["gomod"],
-      "automergeStrategy": "squash"
+      "automerge": false
     },
     {
       "groupName": "golang",
+      "automerge": false,
       "matchManagers": ["gomod"],
-      "matchPackageNames": ["go"],
-      "automergeStrategy": "squash"
+      "matchPackageNames": ["go"]
     },
     {
       "groupName": "linting",
