@@ -12,40 +12,51 @@
     "platformAutomerge": true,
     "automergeStrategy": "squash"
   },
-  "platformAutomerge": true,
-  "automergeStrategy": "squash",
-  "automergeType": "pr",
   "packageRules": [
     {
       "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
-      "automerge": true
+      "automerge": true,
+      "automergeType": "pr",
+      "platformAutomerge": true,
+      "automergeStrategy": "squash"
     },
     {
       "matchManagers": ["github-actions"],
       "matchFiles": [".github/workflows/"],
-      "automerge": true
+      "automerge": true,
+      "automergeType": "pr",
+      "platformAutomerge": true,
+      "automergeStrategy": "squash"
     },
     {
       "matchManagers": ["gomod"],
-      "automerge": false
+      "automerge": false,
+      "automergeStrategy": "squash"
     },
     {
       "groupName": "golang",
       "automerge": false,
       "allowedVersions": "^1.19.0",
       "matchManagers": ["dockerfile", "gomod"],
-      "matchPackageNames": ["go", "public.ecr.aws/docker/library/golang"]
+      "matchPackageNames": ["go", "public.ecr.aws/docker/library/golang"],
+      "automergeStrategy": "squash"
     },
     {
       "groupName": "linting-specific dependencies",
       "matchDepTypes": ["devDependencies"],
       "matchPackagePatterns": ["lint", "prettier"],
-      "automerge": true
+      "automerge": true,
+      "automergeType": "pr",
+      "platformAutomerge": true,
+      "automergeStrategy": "squash"
     },
     {
       "groupName": "jest",
       "matchPackageNames": ["jest", "ts-jest", "@types/jest"],
-      "automerge": true
+      "automerge": true,
+      "automergeType": "pr",
+      "platformAutomerge": true,
+      "automergeStrategy": "squash"
     },
     {
       "groupName": "nodejs",
@@ -56,13 +67,19 @@
         "public.ecr.aws/docker/library/node"
       ],
       "matchManagers": ["dockerfile", "npm"],
-      "automerge": true
+      "automerge": true,
+      "automergeType": "pr",
+      "platformAutomerge": true,
+      "automergeStrategy": "squash"
     },
     {
       "groupName": "aws-cdk",
       "matchPackageNames": ["constructs", "aws-cdk", "aws-cdk-lib"],
       "matchUpdateTypes": ["minor", "patch"],
-      "automerge": true
+      "automerge": true,
+      "automergeType": "pr",
+      "platformAutomerge": true,
+      "automergeStrategy": "squash"
     }
   ]
 }
