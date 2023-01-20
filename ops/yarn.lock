@@ -989,10 +989,10 @@ at-least-node@^1.0.0:
   resolved "https://registry.yarnpkg.com/at-least-node/-/at-least-node-1.0.0.tgz#602cd4b46e844ad4effc92a8011a3c46e0238dc2"
   integrity sha512-+q/t7Ekv1EDY2l6Gda6LLiX14rU9TV20Wa3ofeQmwPFZbOMo9DXrLbOjFaaclkXKWidIaopwAObQDqwWtGUjqg==
 
-aws-cdk-lib@2.60.0:
-  version "2.60.0"
-  resolved "https://registry.yarnpkg.com/aws-cdk-lib/-/aws-cdk-lib-2.60.0.tgz#e96400640aca6cf326bd01b02866a157110e6432"
-  integrity sha512-AttvwGmS1TDiOgkskrRw4lQoDwoyzjb+M0iMzHEa75xDz7hkykudNVEvWOfcbid+rzkgfLQyElwtf/oz6m+O9A==
+aws-cdk-lib@2.61.1:
+  version "2.61.1"
+  resolved "https://registry.yarnpkg.com/aws-cdk-lib/-/aws-cdk-lib-2.61.1.tgz#5769521ba360318aa80de6e5e4d73cf808bf7e1b"
+  integrity sha512-+n6rXkIbGtu151XGN54c9+vObUqTKI50skPsZsPo6S0eKgj4ZsYVfS/W6lM4pgv839BwN66hyYAzOvreXAbKeA==
   dependencies:
     "@aws-cdk/asset-awscli-v1" "^2.2.49"
     "@aws-cdk/asset-kubectl-v20" "^2.1.1"
@@ -1003,14 +1003,14 @@ aws-cdk-lib@2.60.0:
     ignore "^5.2.4"
     jsonschema "^1.4.1"
     minimatch "^3.1.2"
-    punycode "^2.1.1"
+    punycode "^2.2.0"
     semver "^7.3.8"
     yaml "1.10.2"
 
-aws-cdk@2.60.0:
-  version "2.60.0"
-  resolved "https://registry.yarnpkg.com/aws-cdk/-/aws-cdk-2.60.0.tgz#c3bb312f14666399ca72c3906728330a19dae167"
-  integrity sha512-/kO8KGuJVCnkhnR+SmDHsAaaqmaTR6Vp/kpryohsBfKh/ZdOH1oKpviMiz167K6tUdin7x95Wjz/GZAfeiKPKg==
+aws-cdk@2.61.1:
+  version "2.61.1"
+  resolved "https://registry.yarnpkg.com/aws-cdk/-/aws-cdk-2.61.1.tgz#a70451a89ca3bdcb83a58c7c0e37e47845cb9cf4"
+  integrity sha512-bufvOB+I2T6YjVjT6D0j6xbi6CnX62j7TfHL905WLd5UQhPecwlL8wLe2whUOKqZj2wmGjaP7jAjIE1FFfh98w==
   optionalDependencies:
     fsevents "2.3.2"
 
@@ -1236,10 +1236,10 @@ concat-map@0.0.1:
   resolved "https://registry.yarnpkg.com/concat-map/-/concat-map-0.0.1.tgz#d8a96bd77fd68df7793a73036a3ba0d5405d477b"
   integrity sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==
 
-constructs@10.1.218:
-  version "10.1.218"
-  resolved "https://registry.yarnpkg.com/constructs/-/constructs-10.1.218.tgz#d36ef6fee6d54bc4c0d62d9029b0383e69e98b33"
-  integrity sha512-XTRRbPHw9wyTrRZ5j9OE61KgoW9B3gBkcVJz+FB9qH4xnXh94rJzoipcaCzTMMdtWe/LLGLEsjx25rOld9tosA==
+constructs@10.1.225:
+  version "10.1.225"
+  resolved "https://registry.yarnpkg.com/constructs/-/constructs-10.1.225.tgz#f5d649e910fd166bfafd48bb8261cfd93dd438f5"
+  integrity sha512-4An6azyanAGLn+E1/9KSs/H6b/+HORZ+ZQ+7UthLYxJbZQcESlT9Dp8ogiOcP7v38WD1x15bEIC3Ztkp2VXz2w==
 
 convert-source-map@^1.6.0, convert-source-map@^1.7.0:
   version "1.9.0"
@@ -2908,10 +2908,15 @@ prompts@^2.0.1:
     kleur "^3.0.3"
     sisteransi "^1.0.5"
 
-punycode@^2.1.0, punycode@^2.1.1:
+punycode@^2.1.0:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-2.1.1.tgz#b58b010ac40c22c5657616c8d2c2c02c7bf479ec"
   integrity sha512-XRsRjdf+j5ml+y/6GKHPZbrF/8p2Yga0JPtdqTIY2Xe5ohJPD9saDJJLPvp9+NSBprVvevdXZybnj2cv8OEd0A==
+
+punycode@^2.2.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/punycode/-/punycode-2.3.0.tgz#f67fa67c94da8f4d0cfff981aee4118064199b8f"
+  integrity sha512-rRV+zQD8tVFys26lAGR9WUuS4iUAngJScM+ZRSKtvl5tKeZ2t5bvdNFdNHBW9FWR4guGHlgmsZ1G7BSm2wTbuA==
 
 queue-microtask@^1.2.2:
   version "1.2.3"
