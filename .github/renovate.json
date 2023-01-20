@@ -13,21 +13,18 @@
     "platformAutomerge": true,
     "automergeStrategy": "squash"
   },
+  "platformAutomerge": true,
+  "automergeStrategy": "squash",
+  "automergeType": "pr",
   "packageRules": [
     {
       "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
-      "automerge": true,
-      "automergeType": "pr",
-      "platformAutomerge": true,
-      "automergeStrategy": "squash"
+      "automerge": true
     },
     {
       "matchManagers": ["github-actions"],
-      "matchPaths": [".github/workflows/"],
-      "automerge": true,
-      "automergeType": "pr",
-      "platformAutomerge": true,
-      "automergeStrategy": "squash"
+      "matchFiles": [".github/workflows/"],
+      "automerge": true
     },
     {
       "matchManagers": ["gomod"],
@@ -40,47 +37,32 @@
       "automergeStrategy": "squash"
     },
     {
-      "groupName": "eslint",
-      "matchPackagePrefixes": ["@typescript-eslint/", "eslint"],
-      "automerge": true,
-      "automergeType": "pr",
-      "platformAutomerge": true,
-      "automergeStrategy": "squash"
+      "groupName": "linting",
+      "matchPackageNames": [
+        "@typescript-eslint/eslint-plugin",
+        "@typescript-eslint/parser",
+        "eslint",
+        "eslint-plugin-import",
+        "prettier"
+      ],
+      "automerge": true
     },
     {
       "groupName": "jest",
       "matchPackageNames": ["jest", "ts-jest", "@types/jest"],
-      "automerge": true,
-      "automergeType": "pr",
-      "platformAutomerge": true,
-      "automergeStrategy": "squash"
-    },
-    {
-      "groupName": "nodejs",
-      "matchPackageNames": ["@types/node", "ts-node"],
-      "matchUpdateTypes": ["minor", "patch"],
-      "automerge": true,
-      "automergeType": "pr",
-      "platformAutomerge": true,
-      "automergeStrategy": "squash"
+      "automerge": true
     },
     {
       "groupName": "nodejs",
       "allowedVersions": "^18.0.0",
-      "matchPackageNames": ["node"],
-      "automerge": true,
-      "automergeType": "pr",
-      "platformAutomerge": true,
-      "automergeStrategy": "squash"
+      "matchPackageNames": ["node", "@types/node"],
+      "automerge": true
     },
     {
       "groupName": "aws-cdk",
       "matchPackageNames": ["constructs", "aws-cdk", "aws-cdk-lib"],
       "matchUpdateTypes": ["minor", "patch"],
-      "automerge": true,
-      "automergeType": "pr",
-      "platformAutomerge": true,
-      "automergeStrategy": "squash"
+      "automerge": true
     }
   ]
 }
