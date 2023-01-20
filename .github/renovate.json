@@ -40,8 +40,14 @@
       "automergeStrategy": "squash"
     },
     {
-      "groupName": "eslint",
-      "matchPackagePrefixes": ["@typescript-eslint/", "eslint"],
+      "groupName": "linting",
+      "matchPackageNames": [
+        "@typescript-eslint/eslint-plugin",
+        "@typescript-eslint/parser",
+        "eslint",
+        "eslint-plugin-import",
+        "prettier"
+      ],
       "automerge": true,
       "automergeType": "pr",
       "platformAutomerge": true,
