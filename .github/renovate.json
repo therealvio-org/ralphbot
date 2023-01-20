@@ -27,10 +27,12 @@
       "automerge": true
     },
     {
-      "matchManagers": ["gomod"]
+      "matchManagers": ["gomod"],
+      "automerge": false
     },
     {
       "groupName": "golang",
+      "automerge": false,
       "matchManagers": ["gomod"],
       "matchPackageNames": ["go"]
     },
