@@ -23,7 +23,6 @@
     },
     {
       "matchManagers": ["github-actions"],
-      "matchFiles": [".github/workflows/"],
       "automerge": true
     },
     {
