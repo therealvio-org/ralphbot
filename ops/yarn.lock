@@ -1026,10 +1026,10 @@ available-typed-arrays@^1.0.5:
   resolved "https://registry.yarnpkg.com/available-typed-arrays/-/available-typed-arrays-1.0.5.tgz#92f95616501069d07d10edb2fc37d3e1c65123b7"
   integrity sha512-DMD0KiN46eipeziST1LPP/STfDU0sufISXmjSgvVsoU2tqxctQeASejWcfNtxYKqETM1UxQ8sp2OrSBWpHY6sw==
 
-aws-cdk-lib@2.63.2:
-  version "2.63.2"
-  resolved "https://registry.yarnpkg.com/aws-cdk-lib/-/aws-cdk-lib-2.63.2.tgz#c5308cc9b81ec2179ddc37089772d83e07d7c595"
-  integrity sha512-Kk9aP79O+9UJ3Bw0wjquMD+RpWPQ/Fa4wUcP5mdpROpoipPXsFFZPTXT8j8kp2oFOZa9OHxacTF06+/M0H/bWQ==
+aws-cdk-lib@2.64.0:
+  version "2.64.0"
+  resolved "https://registry.yarnpkg.com/aws-cdk-lib/-/aws-cdk-lib-2.64.0.tgz#18f34262b54d3e4088680951137e32da8fe2a148"
+  integrity sha512-IrgL7thb6TeOyHgyR/qKWTdA9FBb9lv7Z9QPDzCNJlkKI+0ANjYHy3RYV8Gd+1+kc6l8DG9Z1elij40YCr/Ptg==
   dependencies:
     "@aws-cdk/asset-awscli-v1" "^2.2.52"
     "@aws-cdk/asset-kubectl-v20" "^2.1.1"
@@ -1044,10 +1044,10 @@ aws-cdk-lib@2.63.2:
     semver "^7.3.8"
     yaml "1.10.2"
 
-aws-cdk@2.63.2:
-  version "2.63.2"
-  resolved "https://registry.yarnpkg.com/aws-cdk/-/aws-cdk-2.63.2.tgz#9fd550eca936304e625d3e24fd4433525fb0d5a1"
-  integrity sha512-YtWfPTOiq+cgSIiM2IwjickvJgD1ESBWzK+0+yeauC3XwdaVcfNeTHF3sEqmc5DRMPKV8kAVBBxc0fmuoxcnBQ==
+aws-cdk@2.64.0:
+  version "2.64.0"
+  resolved "https://registry.yarnpkg.com/aws-cdk/-/aws-cdk-2.64.0.tgz#8dd6561c678053852ab16851292d7a2023f53bd9"
+  integrity sha512-iXkvVeYKt6Glboeicrb3QxC6K6o25+zitM/UTfgVzDlKEvC4hwQp1KqXy/caN7SfA6X2N0LJmXfC99T4cvIH0A==
   optionalDependencies:
     fsevents "2.3.2"
 
@@ -1273,10 +1273,10 @@ concat-map@0.0.1:
   resolved "https://registry.yarnpkg.com/concat-map/-/concat-map-0.0.1.tgz#d8a96bd77fd68df7793a73036a3ba0d5405d477b"
   integrity sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==
 
-constructs@10.1.244:
-  version "10.1.244"
-  resolved "https://registry.yarnpkg.com/constructs/-/constructs-10.1.244.tgz#2ec4487384f47992052baca419949c0dca2b1723"
-  integrity sha512-oJBy6JoiwocEwKxY3yMXfbClT5ocKmX5qXUDpcxW4SRjlRvB8X2pR/lNqg74JVm9qAEUBesI0FLLqc2Ke1I2QA==
+constructs@10.1.245:
+  version "10.1.245"
+  resolved "https://registry.yarnpkg.com/constructs/-/constructs-10.1.245.tgz#8b1075fa68c7e798cdb84af36b3072b92003ff3d"
+  integrity sha512-3TOxsgv5atw87/tAnW4aa7aAp1lA8kqjJ/i78t7jCHJEDzWEOGpT2JjLulyNq+GtyIGBKvHd2a64gogULFJY6Q==
 
 convert-source-map@^1.6.0, convert-source-map@^1.7.0:
   version "1.9.0"
