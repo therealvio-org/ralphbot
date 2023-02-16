@@ -57,6 +57,7 @@
     {
       "groupName": "nodejs",
       "allowedVersions": "^18.0.0",
+      "matchManagers": ["npm"],
       "matchPackageNames": ["node", "@types/node"],
       "automerge": false
     },
