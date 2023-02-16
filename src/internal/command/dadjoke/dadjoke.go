@@ -5,7 +5,6 @@ import (
 	"log"
 	"math/rand"
 	"os"
-	"time"
 
 	"github.com/bwmarrin/discordgo"
 )
@@ -58,7 +57,6 @@ func getJokes() []string {
 }
 
 func dadJoke(i *discordgo.InteractionCreate, j []string) string {
-	rand.Seed(time.Now().Unix())
 	selectedDadJoke := j[rand.Intn(len(j))]
 	result := string(selectedDadJoke)
 	return result
