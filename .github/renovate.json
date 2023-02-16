@@ -18,10 +18,6 @@
   "automergeType": "pr",
   "packageRules": [
     {
-      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
-      "automerge": false
-    },
-    {
       "matchManagers": ["github-actions"],
       "automerge": false
     },
