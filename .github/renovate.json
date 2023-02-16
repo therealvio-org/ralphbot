@@ -26,6 +26,7 @@
     },
     {
       "groupName": "aws-cdk",
+      "allowedVersions": "^2.0.0",
       "matchPackageNames": ["aws-cdk", "aws-cdk-lib"],
       "matchUpdateTypes": ["minor", "patch"],
       "automerge": false
