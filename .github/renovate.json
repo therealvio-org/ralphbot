@@ -19,11 +19,11 @@
   "packageRules": [
     {
       "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
-      "automerge": true
+      "automerge": false
     },
     {
       "matchManagers": ["github-actions"],
-      "automerge": true
+      "automerge": false
     },
     {
       "matchManagers": ["gomod"],
@@ -44,24 +44,24 @@
         "eslint-plugin-import",
         "prettier"
       ],
-      "automerge": true
+      "automerge": false
     },
     {
       "groupName": "jest",
       "matchPackageNames": ["jest", "ts-jest", "@types/jest"],
-      "automerge": true
+      "automerge": false
     },
     {
       "groupName": "nodejs",
       "allowedVersions": "^18.0.0",
       "matchPackageNames": ["node", "@types/node"],
-      "automerge": true
+      "automerge": false
     },
     {
       "groupName": "aws-cdk",
       "matchPackageNames": ["constructs", "aws-cdk", "aws-cdk-lib"],
       "matchUpdateTypes": ["minor", "patch"],
-      "automerge": true
+      "automerge": false
     }
   ]
 }
