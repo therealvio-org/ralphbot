@@ -54,6 +54,14 @@
       "automerge": false
     },
     {
+      "groupName": "nodejs",
+      "allowedVersions": "^18.0.0",
+      "matchDatasources": ["node"],
+      "matchManagers": ["asdf"],
+      "matchPackageNames": ["node"],
+      "automerge": false
+    },
+    {
       "groupName": "aws-cdk",
       "matchPackageNames": ["constructs", "aws-cdk", "aws-cdk-lib"],
       "matchUpdateTypes": ["minor", "patch"],
