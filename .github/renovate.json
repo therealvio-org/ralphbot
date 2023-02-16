@@ -30,7 +30,7 @@
       "matchPackageNames": ["aws-cdk", "aws-cdk-lib"],
       "matchUpdateTypes": ["minor", "patch"],
       "automerge": false
-    }
+    },
     {
       "groupName": "golang",
       "automerge": false,
