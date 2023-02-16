@@ -64,8 +64,15 @@
       "groupName": "nodejs",
       "allowedVersions": "^18.0.0",
       "matchDatasources": ["node"],
-      "matchManagers": ["asdf", "dockerfile"],
+      "matchManagers": ["asdf"],
       "matchPackageNames": ["node"],
+      "automerge": false
+    },
+    {
+      "groupName": "nodejs",
+      "matchManagers": ["dockerfile"],
+      "matchPackageNames": ["node"],
+      "matchUpdateTypes": ["minor"],
       "automerge": false
     }
   ]
