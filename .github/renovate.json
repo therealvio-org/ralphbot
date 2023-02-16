@@ -35,7 +35,7 @@
       "groupName": "golang",
       "automerge": false,
       "matchDatasources": ["golang-version"],
-      "matchManagers": ["gomod", "asdf"],
+      "matchManagers": ["asdf", "dockerfile", "gomod"],
       "rangeStrategy": "bump"
     },
     {
@@ -64,7 +64,7 @@
       "groupName": "nodejs",
       "allowedVersions": "^18.0.0",
       "matchDatasources": ["node"],
-      "matchManagers": ["asdf"],
+      "matchManagers": ["asdf", "dockerfile"],
       "matchPackageNames": ["node"],
       "automerge": false
     }
