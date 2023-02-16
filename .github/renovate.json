@@ -1,0 +1,73 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:base", ":dependencyDashboard"],
+  "schedule": ["after 7am and before 7pm every weekday"],
+  "automergeSchedule": ["after 7am and before 7pm every weekday"],
+  "postUpdateOptions": ["gomodTidy", "gomodUpdateImportPaths"],
+  "lockFileMaintenance": {
+    "enabled": true,
+    "schedule": ["after 7am on the first day of the month"],
+    "automerge": true,
+    "automergeType": "pr",
+    "platformAutomerge": true,
+    "automergeStrategy": "squash"
+  },
+  "platformAutomerge": true,
+  "automergeStrategy": "squash",
+  "automergeType": "pr",
+  "packageRules": [
+    {
+      "matchManagers": ["github-actions"],
+      "automerge": false
+    },
+    {
+      "matchManagers": ["gomod"],
+      "automerge": false
+    },
+    {
+      "groupName": "aws-cdk",
+      "allowedVersions": "^2.0.0",
+      "matchPackageNames": ["aws-cdk", "aws-cdk-lib"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "automerge": false
+    },
+    {
+      "groupName": "golang",
+      "automerge": false,
+      "matchDatasources": ["golang-version"],
+      "matchManagers": ["asdf", "dockerfile", "gomod"],
+      "rangeStrategy": "bump"
+    },
+    {
+      "groupName": "linting",
+      "matchPackageNames": [
+        "@typescript-eslint/eslint-plugin",
+        "@typescript-eslint/parser",
+        "eslint",
+        "eslint-plugin-import",
+        "prettier"
+      ],
+      "automerge": false
+    },
+    {
+      "groupName": "jest",
+      "matchPackageNames": ["jest", "ts-jest", "@types/jest"],
+      "automerge": false
+    },
+    {
+      "groupName": "nodejs",
+      "allowedVersions": "^18.0.0",
+      "matchManagers": ["npm"],
+      "matchPackageNames": ["node", "@types/node"],
+      "automerge": false
+    },
+    {
+      "groupName": "nodejs",
+      "allowedVersions": "^18.0.0",
+      "matchDatasources": ["node"],
+      "matchManagers": ["asdf", "dockerfile"],
+      "matchPackageNames": ["node"],
+      "automerge": false
+    }
+  ]
+}
