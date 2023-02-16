@@ -26,7 +26,7 @@
     },
     {
       "groupName": "aws-cdk",
-      "matchPackageNames": ["constructs", "aws-cdk", "aws-cdk-lib"],
+      "matchPackageNames": ["aws-cdk", "aws-cdk-lib"],
       "matchUpdateTypes": ["minor", "patch"],
       "automerge": false
     }
