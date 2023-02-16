@@ -25,6 +25,12 @@
       "automerge": false
     },
     {
+      "groupName": "aws-cdk",
+      "matchPackageNames": ["constructs", "aws-cdk", "aws-cdk-lib"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "automerge": false
+    }
+    {
       "groupName": "golang",
       "automerge": false,
       "matchDatasources": ["golang-version"],
@@ -59,12 +65,6 @@
       "matchDatasources": ["node"],
       "matchManagers": ["asdf"],
       "matchPackageNames": ["node"],
-      "automerge": false
-    },
-    {
-      "groupName": "aws-cdk",
-      "matchPackageNames": ["constructs", "aws-cdk", "aws-cdk-lib"],
-      "matchUpdateTypes": ["minor", "patch"],
       "automerge": false
     }
   ]
