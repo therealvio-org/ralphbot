@@ -28,8 +28,9 @@
     {
       "groupName": "golang",
       "automerge": false,
-      "matchManagers": ["gomod"],
-      "matchPackageNames": ["go"]
+      "matchDatasources": ["golang-version"],
+      "matchManagers": ["gomod", "asdf"],
+      "rangeStrategy": "bump"
     },
     {
       "groupName": "linting",
