@@ -81,6 +81,6 @@ Arrow brackets are used to escape the github link to prevent previews
 */
 
 func guideGithub(i *discordgo.InteractionCreate, activity string, ghubLink string, gdriveLink string) string {
-	result := fmt.Sprintf("%s, here is your requested **%s** supplementary material!\n\n [Github Link](<%s>)\n[Google Drive Link](%s)", i.Member.Mention(), activity, ghubLink, gdriveLink)
+	result := fmt.Sprintf("%s, here is your requested **%s** supplementary material!\n\n[Github Link](<%s>)\n[Google Drive Link](%s)", i.Member.Mention(), activity, ghubLink, gdriveLink)
 	return result
 }
