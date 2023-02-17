@@ -17,6 +17,11 @@
   "automergeType": "pr",
   "packageRules": [
     {
+      "automerge": true,
+      "matchManagers": ["npm"],
+      "matchUpdateTypes": ["minor", "patch", "rollback", "bump"]
+    },
+    {
       "matchManagers": ["github-actions"],
       "automerge": true
     },
