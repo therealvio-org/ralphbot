@@ -19,6 +19,7 @@
     {
       "automerge": true,
       "matchManagers": ["npm"],
+      "excludeDepPatterns": ["node"],
       "matchUpdateTypes": ["minor", "patch", "rollback", "bump"]
     },
     {
