@@ -1,4 +1,4 @@
-FROM public.ecr.aws/docker/library/node:18.13-alpine
+FROM public.ecr.aws/docker/library/node:18.14-alpine
 
 WORKDIR /cdk
 
