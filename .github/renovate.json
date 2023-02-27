@@ -28,7 +28,6 @@
     },
     {
       "matchManagers": ["gomod"],
-      "matchDepTypes": ["indirect"],
       "automerge": false
     },
     {
