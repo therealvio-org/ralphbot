@@ -1,8 +1,17 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["config:base", ":dependencyDashboard"],
-  "schedule": ["after 7am and before 7pm every weekday"],
-  "automergeSchedule": ["after 7am and before 7pm every weekday"],
+  "timezone": "Australia/Melbourne",
+  "schedule": [
+    "after 8pm every weekday",
+    "before 8am every weekday",
+    "every weekend"
+  ],
+  "automergeSchedule": [
+    "after 8pm every weekday",
+    "before 8am every weekday",
+    "every weekend"
+  ],
   "postUpdateOptions": ["gomodTidy", "gomodUpdateImportPaths"],
   "lockFileMaintenance": {
     "enabled": true,
