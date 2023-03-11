@@ -23,22 +23,24 @@ var (
 		"fetch-guide": func(s *discordgo.Session, i *discordgo.InteractionCreate) {
 			content := ""
 			switch i.ApplicationCommandData().Options[0].Name {
-			case kingsfall.SubCommandName:
-				content = guideMessage(i, kingsfall.Name, kingsfall.GDriveUrl)
-			case vow.SubCommandName:
-				content = guideGithub(i, vow.Name, vow.GHUrl, vow.GDriveUrl)
-			case vault.SubCommandName:
-				content = guideMessage(i, vault.Name, vault.GDriveUrl)
 			case crypt.SubCommandName:
 				content = guideMessage(i, crypt.Name, crypt.GDriveUrl)
 			case garden.SubCommandName:
 				content = guideMessage(i, garden.Name, garden.GDriveUrl)
-			case wish.SubCommandName:
-				content = guideMessage(i, wish.Name, wish.GDriveUrl)
+			case kingsfall.SubCommandName:
+				content = guideMessage(i, kingsfall.Name, kingsfall.GDriveUrl)
 			case pit.SubCommandName:
 				content = guideMessage(i, pit.Name, pit.GDriveUrl)
+			case ron.SubCommandName:
+				content = guideMessage(i, ron.Name, ron.GDriveUrl)
 			case spire.SubCommandName:
 				content = guideMessage(i, spire.Name, spire.GDriveUrl)
+			case vault.SubCommandName:
+				content = guideMessage(i, vault.Name, vault.GDriveUrl)
+			case vow.SubCommandName:
+				content = guideGithub(i, vow.Name, vow.GHUrl, vow.GDriveUrl)
+			case wish.SubCommandName:
+				content = guideMessage(i, wish.Name, wish.GDriveUrl)
 			default:
 				content = "Oops, something has gone wrong!\n"
 				log.Printf("fetch-guide has ran into `default` in switch statement! Value: %v", i.ApplicationCommandData().Options[0].Name)

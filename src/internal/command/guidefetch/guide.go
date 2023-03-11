@@ -37,6 +37,13 @@ var (
 		GDriveUrl:      "https://drive.google.com/drive/folders/17lB7m9KQMwzBb6UHfoBt9ZEA82haD2Fd?usp=sharing",
 	}
 
+	ron = &Guide{
+		Name:           "Root of Nightmares",
+		SubCommandName: "raid-ron",
+		Description:    "Root of Nightmares Raid",
+		GDriveUrl:      "https://drive.google.com/drive/folders/1eR50Jt36GBegMALRkT-tmnH6Nnjc4Pqj?usp=share_link",
+	}
+
 	spire = &Guide{
 		Name:           "Spire of the Watcher",
 		SubCommandName: "dungeon-spire",
@@ -71,6 +78,7 @@ var (
 		*garden,
 		*kingsfall,
 		*pit,
+		*ron,
 		*spire,
 		*vault,
 		*vow,
