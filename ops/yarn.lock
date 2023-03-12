@@ -789,10 +789,15 @@
   resolved "https://registry.yarnpkg.com/@types/json5/-/json5-0.0.29.tgz#ee28707ae94e11d2b827bcbe5270bcea7f3e71ee"
   integrity sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==
 
-"@types/node@*", "@types/node@18.14.2":
+"@types/node@*":
   version "18.14.2"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-18.14.2.tgz#c076ed1d7b6095078ad3cf21dfeea951842778b1"
   integrity sha512-1uEQxww3DaghA0RxqHx0O0ppVlo43pJhepY51OxuQIKHpjbnYLA7vcdwioNPzIqmC2u3I/dmylcqjlh0e7AyUA==
+
+"@types/node@18.15.0":
+  version "18.15.0"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-18.15.0.tgz#286a65e3fdffd691e170541e6ecb0410b16a38be"
+  integrity sha512-z6nr0TTEOBGkzLGmbypWOGnpSpSIBorEhC4L+4HeQ2iezKCi4f77kyslRwvHeNitymGQ+oFyIWGP96l/DPSV9w==
 
 "@types/prettier@^2.1.5":
   version "2.7.2"
@@ -2868,10 +2873,10 @@ node-releases@^2.0.8:
   resolved "https://registry.yarnpkg.com/node-releases/-/node-releases-2.0.10.tgz#c311ebae3b6a148c89b1813fd7c4d3c024ef537f"
   integrity sha512-5GFldHPXVG/YZmFzJvKK2zDSzPKhEp0+ZR5SVaoSag9fsL5YgHbUHDfnG5494ISANDcK4KwPXAx2xqVEydmd7w==
 
-node@18.14.2:
-  version "18.14.2"
-  resolved "https://registry.yarnpkg.com/node/-/node-18.14.2.tgz#4e7c9f6c9d273c6e39ec7b8527e4b69c3bc962bf"
-  integrity sha512-qPZtzc6VcVPnh2ZUsI7R4JM2Ytr1kQvw+1H3Kuzou29DzdoK/jKO7rodr27Po2/GMJp1MlI4Fg+Fqkf4PXBp+w==
+node@18.15.0:
+  version "18.15.0"
+  resolved "https://registry.yarnpkg.com/node/-/node-18.15.0.tgz#4d8b58629b250cd68dfefb23e4020e4a11b6c670"
+  integrity sha512-y6G6jOU7iZ4QjFLCc1srvPBtk+K8Lak0JbNS6ocGSAI30+wvIWaolbhj3f+jqOv58gSIAlDMyTJckQO9lD5wwQ==
   dependencies:
     node-bin-setup "^1.0.0"
 
