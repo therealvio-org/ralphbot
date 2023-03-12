@@ -10,20 +10,20 @@
     "@jridgewell/gen-mapping" "^0.1.0"
     "@jridgewell/trace-mapping" "^0.3.9"
 
-"@aws-cdk/asset-awscli-v1@^2.2.69":
-  version "2.2.85"
-  resolved "https://registry.yarnpkg.com/@aws-cdk/asset-awscli-v1/-/asset-awscli-v1-2.2.85.tgz#3671dc4de44f243571a806d651697bb4f49d06c1"
-  integrity sha512-oNX4HMupi2+/blbUNctA8WIwyqFTLOGhGDB+gginMSy7QHevLWb/duMlwa7Np4wpiHeiBDMF/ccc5Mfb352srg==
+"@aws-cdk/asset-awscli-v1@^2.2.97":
+  version "2.2.102"
+  resolved "https://registry.yarnpkg.com/@aws-cdk/asset-awscli-v1/-/asset-awscli-v1-2.2.102.tgz#5479d14547cc618f3144d8e743b9c285607840aa"
+  integrity sha512-BkgsrU92ooQYfl5MdOrJkjD4MUHb+L6K1zyPfGQ/MWh9K5HS7Mzmz4SH90g+60JWEDwZ5m1KL9md5tyANyIFhw==
 
 "@aws-cdk/asset-kubectl-v20@^2.1.1":
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/@aws-cdk/asset-kubectl-v20/-/asset-kubectl-v20-2.1.1.tgz#d01c1efb867fb7f2cfd8c8b230b8eae16447e156"
   integrity sha512-U1ntiX8XiMRRRH5J1IdC+1t5CE89015cwyt5U63Cpk0GnMlN5+h9WsWMlKlPXZR4rdq/m806JRlBMRpBUB2Dhw==
 
-"@aws-cdk/asset-node-proxy-agent-v5@^2.0.58":
-  version "2.0.71"
-  resolved "https://registry.yarnpkg.com/@aws-cdk/asset-node-proxy-agent-v5/-/asset-node-proxy-agent-v5-2.0.71.tgz#dd269f8aa160473e006633d2f0f5384f46747693"
-  integrity sha512-vB/KF9naAYkELP6Hi5+Oib59B4ZAz6jjtrpsKNzsIZTmcTs0IIBb4nVdAuwMpMkPcwT0mzhMg2tlsiSyjrOFBA==
+"@aws-cdk/asset-node-proxy-agent-v5@^2.0.77":
+  version "2.0.82"
+  resolved "https://registry.yarnpkg.com/@aws-cdk/asset-node-proxy-agent-v5/-/asset-node-proxy-agent-v5-2.0.82.tgz#d5fab6aab8e2cc53b2692f2bc9af6cbb0f567f8f"
+  integrity sha512-mcyIVXWHp5CUKb/C9OHykzQ0FBsW5n91zGhrZXdxDz2GK8Hrk6EFW/+DgYOWjoAGJDjaKriw4XYI7zq9UAxEWA==
 
 "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.12.13", "@babel/code-frame@^7.18.6":
   version "7.18.6"
@@ -1032,14 +1032,14 @@ available-typed-arrays@^1.0.5:
   resolved "https://registry.yarnpkg.com/available-typed-arrays/-/available-typed-arrays-1.0.5.tgz#92f95616501069d07d10edb2fc37d3e1c65123b7"
   integrity sha512-DMD0KiN46eipeziST1LPP/STfDU0sufISXmjSgvVsoU2tqxctQeASejWcfNtxYKqETM1UxQ8sp2OrSBWpHY6sw==
 
-aws-cdk-lib@2.66.1:
-  version "2.66.1"
-  resolved "https://registry.yarnpkg.com/aws-cdk-lib/-/aws-cdk-lib-2.66.1.tgz#f560a8a86f755ce1507f15398e55d6c0218f9c1a"
-  integrity sha512-xMnKXOnsoJLoDyl6L3BUYLPa9bqw8UoBlFGGH4gbzpBPViv9b49xvYuW+BLf7bK7IVgTzYQ+VmZKaFsj+VFouA==
+aws-cdk-lib@2.68.0:
+  version "2.68.0"
+  resolved "https://registry.yarnpkg.com/aws-cdk-lib/-/aws-cdk-lib-2.68.0.tgz#5448dfff733a88551e3df61df5c5b646a7b6ee75"
+  integrity sha512-roN3xwzv/GleGG3CaJrf+thdzr9WBzJU4LotumEOs+0cGfeXSta8Pm/cGAeY4kplr5r10QWUovH0fv/bi6Vrbw==
   dependencies:
-    "@aws-cdk/asset-awscli-v1" "^2.2.69"
+    "@aws-cdk/asset-awscli-v1" "^2.2.97"
     "@aws-cdk/asset-kubectl-v20" "^2.1.1"
-    "@aws-cdk/asset-node-proxy-agent-v5" "^2.0.58"
+    "@aws-cdk/asset-node-proxy-agent-v5" "^2.0.77"
     "@balena/dockerignore" "^1.0.2"
     case "1.6.3"
     fs-extra "^9.1.0"
@@ -1050,10 +1050,10 @@ aws-cdk-lib@2.66.1:
     semver "^7.3.8"
     yaml "1.10.2"
 
-aws-cdk@2.66.1:
-  version "2.66.1"
-  resolved "https://registry.yarnpkg.com/aws-cdk/-/aws-cdk-2.66.1.tgz#1b70a28e1e50362d53b32ff7bb4f1ff7f49a41c1"
-  integrity sha512-exm97/VOH6yZPN2is3UC0acc6KF56AANvCg2gAEhyu6dPBueKxNCzrvsjNg/vmXrA8HqJ2jYJMg88YRNaUfylA==
+aws-cdk@2.68.0:
+  version "2.68.0"
+  resolved "https://registry.yarnpkg.com/aws-cdk/-/aws-cdk-2.68.0.tgz#30490bb1ff6b87bebd8a431e6c74336c69964618"
+  integrity sha512-r+C5M4J3C7RLiixhxsO/W9Kpb5iB0mFshyn5PXT1cGPkDbx23bnWLOab03jG7uHWIWI01DCipHQyTaeXXqvT3A==
   optionalDependencies:
     fsevents "2.3.2"
 
