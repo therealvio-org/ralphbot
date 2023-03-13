@@ -21,7 +21,7 @@
     "platformAutomerge": true,
     "automergeStrategy": "squash"
   },
-  "platformAutomerge": false,
+  "platformAutomerge": true,
   "automergeStrategy": "squash",
   "automergeType": "pr",
   "packageRules": [
