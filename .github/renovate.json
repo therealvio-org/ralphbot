@@ -7,11 +7,7 @@
     "before 8am every weekday",
     "every weekend"
   ],
-  "automergeSchedule": [
-    "after 8pm every weekday",
-    "before 8am every weekday",
-    "every weekend"
-  ],
+  "automergeSchedule": ["at any time"],
   "postUpdateOptions": ["gomodTidy", "gomodUpdateImportPaths"],
   "lockFileMaintenance": {
     "enabled": true,
