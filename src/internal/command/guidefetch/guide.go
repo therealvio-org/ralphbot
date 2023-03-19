@@ -38,9 +38,9 @@ var (
 	}
 
 	ron = &Guide{
-		Name:           "Root of Nightmares",
-		SubCommandName: "raid-ron",
-		Description:    "Root of Nightmares Raid",
+		Name:           "The Root of Nightmares",
+		SubCommandName: "raid-tron",
+		Description:    "The Root of Nightmares Raid",
 		GDriveUrl:      "https://drive.google.com/drive/folders/1eR50Jt36GBegMALRkT-tmnH6Nnjc4Pqj?usp=share_link",
 	}
 
