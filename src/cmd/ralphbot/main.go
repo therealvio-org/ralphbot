@@ -13,17 +13,23 @@ var (
 	env = config.New()
 )
 
-var s *discordgo.Session
-
-func init() {
-	var err error
-	s, err = discordgo.New("Bot " + env.BotToken)
-	if err != nil {
-		log.Fatalf("Error creating new Discord session: %v", err)
-	}
-}
-
 func main() {
-	discord.CheckGuildId(s, env.GuildID)
-	discord.StartBotService(s, env)
+	ds, err := discord.NewDiscord(env.BotToken)
+	if err != nil {
+		log.Fatalf("Error executing NewDiscord(): %v", err)
+	}
+
+	// pre-flight checks go here
+	// check if the session is running
+	ds.AddHandler(func(s *discordgo.Session, r *discordgo.Ready) {
+		log.Printf("Logged in as: %v#%v", s.State.User.Username, s.State.User.Discriminator)
+	})
+
+	discord.CheckGuildId(ds, env.GuildID)
+
+	// launch! 🚀
+	err = discord.StartBotService(ds, env)
+	if err != nil {
+		log.Fatalf("Error starting new discord session: %v", err)
+	}
 }
