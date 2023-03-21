@@ -2,22 +2,20 @@ package discord
 
 import (
 	"log"
-
-	"github.com/bwmarrin/discordgo"
 )
 
-//If GUILD_ID was passed, it checks to see if the GUILD_ID environment variable matches the discord server's (guild) id that
-//`ralphbot` is connected to.
-//If it is, it indicates in the logs that its commands will be registered as `guild` commands, rather than `global` commands.
+// If GUILD_ID was passed, it checks to see if the GUILD_ID environment variable matches the discord server's (guild) id that
+// `ralphbot` is connected to.
+// If it is, it indicates in the logs that its commands will be registered as `guild` commands, rather than `global` commands.
 // i.e. immediate registration for the server, vs a live command
 //
-//The intention for this is to help facilitate local testing on a private server. In production, commands should be `global`.
-func CheckGuildId(s *discordgo.Session, id string) {
+// The intention for this is to help facilitate local testing on a private server. In production, commands should be `global`.
+func CheckGuildId(ds *DiscordSession, id string) {
 	doFail := false
 	if id != "" {
 		log.Printf("Checking for GuildID variable validity against current server (if it matches, we're okay)...")
 
-		g, err := s.Guild(id)
+		g, err := ds.Guild(id)
 		if err != nil {
 			log.Fatalf("Cannot retrieve Guild Id from server: %v", err)
 		}
