@@ -18,6 +18,10 @@ type DiscordSession struct {
 	*discordgo.Session
 }
 
+type DiscordHandlerOutput struct {
+	handler func()
+}
+
 // Starts a new Discord session
 func NewDiscord(authToken string) (*DiscordSession, error) {
 	s, err := discordgo.New("Bot " + authToken)
@@ -27,6 +31,12 @@ func NewDiscord(authToken string) (*DiscordSession, error) {
 	}
 
 	return &DiscordSession{s}, nil
+}
+
+func CheckOnline(ds *DiscordSession) *DiscordHandlerOutput {
+	return &DiscordHandlerOutput{ds.AddHandler(func(s *discordgo.Session, r *discordgo.Ready) {
+		log.Printf("Logged in as: %v#%v", s.State.User.Username, s.State.User.Discriminator)
+	})}
 }
 
 // Starts the `ralphbot` service, to be used after pre-flight checks
