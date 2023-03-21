@@ -70,14 +70,14 @@
     },
     {
       "groupName": "nodejs",
-      "automerge": false,
+      "automerge": true,
       "allowedVersions": "^18.0.0",
       "matchManagers": ["npm"],
       "matchPackageNames": ["node", "@types/node"]
     },
     {
       "groupName": "nodejs",
-      "automerge": false,
+      "automerge": true,
       "allowedVersions": "^18.0.0",
       "matchDatasources": ["node"],
       "matchManagers": ["asdf"],
