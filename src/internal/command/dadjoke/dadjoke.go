@@ -1,13 +1,16 @@
 package dadjoke
 
 import (
+	_ "embed"
 	"encoding/json"
 	"log"
 	"math/rand"
-	"os"
 
 	"github.com/bwmarrin/discordgo"
 )
+
+//go:embed jokes.json
+var jokesFile []byte
 
 var (
 	Commands = []*discordgo.ApplicationCommand{
@@ -18,7 +21,7 @@ var (
 		},
 	}
 
-	jokes = getJokes()
+	jokes = getJokes(jokesFile)
 
 	CommandHandlers = map[string]func(s *discordgo.Session, i *discordgo.InteractionCreate){
 		"dad-joke": func(s *discordgo.Session, i *discordgo.InteractionCreate) {
@@ -35,19 +38,14 @@ var (
 	}
 )
 
-type StructJokes struct {
+type JokeStruct struct {
 	Jokes []string `json:"jokes"`
 }
 
-func getJokes() []string {
-	jokesFile, err := os.ReadFile("jokes.json")
-	if err != nil {
-		log.Fatal("Unable to read jokesFile!")
-	}
+func getJokes(b []byte) []string {
 
-	jokeArray := StructJokes{}
-
-	err = json.Unmarshal([]byte(jokesFile), &jokeArray)
+	var jokeArray JokeStruct
+	err := json.Unmarshal(b, &jokeArray)
 	if err != nil {
 		log.Printf("Unable to Unmarshal : %v", err)
 	}
