@@ -14,26 +14,42 @@ import (
 	"github.com/bwmarrin/discordgo"
 )
 
-// Starts the `ralphbot` service
-func StartBotService(s *discordgo.Session, env *config.EnvConfig) {
-	s.AddHandler(func(s *discordgo.Session, r *discordgo.Ready) {
+type DiscordSession struct {
+	*discordgo.Session
+}
+
+// Starts a new Discord session
+func NewDiscord(authToken string) (*DiscordSession, error) {
+	s, err := discordgo.New("Bot " + authToken)
+
+	if err != nil {
+		return nil, fmt.Errorf("error in creating discord session: %v", err)
+	}
+
+	return &DiscordSession{s}, nil
+}
+
+// Starts the `ralphbot` service, to be used after pre-flight checks
+// This should be responsible for the running service, command registration, e.t.c.
+func StartBotService(ds *DiscordSession, env *config.EnvConfig) {
+	ds.AddHandler(func(s *discordgo.Session, r *discordgo.Ready) {
 		log.Printf("Logged in as: %v#%v", s.State.User.Username, s.State.User.Discriminator)
 	})
-	err := s.Open()
+	err := ds.Open()
 	if err != nil {
 		log.Fatalf("Cannot open the session: %v", err)
 	}
-	defer s.Close()
+	defer ds.Close()
 
-	_, err = registerCommand(s, env.GuildID, guidefetch.Commands, guidefetch.CommandHandlers)
+	_, err = registerCommand(ds, env.GuildID, guidefetch.Commands, guidefetch.CommandHandlers)
 	if err != nil {
 		fmt.Printf("error: %v", err)
 	}
-	_, err = registerCommand(s, env.GuildID, dadjoke.Commands, dadjoke.CommandHandlers)
+	_, err = registerCommand(ds, env.GuildID, dadjoke.Commands, dadjoke.CommandHandlers)
 	if err != nil {
 		fmt.Printf("error: %v", err)
 	}
-	_, err = registerCommand(s, env.GuildID, linkdump.Commands, linkdump.CommandHandlers)
+	_, err = registerCommand(ds, env.GuildID, linkdump.Commands, linkdump.CommandHandlers)
 	if err != nil {
 		fmt.Printf("error: %v", err)
 	}
@@ -44,7 +60,7 @@ func StartBotService(s *discordgo.Session, env *config.EnvConfig) {
 	<-stop
 
 	if env.RemoveCommands {
-		deregisterCommand(s, env)
+		deregisterCommand(ds, env)
 	}
 
 	log.Println("Shutting down gracefully...")
