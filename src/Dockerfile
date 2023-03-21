@@ -15,5 +15,4 @@ RUN make ${MAKE_TARGET}
 FROM public.ecr.aws/docker/library/alpine:latest
 WORKDIR /app
 COPY --from=build_image /app/bin/ralphbot ./
-COPY --from=build_image /app/internal/command/dadjoke/jokes.json ./
 CMD [ "./ralphbot" ]
