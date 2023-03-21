@@ -32,9 +32,6 @@ func NewDiscord(authToken string) (*DiscordSession, error) {
 // Starts the `ralphbot` service, to be used after pre-flight checks
 // This should be responsible for the running service, command registration, e.t.c.
 func StartBotService(ds *DiscordSession, env *config.EnvConfig) error {
-	ds.AddHandler(func(s *discordgo.Session, r *discordgo.Ready) {
-		log.Printf("Logged in as: %v#%v", s.State.User.Username, s.State.User.Discriminator)
-	})
 	err := ds.Open()
 	if err != nil {
 		err = fmt.Errorf("cannot open the session: %v", err)
