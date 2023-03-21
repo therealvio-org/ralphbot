@@ -5,6 +5,8 @@ import (
 
 	"ralphbot/internal/config"
 	"ralphbot/internal/discord"
+
+	"github.com/bwmarrin/discordgo"
 )
 
 var (
@@ -18,6 +20,11 @@ func main() {
 	}
 
 	// pre-flight checks go here
+	// check if the session is running
+	ds.AddHandler(func(s *discordgo.Session, r *discordgo.Ready) {
+		log.Printf("Logged in as: %v#%v", s.State.User.Username, s.State.User.Discriminator)
+	})
+
 	discord.CheckGuildId(ds, env.GuildID)
 
 	// launch! 🚀
