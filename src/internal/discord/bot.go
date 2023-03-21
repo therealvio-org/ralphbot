@@ -14,28 +14,45 @@ import (
 	"github.com/bwmarrin/discordgo"
 )
 
-// Starts the `ralphbot` service
-func StartBotService(s *discordgo.Session, env *config.EnvConfig) {
-	s.AddHandler(func(s *discordgo.Session, r *discordgo.Ready) {
-		log.Printf("Logged in as: %v#%v", s.State.User.Username, s.State.User.Discriminator)
-	})
-	err := s.Open()
-	if err != nil {
-		log.Fatalf("Cannot open the session: %v", err)
-	}
-	defer s.Close()
+type DiscordSession struct {
+	*discordgo.Session
+}
 
-	_, err = registerCommand(s, env.GuildID, guidefetch.Commands, guidefetch.CommandHandlers)
+// Starts a new Discord session
+func NewDiscord(authToken string) (*DiscordSession, error) {
+	s, err := discordgo.New("Bot " + authToken)
+
 	if err != nil {
-		fmt.Printf("error: %v", err)
+		return nil, fmt.Errorf("error in creating discord session: %v", err)
 	}
-	_, err = registerCommand(s, env.GuildID, dadjoke.Commands, dadjoke.CommandHandlers)
+
+	return &DiscordSession{s}, nil
+}
+
+// Starts the `ralphbot` service, to be used after pre-flight checks
+// This should be responsible for the running service, command registration, e.t.c.
+func StartBotService(ds *DiscordSession, env *config.EnvConfig) error {
+	err := ds.Open()
 	if err != nil {
-		fmt.Printf("error: %v", err)
+		err = fmt.Errorf("cannot open the session: %v", err)
+		return err
 	}
-	_, err = registerCommand(s, env.GuildID, linkdump.Commands, linkdump.CommandHandlers)
+	defer ds.Close()
+
+	_, err = registerCommand(ds, env.GuildID, guidefetch.Commands, guidefetch.CommandHandlers)
 	if err != nil {
-		fmt.Printf("error: %v", err)
+		err = fmt.Errorf("unable to register command %v error: %v", "guidefetch", err)
+		return err
+	}
+	_, err = registerCommand(ds, env.GuildID, dadjoke.Commands, dadjoke.CommandHandlers)
+	if err != nil {
+		err = fmt.Errorf("unable to register command %v error: %v", "dadjoke", err)
+		return err
+	}
+	_, err = registerCommand(ds, env.GuildID, linkdump.Commands, linkdump.CommandHandlers)
+	if err != nil {
+		err = fmt.Errorf("unable to register command %v error: %v", "linkdump", err)
+		return err
 	}
 
 	stop := make(chan os.Signal, 1)
@@ -44,8 +61,9 @@ func StartBotService(s *discordgo.Session, env *config.EnvConfig) {
 	<-stop
 
 	if env.RemoveCommands {
-		deregisterCommand(s, env)
+		deregisterCommand(ds, env)
 	}
 
 	log.Println("Shutting down gracefully...")
+	return nil
 }
