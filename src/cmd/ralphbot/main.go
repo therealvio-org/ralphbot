@@ -21,5 +21,8 @@ func main() {
 	discord.CheckGuildId(ds, env.GuildID)
 
 	// launch! 🚀
-	discord.StartBotService(ds, env)
+	err = discord.StartBotService(ds, env)
+	if err != nil {
+		log.Fatalf("Error starting new discord session: %v", err)
+	}
 }

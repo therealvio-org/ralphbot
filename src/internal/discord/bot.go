@@ -31,27 +31,31 @@ func NewDiscord(authToken string) (*DiscordSession, error) {
 
 // Starts the `ralphbot` service, to be used after pre-flight checks
 // This should be responsible for the running service, command registration, e.t.c.
-func StartBotService(ds *DiscordSession, env *config.EnvConfig) {
+func StartBotService(ds *DiscordSession, env *config.EnvConfig) error {
 	ds.AddHandler(func(s *discordgo.Session, r *discordgo.Ready) {
 		log.Printf("Logged in as: %v#%v", s.State.User.Username, s.State.User.Discriminator)
 	})
 	err := ds.Open()
 	if err != nil {
-		log.Fatalf("Cannot open the session: %v", err)
+		err = fmt.Errorf("cannot open the session: %v", err)
+		return err
 	}
 	defer ds.Close()
 
 	_, err = registerCommand(ds, env.GuildID, guidefetch.Commands, guidefetch.CommandHandlers)
 	if err != nil {
-		fmt.Printf("error: %v", err)
+		err = fmt.Errorf("unable to register command %v error: %v", "guidefetch", err)
+		return err
 	}
 	_, err = registerCommand(ds, env.GuildID, dadjoke.Commands, dadjoke.CommandHandlers)
 	if err != nil {
-		fmt.Printf("error: %v", err)
+		err = fmt.Errorf("unable to register command %v error: %v", "dadjoke", err)
+		return err
 	}
 	_, err = registerCommand(ds, env.GuildID, linkdump.Commands, linkdump.CommandHandlers)
 	if err != nil {
-		fmt.Printf("error: %v", err)
+		err = fmt.Errorf("unable to register command %v error: %v", "linkdump", err)
+		return err
 	}
 
 	stop := make(chan os.Signal, 1)
@@ -64,4 +68,5 @@ func StartBotService(ds *DiscordSession, env *config.EnvConfig) {
 	}
 
 	log.Println("Shutting down gracefully...")
+	return nil
 }
