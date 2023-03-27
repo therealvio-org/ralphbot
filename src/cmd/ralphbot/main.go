@@ -5,8 +5,6 @@ import (
 
 	"ralphbot/internal/config"
 	"ralphbot/internal/discord"
-
-	"github.com/bwmarrin/discordgo"
 )
 
 var (
@@ -19,13 +17,9 @@ func main() {
 		log.Fatalf("Error executing NewDiscord(): %v", err)
 	}
 
-	// pre-flight checks go here
-	// check if the session is running
-	ds.AddHandler(func(s *discordgo.Session, r *discordgo.Ready) {
-		log.Printf("Logged in as: %v#%v", s.State.User.Username, s.State.User.Discriminator)
-	})
-
+	// pre-flight checks
 	discord.CheckGuildId(ds, env.GuildID)
+	discord.CheckOnline(ds)
 
 	// launch! 🚀
 	err = discord.StartBotService(ds, env)
