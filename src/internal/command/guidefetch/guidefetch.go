@@ -59,11 +59,11 @@ func getInteractionResponse(i *discordgo.InteractionCreate) *discordgo.Interacti
 
 	for _, g := range Guides {
 		if i.ApplicationCommandData().Options[0].Name == g.SubCommandName {
-			if g.GHUrl != "" {
-				response.Data.Content = guideGithub(i, g.Name, g.GHUrl, g.GDriveUrl)
+			if g.GHLink != "" {
+				response.Data.Content = guideGithub(i, g.Name, g.GHLink, g.GDriveLink)
 				return response
 			}
-			response.Data.Content = guideMessage(i, g.Name, g.GDriveUrl)
+			response.Data.Content = guideMessage(i, g.Name, g.GDriveLink)
 			return response
 		}
 	}
