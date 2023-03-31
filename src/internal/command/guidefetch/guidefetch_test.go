@@ -68,7 +68,8 @@ func TestGenerateCommandOptions(t *testing.T) {
 	}
 
 	for _, test := range cases {
-		result := generateCommandOptions(test.input)
+		result, err := generateCommandOptions(test.input)
+		assert.NoError(t, err)
 		assert.Len(t, result, len(test.expected))
 		assert.ElementsMatch(t, test.expected, result)
 	}

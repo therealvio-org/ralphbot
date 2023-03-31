@@ -1,25 +1,49 @@
 package guidefetch
 
 import (
+	"errors"
 	"fmt"
 	"log"
 
 	"github.com/bwmarrin/discordgo"
 )
 
-var (
-	commandOptions = generateCommandOptions(guides)
+func generateCommandOptions(g []Guide) ([]*discordgo.ApplicationCommandOption, error) {
+	var subCommands []*discordgo.ApplicationCommandOption
 
-	Commands = []*discordgo.ApplicationCommand{
+	if g == nil {
+		return nil, errors.New("guides slice is empty")
+	}
+
+	for _, s := range g {
+		subCommands = append(subCommands, &discordgo.ApplicationCommandOption{
+			Name:        s.SubCommandName,
+			Description: s.Description,
+			Type:        discordgo.ApplicationCommandOptionSubCommand,
+		})
+	}
+
+	return subCommands, nil
+}
+
+func GetCommands() ([]*discordgo.ApplicationCommand, error) {
+	commandOptions, err := generateCommandOptions(guides)
+	if err != nil {
+		return nil, fmt.Errorf("unable to generated command options: %v", err)
+	}
+	return []*discordgo.ApplicationCommand{
 		//https://discord.com/developers/docs/interactions/application-commands#slash-commands
 		{
 			Name:        "fetch-guide",
 			Description: "Provides a link to materials for a given Destiny activity",
 			Options:     commandOptions,
 		},
-	}
+	}, nil
+}
 
-	CommandHandlers = map[string]func(s *discordgo.Session, i *discordgo.InteractionCreate){
+func GetCommandHandlers() map[string]func(s *discordgo.Session, i *discordgo.InteractionCreate) {
+
+	return map[string]func(s *discordgo.Session, i *discordgo.InteractionCreate){
 		"fetch-guide": func(s *discordgo.Session, i *discordgo.InteractionCreate) {
 			content := ""
 			switch i.ApplicationCommandData().Options[0].Name {
@@ -56,20 +80,6 @@ var (
 			}
 		},
 	}
-)
-
-func generateCommandOptions(g []Guide) []*discordgo.ApplicationCommandOption {
-	var subCommands []*discordgo.ApplicationCommandOption
-
-	for _, s := range g {
-		subCommands = append(subCommands, &discordgo.ApplicationCommandOption{
-			Name:        s.SubCommandName,
-			Description: s.Description,
-			Type:        discordgo.ApplicationCommandOptionSubCommand,
-		})
-	}
-
-	return subCommands
 }
 
 func guideMessage(i *discordgo.InteractionCreate, activity string, link string) string {
