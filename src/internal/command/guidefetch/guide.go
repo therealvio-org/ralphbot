@@ -1,6 +1,6 @@
 package guidefetch
 
-type Guide struct {
+type guide struct {
 	Name           string
 	SubCommandName string
 	Description    string
@@ -9,56 +9,56 @@ type Guide struct {
 }
 
 var (
-	crypt = &Guide{
+	crypt = &guide{
 		Name:           "Deep Stone Crypt",
 		SubCommandName: "raid-crypt",
 		Description:    "Deep Stone Crypt Raid",
 		GDriveUrl:      "https://drive.google.com/drive/folders/1YKU4_-hInHQ3rVEAvqIjdJaT25oQvmYc?usp=sharing",
 	}
 
-	garden = &Guide{
+	garden = &guide{
 		Name:           "Garden of Salvation",
 		SubCommandName: "raid-garden",
 		Description:    "Garden of Salvation Raid",
 		GDriveUrl:      "https://drive.google.com/drive/folders/1pPdtAptJMaaDYRv2i-8bfaL6l3I0WTsT?usp=sharing",
 	}
 
-	kingsfall = &Guide{
+	kingsfall = &guide{
 		Name:           "King's Fall",
 		SubCommandName: "raid-kingsfall",
 		Description:    "King's Fall Raid",
 		GDriveUrl:      "https://drive.google.com/drive/folders/1tsOVCy2SwP0rLUDQUJaDIFh5y-O0DoKn",
 	}
 
-	pit = &Guide{
+	pit = &guide{
 		Name:           "Pit of Heresy",
 		SubCommandName: "dungeon-pit",
 		Description:    "Pit of Heresy Dungeon",
 		GDriveUrl:      "https://drive.google.com/drive/folders/17lB7m9KQMwzBb6UHfoBt9ZEA82haD2Fd?usp=sharing",
 	}
 
-	ron = &Guide{
+	ron = &guide{
 		Name:           "The Root of Nightmares",
 		SubCommandName: "raid-tron",
 		Description:    "The Root of Nightmares Raid",
 		GDriveUrl:      "https://drive.google.com/drive/folders/1eR50Jt36GBegMALRkT-tmnH6Nnjc4Pqj?usp=share_link",
 	}
 
-	spire = &Guide{
+	spire = &guide{
 		Name:           "Spire of the Watcher",
 		SubCommandName: "dungeon-spire",
 		Description:    "Spire of the Watcher Dungeon",
 		GDriveUrl:      "https://drive.google.com/drive/folders/1Xu_8NfiPFnknocqdR8p9adWPF-qiHmxo?usp=share_link",
 	}
 
-	vault = &Guide{
+	vault = &guide{
 		Name:           "Vault of Glass",
 		SubCommandName: "raid-vault",
 		Description:    "Vault of Glass Raid",
 		GDriveUrl:      "https://drive.google.com/drive/folders/1HLx6nVIji_3OcwnzaLeSoksspa4pfdjD?usp=sharing",
 	}
 
-	vow = &Guide{
+	vow = &guide{
 		Name:           "Vow of the Disciple",
 		SubCommandName: "raid-vow",
 		Description:    "Vow of the Disciple Raid",
@@ -66,14 +66,14 @@ var (
 		GHUrl:          "https://github.com/therealvio/destiny-guides/tree/main/raids/vow-of-the-disciple",
 	}
 
-	wish = &Guide{
+	wish = &guide{
 		Name:           "Last Wish",
 		SubCommandName: "raid-lastwish",
 		Description:    "Last Wish Raid",
 		GDriveUrl:      "https://drive.google.com/drive/folders/1d_WEa84KuX1_9hPTwgFhl651IwywHeOg?usp=sharing",
 	}
 
-	guides = []Guide{
+	guides = []guide{
 		*crypt,
 		*garden,
 		*kingsfall,

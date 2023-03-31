@@ -1,65 +1,19 @@
 package guidefetch
 
 import (
+	"errors"
 	"fmt"
 	"log"
 
 	"github.com/bwmarrin/discordgo"
 )
 
-var (
-	commandOptions = generateCommandOptions(guides)
-
-	Commands = []*discordgo.ApplicationCommand{
-		//https://discord.com/developers/docs/interactions/application-commands#slash-commands
-		{
-			Name:        "fetch-guide",
-			Description: "Provides a link to materials for a given Destiny activity",
-			Options:     commandOptions,
-		},
-	}
-
-	CommandHandlers = map[string]func(s *discordgo.Session, i *discordgo.InteractionCreate){
-		"fetch-guide": func(s *discordgo.Session, i *discordgo.InteractionCreate) {
-			content := ""
-			switch i.ApplicationCommandData().Options[0].Name {
-			case crypt.SubCommandName:
-				content = guideMessage(i, crypt.Name, crypt.GDriveUrl)
-			case garden.SubCommandName:
-				content = guideMessage(i, garden.Name, garden.GDriveUrl)
-			case kingsfall.SubCommandName:
-				content = guideMessage(i, kingsfall.Name, kingsfall.GDriveUrl)
-			case pit.SubCommandName:
-				content = guideMessage(i, pit.Name, pit.GDriveUrl)
-			case ron.SubCommandName:
-				content = guideMessage(i, ron.Name, ron.GDriveUrl)
-			case spire.SubCommandName:
-				content = guideMessage(i, spire.Name, spire.GDriveUrl)
-			case vault.SubCommandName:
-				content = guideMessage(i, vault.Name, vault.GDriveUrl)
-			case vow.SubCommandName:
-				content = guideGithub(i, vow.Name, vow.GHUrl, vow.GDriveUrl)
-			case wish.SubCommandName:
-				content = guideMessage(i, wish.Name, wish.GDriveUrl)
-			default:
-				content = "Oops, something has gone wrong!\n"
-				log.Printf("fetch-guide has ran into `default` in switch statement! Value: %v", i.ApplicationCommandData().Options[0].Name)
-			}
-			err := s.InteractionRespond(i.Interaction, &discordgo.InteractionResponse{
-				Type: discordgo.InteractionResponseChannelMessageWithSource,
-				Data: &discordgo.InteractionResponseData{
-					Content: content,
-				},
-			})
-			if err != nil {
-				log.Printf("Failed to respond to interaction: %v", err)
-			}
-		},
-	}
-)
-
-func generateCommandOptions(g []Guide) []*discordgo.ApplicationCommandOption {
+func generateCommandOptions(g []guide) ([]*discordgo.ApplicationCommandOption, error) {
 	var subCommands []*discordgo.ApplicationCommandOption
+
+	if g == nil {
+		return nil, errors.New("guides slice is empty")
+	}
 
 	for _, s := range g {
 		subCommands = append(subCommands, &discordgo.ApplicationCommandOption{
@@ -69,7 +23,58 @@ func generateCommandOptions(g []Guide) []*discordgo.ApplicationCommandOption {
 		})
 	}
 
-	return subCommands
+	return subCommands, nil
+}
+
+func GetCommands() ([]*discordgo.ApplicationCommand, error) {
+	commandOptions, err := generateCommandOptions(guides)
+	if err != nil {
+		return nil, fmt.Errorf("unable to generated command options: %v", err)
+	}
+	return []*discordgo.ApplicationCommand{
+		//https://discord.com/developers/docs/interactions/application-commands#slash-commands
+		{
+			Name:        "fetch-guide",
+			Description: "Provides a link to materials for a given Destiny activity",
+			Options:     commandOptions,
+		},
+	}, nil
+}
+
+func GetCommandHandlers() map[string]func(s *discordgo.Session, i *discordgo.InteractionCreate) {
+	return map[string]func(s *discordgo.Session, i *discordgo.InteractionCreate){
+		"fetch-guide": func(s *discordgo.Session, i *discordgo.InteractionCreate) {
+			response := getInteractionResponse(i)
+			err := s.InteractionRespond(i.Interaction, response)
+			if err != nil {
+				log.Printf("Failed to respond to interaction: %v", err)
+			}
+		},
+	}
+}
+
+func getInteractionResponse(i *discordgo.InteractionCreate) *discordgo.InteractionResponse {
+	response := &discordgo.InteractionResponse{
+		Type: discordgo.InteractionResponseChannelMessageWithSource,
+		Data: &discordgo.InteractionResponseData{
+			Content: "",
+		},
+	}
+
+	for _, g := range guides {
+		if i.ApplicationCommandData().Options[0].Name == g.SubCommandName {
+			if g.GHUrl != "" {
+				response.Data.Content = guideGithub(i, g.Name, g.GHUrl, g.GDriveUrl)
+				return response
+			}
+			response.Data.Content = guideMessage(i, g.Name, g.GDriveUrl)
+			return response
+		}
+	}
+
+	response.Data.Content = "Oops, your command didn't return a guide message!\n"
+	log.Printf("fetch-guide has ran into `default` in switch statement! Value: %v", i.ApplicationCommandData().Options[0].Name)
+	return response
 }
 
 func guideMessage(i *discordgo.InteractionCreate, activity string, link string) string {
