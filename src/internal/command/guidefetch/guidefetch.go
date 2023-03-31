@@ -40,8 +40,8 @@ func GetCommands(co []*discordgo.ApplicationCommandOption) []*discordgo.Applicat
 func GetCommandHandlers() map[string]func(s *discordgo.Session, i *discordgo.InteractionCreate) {
 	return map[string]func(s *discordgo.Session, i *discordgo.InteractionCreate){
 		"fetch-guide": func(s *discordgo.Session, i *discordgo.InteractionCreate) {
-			response := getInteractionResponse(i)
-			err := s.InteractionRespond(i.Interaction, response)
+			resp := getInteractionResponse(i)
+			err := s.InteractionRespond(i.Interaction, resp)
 			if err != nil {
 				log.Printf("Failed to respond to interaction: %v", err)
 			}
@@ -50,6 +50,11 @@ func GetCommandHandlers() map[string]func(s *discordgo.Session, i *discordgo.Int
 }
 
 func getInteractionResponse(i *discordgo.InteractionCreate) *discordgo.InteractionResponse {
+	if i.Type != discordgo.InteractionApplicationCommand {
+		log.Printf("fetchguide - interaction type does not match: discordgo.InteractionApplicationCommand - Type: %v Data:%v", i.Type, i.Data)
+		return nil
+	}
+
 	response := &discordgo.InteractionResponse{
 		Type: discordgo.InteractionResponseChannelMessageWithSource,
 		Data: &discordgo.InteractionResponseData{
@@ -59,31 +64,21 @@ func getInteractionResponse(i *discordgo.InteractionCreate) *discordgo.Interacti
 
 	for _, g := range Guides {
 		if i.ApplicationCommandData().Options[0].Name == g.SubCommandName {
-			if g.GHLink != "" {
-				response.Data.Content = guideGithub(i, g.Name, g.GHLink, g.GDriveLink)
-				return response
-			}
-			response.Data.Content = guideMessage(i, g.Name, g.GDriveLink)
+			response.Data.Content = guideMessage(i, &g)
 			return response
 		}
 	}
 
 	response.Data.Content = "Oops, your command didn't return a guide message!\n"
-	log.Printf("fetch-guide was unablet to source guide: %v", i.ApplicationCommandData().Options[0].Name)
+	log.Printf("fetch-guide was unable to source guide: %v", i.ApplicationCommandData().Options[0].Name)
 	return response
 }
 
-func guideMessage(i *discordgo.InteractionCreate, activity string, link string) string {
-	result := fmt.Sprintf("%s, here is your requested **%s** supplementary material!\n\n[Google Drive Link](%s)", i.Member.Mention(), activity, link)
-	return result
-}
-
-/**
-Testing Github links in tandem with Google Drive links
-Arrow brackets are used to escape the github link to prevent previews
-*/
-
-func guideGithub(i *discordgo.InteractionCreate, activity string, ghubLink string, gdriveLink string) string {
-	result := fmt.Sprintf("%s, here is your requested **%s** supplementary material!\n\n[Github Link](<%s>)\n[Google Drive Link](%s)", i.Member.Mention(), activity, ghubLink, gdriveLink)
+func guideMessage(i *discordgo.InteractionCreate, g *guide) string {
+	if g.GHLink != "" {
+		result := fmt.Sprintf("%s, here is your requested **%s** supplementary material!\n\n[Github Link](<%s>)\n[Google Drive Link](%s)", i.Member.Mention(), g.Name, g.GHLink, g.GDriveLink)
+		return result
+	}
+	result := fmt.Sprintf("%s, here is your requested **%s** supplementary material!\n\n[Google Drive Link](%s)", i.Member.Mention(), g.Name, g.GDriveLink)
 	return result
 }
