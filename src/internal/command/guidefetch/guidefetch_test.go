@@ -8,7 +8,7 @@ import (
 )
 
 func TestGenerateCommandOptions(t *testing.T) {
-	backrooms := &Guide{
+	backrooms := &guide{
 		Name:           "The Backrooms",
 		SubCommandName: "raid-backrooms",
 		Description:    "The Backrooms Raid",
@@ -16,7 +16,7 @@ func TestGenerateCommandOptions(t *testing.T) {
 		GHUrl:          "https://github.com/butterdog/destiny-guides/tree/main/raids/the-backrooms",
 	}
 
-	wax := &Guide{
+	wax := &guide{
 		Name:           "Wax Museum",
 		SubCommandName: "raid-wax",
 		Description:    "The Wax Museum Raid",
@@ -25,17 +25,17 @@ func TestGenerateCommandOptions(t *testing.T) {
 
 	cases := []struct {
 		name     string
-		input    []Guide
+		input    []guide
 		expected []*discordgo.ApplicationCommandOption
 	}{
 		{
 			name:     "when no guides are supplied, return a slice of zero ApplicationCommandOption, and an error",
-			input:    []Guide{},
+			input:    []guide{},
 			expected: nil,
 		},
 		{
 			name: "when one guide is supplied, return a slice of one ApplicationCommandOption",
-			input: []Guide{
+			input: []guide{
 				*backrooms,
 			},
 			expected: []*discordgo.ApplicationCommandOption{
@@ -48,7 +48,7 @@ func TestGenerateCommandOptions(t *testing.T) {
 		},
 		{
 			name: "when two guides are supplied, return a slice of two ApplicationCommandOption",
-			input: []Guide{
+			input: []guide{
 				*backrooms,
 				*wax,
 			},
@@ -68,7 +68,8 @@ func TestGenerateCommandOptions(t *testing.T) {
 	}
 
 	for _, test := range cases {
-		result := generateCommandOptions(test.input)
+		result, err := generateCommandOptions(test.input)
+		assert.NoError(t, err)
 		assert.Len(t, result, len(test.expected))
 		assert.ElementsMatch(t, test.expected, result)
 	}

@@ -49,17 +49,37 @@ func StartBotService(ds *DiscordSession, env *config.EnvConfig) error {
 	}
 	defer ds.Close()
 
-	_, err = registerCommand(ds, env.GuildID, guidefetch.Commands, guidefetch.CommandHandlers)
+	// guide fetch
+	commandGF, err := guidefetch.GetCommands()
+	if err != nil {
+		err = fmt.Errorf("unable to prepare command for %v error: %v", "guidefetch", err)
+		return err
+	}
+	_, err = registerCommand(ds, env.GuildID, commandGF, guidefetch.GetCommandHandlers())
 	if err != nil {
 		err = fmt.Errorf("unable to register command %v error: %v", "guidefetch", err)
 		return err
 	}
-	_, err = registerCommand(ds, env.GuildID, dadjoke.Commands, dadjoke.CommandHandlers)
+
+	// dadjoke
+	commandHandlerDJ, err := dadjoke.GetCommandHandlers()
+	if err != nil {
+		err = fmt.Errorf("unable to prepare command handlers for %v error: %v", "dadjoke", err)
+		return err
+	}
+	_, err = registerCommand(ds, env.GuildID, dadjoke.GetCommands(), commandHandlerDJ)
 	if err != nil {
 		err = fmt.Errorf("unable to register command %v error: %v", "dadjoke", err)
 		return err
 	}
-	_, err = registerCommand(ds, env.GuildID, linkdump.Commands, linkdump.CommandHandlers)
+
+	// linkdump
+	commandHandlerLD, err := linkdump.GetCommandHandlers()
+	if err != nil {
+		err = fmt.Errorf("unable to prepare command handlers for %v error: %v", "linkdump", err)
+		return err
+	}
+	_, err = registerCommand(ds, env.GuildID, linkdump.GetCommands(), commandHandlerLD)
 	if err != nil {
 		err = fmt.Errorf("unable to register command %v error: %v", "linkdump", err)
 		return err
