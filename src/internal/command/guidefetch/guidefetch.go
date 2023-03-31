@@ -73,7 +73,7 @@ func getInteractionResponse(i *discordgo.InteractionCreate) *discordgo.Interacti
 	}
 
 	response.Data.Content = "Oops, your command didn't return a guide message!\n"
-	log.Printf("fetch-guide has ran into `default` in switch statement! Value: %v", i.ApplicationCommandData().Options[0].Name)
+	log.Printf("fetch-guide was unablet to source guide: %v", i.ApplicationCommandData().Options[0].Name)
 	return response
 }
 
