@@ -1,6 +1,7 @@
 package guidefetch
 
 import (
+	"fmt"
 	"testing"
 
 	"github.com/bwmarrin/discordgo"
@@ -127,5 +128,91 @@ func TestGetCommands(t *testing.T) {
 		result := GetCommands(test.input)
 		assert.Equal(t, test.expect, result)
 		assert.IsType(t, test.expect, result)
+	}
+}
+
+func TestGuideMessage(t *testing.T) {
+	sampleInteractionCreateBigBosso := discordgo.InteractionCreate{Interaction: &discordgo.Interaction{
+		Member: &discordgo.Member{
+			User: &discordgo.User{
+				ID: "bigbosso123",
+			},
+		},
+	}}
+
+	backroomsGDriveUrl := "not-a-real-url-lmao.com/backrooms"
+
+	casesGuideMessage := []struct {
+		name  string
+		input struct {
+			interaction *discordgo.InteractionCreate
+			activity    string
+			gDriveLink  string
+		}
+		expect string
+	}{
+		{
+			name: "when user bigbosso requests a backrooms guide, a guide message is returned with a mention for bigbosso",
+			input: struct {
+				interaction *discordgo.InteractionCreate
+				activity    string
+				gDriveLink  string
+			}{
+				interaction: &sampleInteractionCreateBigBosso,
+				activity:    "backrooms",
+				gDriveLink:  backroomsGDriveUrl,
+			},
+			expect: fmt.Sprintf("<@!%s>, here is your requested **%s** supplementary material!\n\n[Google Drive Link](%s)", sampleInteractionCreateBigBosso.Interaction.Member.User.ID, "backrooms", backroomsGDriveUrl),
+		},
+	}
+
+	for _, test := range casesGuideMessage {
+		result := guideMessage(test.input.interaction, test.input.activity, test.input.gDriveLink)
+		assert.Equal(t, test.expect, result)
+	}
+}
+
+func TestGuideGithubMessage(t *testing.T) {
+	sampleInteractionCreateBigBosso := discordgo.InteractionCreate{Interaction: &discordgo.Interaction{
+		Member: &discordgo.Member{
+			User: &discordgo.User{
+				ID: "bigbosso123",
+			},
+		},
+	}}
+
+	backroomsGHubUrl := "also-not-a-real-url-lmao.com/backrooms"
+	backroomsGDriveUrl := "not-a-real-url-lmao.com/backrooms"
+
+	casesGuideGithubMessage := []struct {
+		name  string
+		input struct {
+			interaction *discordgo.InteractionCreate
+			activity    string
+			gDriveLink  string
+			gHubLink    string
+		}
+		expect string
+	}{
+		{
+			name: "when user bigbosso requests a backrooms guide, a guide message is returned with a mention for bigbosso",
+			input: struct {
+				interaction *discordgo.InteractionCreate
+				activity    string
+				gDriveLink  string
+				gHubLink    string
+			}{
+				interaction: &sampleInteractionCreateBigBosso,
+				activity:    "backrooms",
+				gDriveLink:  backroomsGDriveUrl,
+				gHubLink:    backroomsGHubUrl,
+			},
+			expect: fmt.Sprintf("<@!%s>, here is your requested **%s** supplementary material!\n\n[Github Link](<%s>)\n[Google Drive Link](%s)", sampleInteractionCreateBigBosso.Interaction.Member.User.ID, "backrooms", backroomsGHubUrl, backroomsGDriveUrl),
+		},
+	}
+
+	for _, test := range casesGuideGithubMessage {
+		result := guideGithub(test.input.interaction, test.input.activity, test.input.gHubLink, test.input.gDriveLink)
+		assert.Equal(t, test.expect, result)
 	}
 }
