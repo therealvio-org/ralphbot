@@ -8,7 +8,6 @@ import (
 )
 
 func TestGenerateCommandOptions(t *testing.T) {
-
 	backrooms := &Guide{
 		Name:           "The Backrooms",
 		SubCommandName: "raid-backrooms",
@@ -24,23 +23,53 @@ func TestGenerateCommandOptions(t *testing.T) {
 		GDriveUrl:      "https://drive.google.com/drive/folders/1d_WEa84KuX1_9hPTwgFhl651IwywHeOg?usp=sharing",
 	}
 
-	commandOptions = generateCommandOptions([]Guide{
-		*backrooms,
-		*wax,
-	})
-
-	expected := []*discordgo.ApplicationCommandOption{
+	cases := []struct {
+		name     string
+		input    []Guide
+		expected []*discordgo.ApplicationCommandOption
+	}{
 		{
-			Name:        backrooms.SubCommandName,
-			Description: backrooms.Description,
-			Type:        discordgo.ApplicationCommandOptionSubCommand,
+			name:     "when no guides are supplied, return a slice of zero ApplicationCommandOption, and an error",
+			input:    []Guide{},
+			expected: nil,
 		},
 		{
-			Name:        wax.SubCommandName,
-			Description: wax.Description,
-			Type:        discordgo.ApplicationCommandOptionSubCommand,
+			name: "when one guide is supplied, return a slice of one ApplicationCommandOption",
+			input: []Guide{
+				*backrooms,
+			},
+			expected: []*discordgo.ApplicationCommandOption{
+				{
+					Name:        backrooms.SubCommandName,
+					Description: backrooms.Description,
+					Type:        discordgo.ApplicationCommandOptionSubCommand,
+				},
+			},
+		},
+		{
+			name: "when two guides are supplied, return a slice of two ApplicationCommandOption",
+			input: []Guide{
+				*backrooms,
+				*wax,
+			},
+			expected: []*discordgo.ApplicationCommandOption{
+				{
+					Name:        backrooms.SubCommandName,
+					Description: backrooms.Description,
+					Type:        discordgo.ApplicationCommandOptionSubCommand,
+				},
+				{
+					Name:        wax.SubCommandName,
+					Description: wax.Description,
+					Type:        discordgo.ApplicationCommandOptionSubCommand,
+				},
+			},
 		},
 	}
 
-	assert.ElementsMatch(t, expected, commandOptions)
+	for _, test := range cases {
+		result := generateCommandOptions(test.input)
+		assert.Len(t, result, len(test.expected))
+		assert.ElementsMatch(t, test.expected, result)
+	}
 }
