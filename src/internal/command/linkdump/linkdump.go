@@ -22,18 +22,41 @@ type Links struct {
 //go:embed links.json
 var linkFile []byte
 
-var (
-	Commands = []*discordgo.ApplicationCommand{
-		//https://discord.com/developers/docs/interactions/application-commands#slash-commands
+func getLinks(b []byte) (string, error) {
+	var linkStruct Links
+	err := json.Unmarshal(b, &linkStruct)
+	if err != nil {
+		log.Printf("Unable to Unmarshal : %v", err)
+		return "", err
+	}
+
+	var linkSlice []string
+	for _, l := range linkStruct.Links {
+		//For some reason, markdown for links doesn't work here
+		linkElem := fmt.Sprintf("%s - <%s>", l.Name, l.URL)
+		linkSlice = append(linkSlice, linkElem)
+	}
+	content := strings.Join(linkSlice, "\n")
+
+	return content, nil
+}
+
+func GetCommands() []*discordgo.ApplicationCommand {
+	return []*discordgo.ApplicationCommand{
 		{
 			Name:        "link-dump",
 			Description: "Sends a link dump via DM of helpful Destiny 2-related web apps",
 		},
 	}
+}
 
-	links, _ = getLinks(linkFile)
+func GetCommandHandlers() (map[string]func(s *discordgo.Session, i *discordgo.InteractionCreate), error) {
+	links, err := getLinks(linkFile)
+	if err != nil {
+		return nil, err
+	}
 
-	CommandHandlers = map[string]func(s *discordgo.Session, i *discordgo.InteractionCreate){
+	return map[string]func(s *discordgo.Session, i *discordgo.InteractionCreate){
 		"link-dump": func(s *discordgo.Session, i *discordgo.InteractionCreate) {
 			channel, err := s.UserChannelCreate(i.Member.User.ID)
 			if err != nil {
@@ -56,26 +79,5 @@ var (
 				log.Printf("Failed to send message to DM channel: %v", err)
 			}
 		},
-	}
-)
-
-func getLinks(b []byte) (string, error) {
-
-	var linkStruct Links
-	err := json.Unmarshal(b, &linkStruct)
-	if err != nil {
-		log.Printf("Unable to Unmarshal : %v", err)
-		return "", err
-	}
-
-	var linkSlice []string
-	for _, l := range linkStruct.Links {
-		//For some reason, markdown for links doesn't work here
-		linkElem := fmt.Sprintf("%s - <%s>", l.Name, l.URL)
-		linkSlice = append(linkSlice, linkElem)
-	}
-	content := strings.Join(linkSlice, "\n")
-
-	return content, nil
-
+	}, nil
 }
