@@ -68,9 +68,63 @@ func TestGenerateCommandOptions(t *testing.T) {
 	}
 
 	for _, test := range cases {
-		result, err := generateCommandOptions(test.input)
+		result, err := GenerateCommandOptions(test.input)
 		assert.NoError(t, err)
 		assert.Len(t, result, len(test.expected))
 		assert.ElementsMatch(t, test.expected, result)
+	}
+}
+
+func TestGetCommands(t *testing.T) {
+	backrooms := &discordgo.ApplicationCommandOption{
+		Name:        "The Backrooms",
+		Description: "The Backrooms Raid",
+		Type:        discordgo.ApplicationCommandOptionSubCommand,
+	}
+
+	wax := &discordgo.ApplicationCommandOption{
+		Name:        "The Wax Museum",
+		Description: "The Wax Museum Raid",
+		Type:        discordgo.ApplicationCommandOptionSubCommand,
+	}
+
+	cases := []struct {
+		name   string
+		input  []*discordgo.ApplicationCommandOption
+		expect []*discordgo.ApplicationCommand
+	}{
+		{
+			name: "when one command option is provided, the command only has one option",
+			input: []*discordgo.ApplicationCommandOption{
+				backrooms,
+			},
+			expect: []*discordgo.ApplicationCommand{{
+				Name:        "fetch-guide",
+				Description: "Provides a link to materials for a given Destiny activity",
+				Options: []*discordgo.ApplicationCommandOption{
+					backrooms,
+				},
+			}},
+		},
+		{
+			name: "when two command options are provided, the command has two options",
+			input: []*discordgo.ApplicationCommandOption{
+				backrooms,
+				wax,
+			},
+			expect: []*discordgo.ApplicationCommand{{
+				Name:        "fetch-guide",
+				Description: "Provides a link to materials for a given Destiny activity",
+				Options: []*discordgo.ApplicationCommandOption{
+					backrooms,
+					wax,
+				},
+			}},
+		},
+	}
+
+	for _, test := range cases {
+		result := GetCommands(test.input)
+		assert.Equal(t, test.expect, result)
 	}
 }
