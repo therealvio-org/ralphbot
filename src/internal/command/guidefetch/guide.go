@@ -73,7 +73,7 @@ var (
 		GDriveUrl:      "https://drive.google.com/drive/folders/1d_WEa84KuX1_9hPTwgFhl651IwywHeOg?usp=sharing",
 	}
 
-	guides = []guide{
+	Guides = []guide{
 		*crypt,
 		*garden,
 		*kingsfall,

@@ -8,7 +8,7 @@ import (
 	"github.com/bwmarrin/discordgo"
 )
 
-func generateCommandOptions(g []guide) ([]*discordgo.ApplicationCommandOption, error) {
+func GenerateCommandOptions(g []guide) ([]*discordgo.ApplicationCommandOption, error) {
 	var subCommands []*discordgo.ApplicationCommandOption
 
 	if g == nil {
@@ -26,19 +26,15 @@ func generateCommandOptions(g []guide) ([]*discordgo.ApplicationCommandOption, e
 	return subCommands, nil
 }
 
-func GetCommands() ([]*discordgo.ApplicationCommand, error) {
-	commandOptions, err := generateCommandOptions(guides)
-	if err != nil {
-		return nil, fmt.Errorf("unable to generated command options: %v", err)
-	}
+func GetCommands(co []*discordgo.ApplicationCommandOption) []*discordgo.ApplicationCommand {
 	return []*discordgo.ApplicationCommand{
 		//https://discord.com/developers/docs/interactions/application-commands#slash-commands
 		{
 			Name:        "fetch-guide",
 			Description: "Provides a link to materials for a given Destiny activity",
-			Options:     commandOptions,
+			Options:     co,
 		},
-	}, nil
+	}
 }
 
 func GetCommandHandlers() map[string]func(s *discordgo.Session, i *discordgo.InteractionCreate) {
@@ -61,7 +57,7 @@ func getInteractionResponse(i *discordgo.InteractionCreate) *discordgo.Interacti
 		},
 	}
 
-	for _, g := range guides {
+	for _, g := range Guides {
 		if i.ApplicationCommandData().Options[0].Name == g.SubCommandName {
 			if g.GHUrl != "" {
 				response.Data.Content = guideGithub(i, g.Name, g.GHUrl, g.GDriveUrl)
