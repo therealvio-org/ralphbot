@@ -126,5 +126,6 @@ func TestGetCommands(t *testing.T) {
 	for _, test := range cases {
 		result := GetCommands(test.input)
 		assert.Equal(t, test.expect, result)
+		assert.IsType(t, test.expect, result)
 	}
 }
