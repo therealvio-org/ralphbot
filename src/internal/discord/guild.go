@@ -18,7 +18,6 @@ type DiscordAPI interface {
 // The intention for this is to help facilitate local testing on a private server. In production, commands should be `global`.
 // Return `true` if `id` matches guildId, otherwise return `false`
 func CheckGuildId(dAPI DiscordAPI, id string) bool {
-	doFail := false
 	if id != "" {
 		log.Printf("Checking for GuildID variable validity against current server (if it matches, we're okay)...")
 
@@ -33,16 +32,9 @@ func CheckGuildId(dAPI DiscordAPI, id string) bool {
 			return true
 		} else {
 			log.Printf("GuildID is invalid...")
-			doFail = true
 		}
-	} else {
-		doFail = true
 	}
 
-	if doFail {
-		log.Printf("GuildID is undefined - ralphbot is running in production mode, only Global commands are available...")
-		return false
-	}
-
+	log.Printf("GuildID is undefined - ralphbot is running in production mode, only Global commands are available...")
 	return false
 }
