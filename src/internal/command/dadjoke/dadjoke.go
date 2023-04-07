@@ -3,6 +3,7 @@ package dadjoke
 import (
 	_ "embed"
 	"encoding/json"
+	"fmt"
 	"log"
 	"math/rand"
 
@@ -16,19 +17,17 @@ type JokeStruct struct {
 	Jokes []string `json:"jokes"`
 }
 
-func getJokes(b []byte) []string {
+func getJokes(b []byte) ([]string, error) {
 
 	var jokeArray JokeStruct
 	err := json.Unmarshal(b, &jokeArray)
 	if err != nil {
-		log.Printf("Unable to Unmarshal : %v", err)
+		return nil, fmt.Errorf("unable to unmarshal json: %v", err)
 	}
-
-	return jokeArray.Jokes
-
+	return jokeArray.Jokes, nil
 }
 
-func dadJoke(i *discordgo.InteractionCreate, j []string) string {
+func selectDadJoke(j []string) string {
 	selectedDadJoke := j[rand.Intn(len(j))]
 	result := string(selectedDadJoke)
 	return result
@@ -45,14 +44,17 @@ func GetCommands() []*discordgo.ApplicationCommand {
 }
 
 func GetCommandHandlers() (map[string]func(s *discordgo.Session, i *discordgo.InteractionCreate), error) {
-	jokes := getJokes(jokesFile)
+	jokes, err := getJokes(jokesFile)
+	if err != nil {
+		return nil, fmt.Errorf("unable to execute getJokes: %v", err)
+	}
 
 	return map[string]func(s *discordgo.Session, i *discordgo.InteractionCreate){
 		"dad-joke": func(s *discordgo.Session, i *discordgo.InteractionCreate) {
 			err := s.InteractionRespond(i.Interaction, &discordgo.InteractionResponse{
 				Type: discordgo.InteractionResponseChannelMessageWithSource,
 				Data: &discordgo.InteractionResponseData{
-					Content: dadJoke(i, jokes),
+					Content: selectDadJoke(jokes),
 				},
 			})
 			if err != nil {
