@@ -2,11 +2,19 @@ package guidefetch
 
 import (
 	"fmt"
+	"io"
+	"log"
+	"os"
 	"testing"
 
 	"github.com/bwmarrin/discordgo"
 	"github.com/stretchr/testify/assert"
 )
+
+func TestMain(m *testing.M) {
+	log.SetOutput(io.Discard)
+	os.Exit(m.Run())
+}
 
 func TestGenerateCommandOptions(t *testing.T) {
 	backrooms := &guide{

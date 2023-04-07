@@ -1,6 +1,9 @@
 package discord
 
 import (
+	"io"
+	"log"
+	"os"
 	"testing"
 
 	"github.com/bwmarrin/discordgo"
@@ -12,6 +15,11 @@ type mockGuild func(guildID string, options ...discordgo.RequestOption) (st *dis
 
 func (m mockGuild) Guild(guildID string, options ...discordgo.RequestOption) (st *discordgo.Guild, err error) {
 	return m(guildID, options...)
+}
+
+func TestMain(m *testing.M) {
+	log.SetOutput(io.Discard)
+	os.Exit(m.Run())
 }
 
 func TestCheckGuildId(t *testing.T) {

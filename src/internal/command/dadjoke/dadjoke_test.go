@@ -1,10 +1,18 @@
 package dadjoke
 
 import (
+	"io"
+	"log"
+	"os"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
 )
+
+func TestMain(m *testing.M) {
+	log.SetOutput(io.Discard)
+	os.Exit(m.Run())
+}
 
 func TestGetJokes(t *testing.T) {
 	cases := []struct {
