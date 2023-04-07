@@ -47,7 +47,7 @@
     },
     {
       "groupName": "golang",
-      "automerge": false,
+      "automerge": true,
       "matchDatasources": ["golang-version"],
       "matchManagers": ["asdf", "dockerfile", "gomod"],
       "rangeStrategy": "bump"
