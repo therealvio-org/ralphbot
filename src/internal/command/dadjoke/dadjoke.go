@@ -27,7 +27,7 @@ func getJokes(b []byte) ([]string, error) {
 	return jokeArray.Jokes, nil
 }
 
-func dadJoke(j []string) string {
+func selectDadJoke(j []string) string {
 	selectedDadJoke := j[rand.Intn(len(j))]
 	result := string(selectedDadJoke)
 	return result
@@ -54,7 +54,7 @@ func GetCommandHandlers() (map[string]func(s *discordgo.Session, i *discordgo.In
 			err := s.InteractionRespond(i.Interaction, &discordgo.InteractionResponse{
 				Type: discordgo.InteractionResponseChannelMessageWithSource,
 				Data: &discordgo.InteractionResponseData{
-					Content: dadJoke(jokes),
+					Content: selectDadJoke(jokes),
 				},
 			})
 			if err != nil {
