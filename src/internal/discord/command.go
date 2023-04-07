@@ -9,11 +9,6 @@ import (
 	"github.com/bwmarrin/discordgo"
 )
 
-type DiscordSource interface {
-	AddHandler(handler interface{})
-	ApplicationCommandCreate(appID string, guildID string, cmd *discordgo.ApplicationCommand, options ...discordgo.RequestOption) (ccmd *discordgo.ApplicationCommand, err error)
-}
-
 // Registers commands for `ralphbot` service.
 // If `GUILD_ID` is passed, then the command is set as a guild command, and will not be registered globally. However, it will be immediately registered exclusively
 // to the Discord server (guild). If `GUILD_ID` is not passed, then the command is registered globally.

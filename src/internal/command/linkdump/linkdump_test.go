@@ -2,10 +2,18 @@ package linkdump
 
 import (
 	"fmt"
+	"io"
+	"log"
+	"os"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
 )
+
+func TestMain(m *testing.M) {
+	log.SetOutput(io.Discard)
+	os.Exit(m.Run())
+}
 
 func TestGetLinks(t *testing.T) {
 
