@@ -50,12 +50,11 @@ func StartBotService(ds *DiscordSession, env *config.EnvConfig) error {
 	defer ds.Close()
 
 	// guide fetch
-	commandGF, err := guidefetch.GetCommands()
+	commandOptionsGF, err := guidefetch.GenerateCommandOptions(guidefetch.Guides)
 	if err != nil {
-		err = fmt.Errorf("unable to prepare command for %v error: %v", "guidefetch", err)
-		return err
+		return fmt.Errorf("unable to generated command options for %v error: %v", "guidefetch", err)
 	}
-	_, err = registerCommand(ds, env.GuildID, commandGF, guidefetch.GetCommandHandlers())
+	_, err = registerCommand(ds, env.GuildID, guidefetch.GetCommands(commandOptionsGF), guidefetch.GetCommandHandlers())
 	if err != nil {
 		err = fmt.Errorf("unable to register command %v error: %v", "guidefetch", err)
 		return err
