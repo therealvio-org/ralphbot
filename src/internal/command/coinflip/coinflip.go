@@ -32,6 +32,7 @@ func selectPhrase(phrases []string) string {
 }
 
 func makePhrase(side string, phrase string) string {
+	// coin sides are always strings, though we need to use a struct to satisfy template execution
 	type coin struct {
 		Side string
 	}
@@ -39,7 +40,10 @@ func makePhrase(side string, phrase string) string {
 	c := &coin{}
 	c.Side = side
 	buf := new(bytes.Buffer)
-	template, _ := template.New("phrase").Parse(phrase)
+	template, err := template.New("phrase").Parse(phrase)
+	if err != nil {
+		log.Printf("Failed to parse phrase template: %v", err)
+	}
 	template.Execute(buf, c)
 
 	return buf.String()
