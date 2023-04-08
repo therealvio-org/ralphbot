@@ -16,7 +16,7 @@ type LinkDetails struct {
 }
 
 type Links struct {
-	Links []LinkDetails `json:"Links"`
+	Links []LinkDetails `json:"links"`
 }
 
 //go:embed links.json

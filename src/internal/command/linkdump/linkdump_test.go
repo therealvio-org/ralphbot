@@ -28,7 +28,7 @@ func TestGetLinks(t *testing.T) {
 		{
 			name: "when one link is provided as input, the string contains one link",
 			input: `{
-				"Links": [
+				"links": [
 					{
 					  "Name": "foo",
 					  "URL": "foo.com"
@@ -40,7 +40,7 @@ func TestGetLinks(t *testing.T) {
 		{
 			name: "when 2 links are provided as input, the string contains two links, seperated by newline",
 			input: `{
-				"Links": [
+				"links": [
 					{
 					  "Name": "foo",
 					  "URL": "foo.com"
