@@ -17,6 +17,17 @@ var (
 		"It's **{{.Side}}**",
 		"What the **{{.Side}}** doing?",
 		"**{{.Side}}**, you hate to see it",
+		"Can you believe it? **{{.Side}}**, only two weeks away!",
+		"Now that **{{.Side}}** is gone",
+		"**{{.Side}}**, HOW!?",
+		"Uh oh, **{{.Side}}**",
+		"**{{.Side}}**, I believe",
+		"When's Guild **{{.Side}}** night?",
+		"Wow, they have it! **{{.Side}}**",
+		"Where's your 4 **{{.Side}}**?",
+		"I can shoot four **{{.Side}}**",
+		"I'm gonna **{{.Side}}**",
+		"Jeffery Epstein didn't kill himself. Oh and I got **{{.Side}}**",
 	}
 )
 
