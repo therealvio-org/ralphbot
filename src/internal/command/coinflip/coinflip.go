@@ -3,9 +3,8 @@ package coinflip
 import (
 	"bytes"
 	"log"
-	"math/rand"
+	"ralphbot/internal/common"
 	"text/template"
-	"time"
 
 	"github.com/bwmarrin/discordgo"
 )
@@ -30,17 +29,6 @@ var (
 		"Jeffery Epstein didn't kill himself. Oh and I got **{{.Side}}**",
 	}
 )
-
-func coinFlip() string {
-	selectedSide := sides[rand.Intn(len(sides))]
-	return selectedSide
-}
-
-func selectPhrase(phrases []string) string {
-	rand.NewSource(time.Now().UnixNano())
-	selectedPhrase := phrases[rand.Intn(len(phrases))]
-	return selectedPhrase
-}
 
 func makePhrase(side string, phrase string) string {
 	// coin sides are always strings, though we need to use a struct to satisfy template execution
@@ -78,7 +66,7 @@ func GetCommandHandlers() (map[string]func(s *discordgo.Session, i *discordgo.In
 			err := s.InteractionRespond(i.Interaction, &discordgo.InteractionResponse{
 				Type: discordgo.InteractionResponseChannelMessageWithSource,
 				Data: &discordgo.InteractionResponseData{
-					Content: makePhrase(coinFlip(), selectPhrase(phrases)),
+					Content: makePhrase(common.SelectRandomString(sides), common.SelectRandomString(phrases)),
 				},
 			})
 			if err != nil {

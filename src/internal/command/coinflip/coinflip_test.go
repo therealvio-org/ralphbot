@@ -14,42 +14,6 @@ func TestMain(m *testing.M) {
 	os.Exit(m.Run())
 }
 
-func TestCoinFlip(t *testing.T) {
-	cases := []struct {
-		name   string
-		expect []string
-	}{
-		{
-			name:   "when the function runs, return either heads or tails",
-			expect: sides,
-		},
-	}
-
-	for _, test := range cases {
-		result := coinFlip()
-		assert.Contains(t, test.expect, result)
-	}
-}
-
-func TestSelectPhrase(t *testing.T) {
-	cases := []struct {
-		name   string
-		input  []string
-		expect []string
-	}{
-		{
-			name:   "when the function runs, return a phrase",
-			input:  []string{"phrase one", "phrase two", "phrase three"},
-			expect: []string{"phrase one", "phrase two", "phrase three"},
-		},
-	}
-
-	for _, test := range cases {
-		result := selectPhrase(test.input)
-		assert.Contains(t, test.expect, result)
-	}
-}
-
 func TestMakePhrase(t *testing.T) {
 	cases := []struct {
 		name  string

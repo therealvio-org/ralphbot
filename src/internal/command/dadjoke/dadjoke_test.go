@@ -87,31 +87,3 @@ func TestGetJokes(t *testing.T) {
 		}
 	}
 }
-
-func TestSelectDadJoke(t *testing.T) {
-	cases := []struct {
-		name  string
-		input []string
-	}{
-		{
-			name: "given 3 jokes, selectDadJoke will randomly pick a joke",
-			input: []string{
-				"option 1",
-				"option 2",
-				"option 3",
-			},
-		},
-	}
-
-	for _, test := range cases {
-		result := selectDadJoke(test.input)
-
-		// testing for probability i.e. does our result show up at least once? This is more of a "transparency" test
-		var resultTally []string
-		for i := 0; i < 1000; i++ {
-			resultTally = append(resultTally, selectDadJoke(test.input))
-		}
-
-		assert.Contains(t, resultTally, result)
-	}
-}
