@@ -21,7 +21,6 @@ var (
 )
 
 func coinFlip() string {
-	rand.NewSource(time.Now().UnixNano())
 	selectedSide := sides[rand.Intn(len(sides))]
 	return selectedSide
 }
@@ -56,16 +55,12 @@ func GetCommands() []*discordgo.ApplicationCommand {
 }
 
 func GetCommandHandlers() (map[string]func(s *discordgo.Session, i *discordgo.InteractionCreate), error) {
-	side := coinFlip()
-	selectedPhrase := selectPhrase(phrases)
-	constructedPhrase := makePhrase(side, selectedPhrase)
-
 	return map[string]func(s *discordgo.Session, i *discordgo.InteractionCreate){
 		"coin-flip": func(s *discordgo.Session, i *discordgo.InteractionCreate) {
 			err := s.InteractionRespond(i.Interaction, &discordgo.InteractionResponse{
 				Type: discordgo.InteractionResponseChannelMessageWithSource,
 				Data: &discordgo.InteractionResponseData{
-					Content: constructedPhrase,
+					Content: makePhrase(coinFlip(), selectPhrase(phrases)),
 				},
 			})
 			if err != nil {
