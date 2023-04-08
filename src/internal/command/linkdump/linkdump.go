@@ -15,30 +15,34 @@ type LinkDetails struct {
 	URL  string
 }
 
-type Links struct {
+type LinksStruct struct {
 	Links []LinkDetails `json:"links"`
 }
 
 //go:embed links.json
 var linkFile []byte
 
-func getLinks(b []byte) (string, error) {
-	var linkStruct Links
+func getLinksFromJSON(b []byte) (LinksStruct, error) {
+	var linkStruct LinksStruct
 	err := json.Unmarshal(b, &linkStruct)
 	if err != nil {
 		log.Printf("Unable to Unmarshal : %v", err)
-		return "", err
+		return LinksStruct{}, err
 	}
 
+	return linkStruct, nil
+}
+
+func makeLinkDumpMessage(l LinksStruct) string {
 	var linkSlice []string
-	for _, l := range linkStruct.Links {
+	for _, l := range l.Links {
 		//For some reason, markdown for links doesn't work here
 		linkElem := fmt.Sprintf("%s - <%s>", l.Name, l.URL)
 		linkSlice = append(linkSlice, linkElem)
 	}
 	content := strings.Join(linkSlice, "\n")
 
-	return content, nil
+	return content
 }
 
 func GetCommands() []*discordgo.ApplicationCommand {
@@ -51,10 +55,12 @@ func GetCommands() []*discordgo.ApplicationCommand {
 }
 
 func GetCommandHandlers() (map[string]func(s *discordgo.Session, i *discordgo.InteractionCreate), error) {
-	links, err := getLinks(linkFile)
+	links, err := getLinksFromJSON(linkFile)
 	if err != nil {
 		return nil, err
 	}
+
+	message := makeLinkDumpMessage(links)
 
 	return map[string]func(s *discordgo.Session, i *discordgo.InteractionCreate){
 		"link-dump": func(s *discordgo.Session, i *discordgo.InteractionCreate) {
@@ -74,7 +80,7 @@ func GetCommandHandlers() (map[string]func(s *discordgo.Session, i *discordgo.In
 				log.Printf("Failed to respond to interaction: %v", err)
 			}
 
-			_, err = s.ChannelMessageSend(channel.ID, links)
+			_, err = s.ChannelMessageSend(channel.ID, message)
 			if err != nil {
 				log.Printf("Failed to send message to DM channel: %v", err)
 			}
