@@ -6,6 +6,7 @@ import (
 	"os"
 	"os/signal"
 
+	"ralphbot/internal/command/coinflip"
 	"ralphbot/internal/command/dadjoke"
 	"ralphbot/internal/command/guidefetch"
 	"ralphbot/internal/command/linkdump"
@@ -48,6 +49,18 @@ func StartBotService(ds *DiscordSession, env *config.EnvConfig) error {
 		return err
 	}
 	defer ds.Close()
+
+	// coin flip
+	commandHandlerCF, err := coinflip.GetCommandHandlers()
+	if err != nil {
+		err = fmt.Errorf("unable to prepare command handlers for %v error: %v", "coinflip", err)
+		return err
+	}
+	_, err = registerCommand(ds, env.GuildID, coinflip.GetCommands(), commandHandlerCF)
+	if err != nil {
+		err = fmt.Errorf("unable to register command %v error: %v", "coinflip", err)
+		return err
+	}
 
 	// guide fetch
 	commandOptionsGF, err := guidefetch.GenerateCommandOptions(guidefetch.Guides)
