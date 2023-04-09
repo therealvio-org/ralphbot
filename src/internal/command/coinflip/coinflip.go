@@ -55,7 +55,10 @@ func makePhrase(side string, phrase string) string {
 	if err != nil {
 		log.Printf("Failed to parse phrase template: %v", err)
 	}
-	template.Execute(buf, c)
+	err = template.Execute(buf, c)
+	if err != nil {
+		log.Printf("Failed to execute phrase template: %v", err)
+	}
 
 	return buf.String()
 }
