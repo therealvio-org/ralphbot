@@ -5,7 +5,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
-	"math/rand"
+
+	"ralphbot/internal/common"
 
 	"github.com/bwmarrin/discordgo"
 )
@@ -25,12 +26,6 @@ func getJokes(b []byte) ([]string, error) {
 		return nil, fmt.Errorf("unable to unmarshal json: %v", err)
 	}
 	return jokeArray.Jokes, nil
-}
-
-func selectDadJoke(j []string) string {
-	selectedDadJoke := j[rand.Intn(len(j))]
-	result := string(selectedDadJoke)
-	return result
 }
 
 func GetCommands() []*discordgo.ApplicationCommand {
@@ -54,7 +49,7 @@ func GetCommandHandlers() (map[string]func(s *discordgo.Session, i *discordgo.In
 			err := s.InteractionRespond(i.Interaction, &discordgo.InteractionResponse{
 				Type: discordgo.InteractionResponseChannelMessageWithSource,
 				Data: &discordgo.InteractionResponseData{
-					Content: selectDadJoke(jokes),
+					Content: common.SelectRandomString(jokes), //selectDadJoke(jokes),
 				},
 			})
 			if err != nil {

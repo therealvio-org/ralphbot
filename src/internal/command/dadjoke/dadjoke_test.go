@@ -17,7 +17,7 @@ func TestMain(m *testing.M) {
 func TestGetJokes(t *testing.T) {
 	cases := []struct {
 		name   string
-		input  string
+		input  []byte
 		expect struct {
 			result struct {
 				slice        []string
@@ -27,13 +27,13 @@ func TestGetJokes(t *testing.T) {
 	}{
 		{
 			name: "with a json array length of 3, getJokes returns a slice with length of 3",
-			input: `{
+			input: []byte(`{
 						"jokes": [
 							"the joke is this test suite",
 							"not really",
 							"unless?"
 						]
-					}`,
+					}`),
 			expect: struct {
 				result struct {
 					slice        []string
@@ -50,11 +50,11 @@ func TestGetJokes(t *testing.T) {
 		},
 		{
 			name: "when a bad json input is provided, getJokes returns a slice with length of 0, and an error",
-			input: `{
+			input: []byte(`{
 				"bad-json": {
 					notAValidKey: true
 				}
-			}`,
+			}`),
 			expect: struct {
 				result struct {
 					slice        []string
@@ -85,33 +85,5 @@ func TestGetJokes(t *testing.T) {
 			assert.EqualError(t, err, test.expect.result.errorMessage)
 			assert.Equal(t, test.expect.result.slice, result)
 		}
-	}
-}
-
-func TestSelectDadJoke(t *testing.T) {
-	cases := []struct {
-		name  string
-		input []string
-	}{
-		{
-			name: "given 3 jokes, selectDadJoke will randomly pick a joke",
-			input: []string{
-				"option 1",
-				"option 2",
-				"option 3",
-			},
-		},
-	}
-
-	for _, test := range cases {
-		result := selectDadJoke(test.input)
-
-		// testing for probability i.e. does our result show up at least once? This is more of a "transparency" test
-		var resultTally []string
-		for i := 0; i < 1000; i++ {
-			resultTally = append(resultTally, selectDadJoke(test.input))
-		}
-
-		assert.Contains(t, resultTally, result)
 	}
 }
