@@ -17,7 +17,7 @@ func TestMain(m *testing.M) {
 func TestGetJokes(t *testing.T) {
 	cases := []struct {
 		name   string
-		input  string
+		input  []byte
 		expect struct {
 			result struct {
 				slice        []string
@@ -27,13 +27,13 @@ func TestGetJokes(t *testing.T) {
 	}{
 		{
 			name: "with a json array length of 3, getJokes returns a slice with length of 3",
-			input: `{
+			input: []byte(`{
 						"jokes": [
 							"the joke is this test suite",
 							"not really",
 							"unless?"
 						]
-					}`,
+					}`),
 			expect: struct {
 				result struct {
 					slice        []string
@@ -50,11 +50,11 @@ func TestGetJokes(t *testing.T) {
 		},
 		{
 			name: "when a bad json input is provided, getJokes returns a slice with length of 0, and an error",
-			input: `{
+			input: []byte(`{
 				"bad-json": {
 					notAValidKey: true
 				}
-			}`,
+			}`),
 			expect: struct {
 				result struct {
 					slice        []string
