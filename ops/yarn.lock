@@ -1289,10 +1289,10 @@ concat-map@0.0.1:
   resolved "https://registry.yarnpkg.com/concat-map/-/concat-map-0.0.1.tgz#d8a96bd77fd68df7793a73036a3ba0d5405d477b"
   integrity sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==
 
-constructs@10.2.10:
-  version "10.2.10"
-  resolved "https://registry.yarnpkg.com/constructs/-/constructs-10.2.10.tgz#41aa1edc1b7e9b8db2c377064837c1c578a16216"
-  integrity sha512-FTxjGUJg5JOMTfX+pCxoG6nkauYFpcX9YSe3x0+P0xwg77hg7NzYGd4tdGQJFOwbiku3r943XQ0nlcYgJhEF9w==
+constructs@10.2.11:
+  version "10.2.11"
+  resolved "https://registry.yarnpkg.com/constructs/-/constructs-10.2.11.tgz#0b2564c505243174b31464738a21e75ce941f94e"
+  integrity sha512-p1xAd9MJUHx58RjRr54drcUzU25E5vpZe1HylCohCoOdyCm6PyhhTgAowkm8Jsd/k0bFrWEr5vfQBM4ajgH7Yg==
 
 convert-source-map@^1.6.0, convert-source-map@^1.7.0:
   version "1.9.0"
