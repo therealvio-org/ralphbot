@@ -1,13 +1,11 @@
+# yaml-language server: $schema=https://json.schemastore.org/github-action.json
+
 name: Ralphbot Infra Stack Linting & Testing
 on:
   push:
     paths:
       - "ops/**"
       - ".github/workflows/ralphbot-ops-lint.yaml"
-
-env:
-  COMMIT: ${GITHUB_SHA}
-  CDK_IMAGE_NAMETAG: cdk-ralphbot
 
 jobs:
   cdk-test:
@@ -23,25 +21,19 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Set IMAGE_TAG env
-        run: |
-          echo "IMAGE_TAG="$(date '+%Y.%m.%d'.${GITHUB_SHA::6})"" >> $GITHUB_ENV
-
-      - name: "Configure AWS Credentials"
-        uses: aws-actions/configure-aws-credentials@v1-node16
+      - uses: pnpm/action-setup@v2
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1
+          version: 8.5.0 # The action doesn't support specifying a directory for package.json. So this has to be hard-coded for now
 
-      - name: "Login to Amazon Public ECR"
-        uses: aws-actions/amazon-ecr-login@v1
+      - uses: actions/setup-node@v3
         with:
-          registry-type: public
+          node-version-file: .tool-versions
+          cache: pnpm
+          cache-dependency-path: ./ops/pnpm-lock.yaml
 
-      - name: "Build CDK App"
+      - name: Install dependencies
         run: |
-          docker build --tag ${{ env.CDK_IMAGE_NAMETAG }}:$IMAGE_TAG .
+          pnpm install --frozen-lockfile
 
       - run: |
-          docker run -i ${{ env.CDK_IMAGE_NAMETAG }}:$IMAGE_TAG ${{ matrix.task }}
+          pnpm ${{ matrix.task }}
