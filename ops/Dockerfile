@@ -2,11 +2,14 @@ FROM public.ecr.aws/docker/library/node:18.16-alpine
 
 WORKDIR /cdk
 
-COPY package.json yarn.lock ./
+COPY package.json pnpm-lock.yaml ./
 
-RUN yarn install --frozen-lockfile
+# pnpm isn't installed by default
+# https://pnpm.io/installation#using-corepack
+RUN corepack enable
+
+RUN pnpm install --frozen-lockfile
 
 COPY . .
-RUN yarn build
 
-ENTRYPOINT ["yarn"]
+ENTRYPOINT ["pnpm"]

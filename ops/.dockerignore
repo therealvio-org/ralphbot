@@ -17,6 +17,5 @@ docker-compose.yml
 **/cdk.out
 **/cdktf.log
 **/cdktf.out
-**/yarn-error.log
 
 /.*/**
