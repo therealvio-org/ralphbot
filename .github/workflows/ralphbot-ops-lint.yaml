@@ -6,7 +6,6 @@ on:
       - ".github/workflows/ralphbot-ops-lint.yaml"
 
 env:
-  COMMIT: ${GITHUB_SHA}
   CDK_IMAGE_NAMETAG: cdk-ralphbot
 
 jobs:
