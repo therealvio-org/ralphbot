@@ -63,7 +63,7 @@ If you intend on forking, or cloning this project for your own use, you do not n
 
 Below is a diagram of the infrastructure stack defined in `./ops` (this may not be up to date as the CDK stack updates, but gives a general idea on how it all comes together):
 
-![aws-infrastructure-diagram](./doc/res/infra-diagram.svg)
+![aws-infrastructure-diagram](./doc/res/infra-diagram.png)
 
 ### Regarding CDK Stack as a Container Image
 
