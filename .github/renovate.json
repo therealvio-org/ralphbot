@@ -27,17 +27,17 @@
   "packageRules": [
     {
       "automerge": true,
+      "matchManagers": ["github-actions"]
+    },
+    {
+      "automerge": true,
+      "matchManagers": ["gomod"]
+    },
+    {
+      "automerge": true,
       "matchManagers": ["npm"],
       "excludeDepPatterns": ["node"],
       "matchUpdateTypes": ["minor", "patch", "rollback", "bump"]
-    },
-    {
-      "matchManagers": ["github-actions"],
-      "automerge": true
-    },
-    {
-      "matchManagers": ["gomod"],
-      "automerge": true
     },
     {
       "groupName": "aws-cdk",
