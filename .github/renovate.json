@@ -27,6 +27,10 @@
   "packageRules": [
     {
       "automerge": true,
+      "matchManagers": ["asdf"]
+    },
+    {
+      "automerge": true,
       "matchManagers": ["github-actions"]
     },
     {
