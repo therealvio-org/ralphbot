@@ -16,7 +16,7 @@
     "lint": "pnpm -s eslint && pnpm -s prettier",
     "lint:fix": "tsc && pnpm -s eslint --fix && pnpm -s prettier --write",
     "deploy": "cdk deploy '*' --require-approval never",
-    "ci-deploy": "cdk deploy '*' --require-approval never --progress events"
+    "ci-deploy": "cdk deploy '*' --require-approval never --progress events --concurrency 2"
   },
   "devDependencies": {
     "@types/jest": "29.5.1",
