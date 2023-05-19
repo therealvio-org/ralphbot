@@ -10,11 +10,6 @@ For programming language, and other tools, check out `.tool-versions` (I tend to
 - AWS CLI v2: https://docs.aws.amazon.com/cli/latest/userguide/getting-started-version.html
 - Docker: https://docs.docker.com/get-docker/
 
-## Project Structure
-
-- Golang Standards: https://github.com/golang-standards/project-layout
-- How do I structure my go project?: https://www.wolfe.id.au/2020/03/10/how-do-i-structure-my-go-project/
-
 ## Environment Variables
 
 Personally, I use `direnv` (read more [here](https://direnv.net/)) to manage my environment variables via a `.envrc` file in my projects, including this one.
@@ -63,7 +58,7 @@ If you intend on forking, or cloning this project for your own use, you do not n
 
 Below is a diagram of the infrastructure stack defined in `./ops` (this may not be up to date as the CDK stack updates, but gives a general idea on how it all comes together):
 
-![aws-infrastructure-diagram](./doc/res/infra-diagram.svg)
+![aws-infrastructure-diagram](./doc/res/infra-diagram.png)
 
 ### Regarding CDK Stack as a Container Image
 
