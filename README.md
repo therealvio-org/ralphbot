@@ -1,5 +1,9 @@
 # ralphbot
 
+[![Deploy](https://github.com/therealvio-org/ralphbot/actions/workflows/ralphbot-deploy.yaml/badge.svg?branch=main)](https://github.com/therealvio-org/ralphbot/actions/workflows/ralphbot-deploy.yaml)
+[![Infra Code Linting & Testing](https://github.com/therealvio-org/ralphbot/actions/workflows/ralphbot-ops-lint.yaml/badge.svg)](https://github.com/therealvio-org/ralphbot/actions/workflows/ralphbot-ops-lint.yaml)
+[![Bot Code Linting & Testing](https://github.com/therealvio-org/ralphbot/actions/workflows/ralphbot-src-lint.yaml/badge.svg)](https://github.com/therealvio-org/ralphbot/actions/workflows/ralphbot-src-lint.yaml)
+
 A humble discord bot
 
 ## Tools
