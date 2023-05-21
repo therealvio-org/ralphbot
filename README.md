@@ -10,9 +10,9 @@ A humble discord bot
 
 For programming language, and other tools, check out `.tool-versions` (I tend to use asdf where I can!)
 
-- asdf version manager: https://asdf-vm.com/guide/getting-started.html#getting-started
-- AWS CLI v2: https://docs.aws.amazon.com/cli/latest/userguide/getting-started-version.html
-- Docker: https://docs.docker.com/get-docker/
+- [asdf version manager](https://asdf-vm.com/guide/getting-started.html#getting-started)
+- [AWS CLI v2](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-version.html)
+- [Docker](https://docs.docker.com/get-docker/)
 
 ## Environment Variables
 
