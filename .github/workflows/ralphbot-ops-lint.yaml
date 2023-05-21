@@ -1,6 +1,6 @@
 # yaml-language server: $schema=https://json.schemastore.org/github-action.json
 
-name: Ralphbot Infra Stack Linting & Testing
+name: Infra Code Linting & Testing
 on:
   push:
     paths:
