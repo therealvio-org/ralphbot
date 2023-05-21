@@ -1,14 +1,18 @@
 # ralphbot
 
+[![Deploy](https://github.com/therealvio-org/ralphbot/actions/workflows/ralphbot-deploy.yaml/badge.svg?branch=main)](https://github.com/therealvio-org/ralphbot/actions/workflows/ralphbot-deploy.yaml)
+[![Infra Code Linting & Testing](https://github.com/therealvio-org/ralphbot/actions/workflows/ralphbot-ops-lint.yaml/badge.svg)](https://github.com/therealvio-org/ralphbot/actions/workflows/ralphbot-ops-lint.yaml)
+[![Bot Code Linting & Testing](https://github.com/therealvio-org/ralphbot/actions/workflows/ralphbot-src-lint.yaml/badge.svg)](https://github.com/therealvio-org/ralphbot/actions/workflows/ralphbot-src-lint.yaml)
+
 A humble discord bot
 
 ## Tools
 
 For programming language, and other tools, check out `.tool-versions` (I tend to use asdf where I can!)
 
-- asdf version manager: https://asdf-vm.com/guide/getting-started.html#getting-started
-- AWS CLI v2: https://docs.aws.amazon.com/cli/latest/userguide/getting-started-version.html
-- Docker: https://docs.docker.com/get-docker/
+- [asdf version manager](https://asdf-vm.com/guide/getting-started.html#getting-started)
+- [AWS CLI v2](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-version.html)
+- [Docker](https://docs.docker.com/get-docker/)
 
 ## Environment Variables
 
