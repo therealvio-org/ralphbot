@@ -4,8 +4,8 @@ name: Deploy
 on:
   workflow_run:
     workflows:
-      - Ralphbot Infra Stack Linting & Testing
-      - Ralphbot Bot Source Code Linting
+      - Infra Code Linting & Testing
+      - Bot Code Linting & Testing
     branches:
       - main
     types:
