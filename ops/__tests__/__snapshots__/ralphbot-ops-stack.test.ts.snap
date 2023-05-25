@@ -34,7 +34,6 @@ exports[`Retrieve ralphbot ECR Stack Synths and snapshots 1`] = `
           "Type": "ECS",
         },
         "EnableECSManagedTags": false,
-        "HealthCheckGracePeriodSeconds": 10,
         "LaunchType": "FARGATE",
         "NetworkConfiguration": {
           "AwsvpcConfiguration": {
