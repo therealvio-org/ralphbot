@@ -1,6 +1,6 @@
-import * as cdk from "aws-cdk-lib"
 import { AppExtensionProps } from "../app"
 import { Construct } from "constructs"
+import { Stack, StackProps } from "aws-cdk-lib"
 import { aws_ec2 as ec2 } from "aws-cdk-lib"
 import { aws_ecr as ecr } from "aws-cdk-lib"
 import { aws_ecs as ecs } from "aws-cdk-lib"
@@ -9,11 +9,11 @@ import { aws_logs as logs } from "aws-cdk-lib"
 import { aws_secretsmanager as secretsmanager } from "aws-cdk-lib"
 import { aws_ssm as ssm } from "aws-cdk-lib"
 
-export class RalphbotStack extends cdk.Stack {
+export class RalphbotStack extends Stack {
   constructor(
     scope: Construct,
     id: string,
-    props?: cdk.StackProps,
+    props?: StackProps,
     extendedProps?: AppExtensionProps
   ) {
     super(scope, id, props)
@@ -82,7 +82,6 @@ export class RalphbotStack extends cdk.Stack {
     new ecs.FargateService(this, "Service", {
       assignPublicIp: true,
       cluster: cluster,
-      healthCheckGracePeriod: cdk.Duration.seconds(10),
       taskDefinition: taskDefinition,
       circuitBreaker: { rollback: true },
       vpcSubnets: vpc.selectSubnets({
