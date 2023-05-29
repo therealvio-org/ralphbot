@@ -23,6 +23,7 @@ jobs:
 
       - uses: pnpm/action-setup@v2
         with:
+          # renovate: datasource=github-releases depName=pnpm/pnpm versioning=semver
           version: 8.5.0 # The action doesn't support specifying a directory for package.json. So this has to be hard-coded for now
 
       - uses: actions/setup-node@v3
