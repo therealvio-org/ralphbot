@@ -94,5 +94,13 @@
       "matchPackageNames": ["node"],
       "matchUpdateTypes": ["minor"]
     }
+  ],
+  "regexManagers": [
+    {
+      "fileMatch": ["./workflows/ralphbot-ops-lint.yaml"],
+      "matchStrings": [
+        "datasource=(?<datasource>.*?) depName=(?<depName>.*?)( versioning=(?<versioning>.*?))?\\s.*?_VERSION=(?<currentValue>.*)\\s"
+      ]
+    }
   ]
 }
