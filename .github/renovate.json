@@ -57,6 +57,11 @@
       "rangeStrategy": "bump"
     },
     {
+      "groupName": "jest",
+      "automerge": true,
+      "matchPackageNames": ["jest", "ts-jest", "@types/jest"]
+    },
+    {
       "groupName": "linting",
       "automerge": true,
       "matchPackageNames": [
@@ -66,11 +71,6 @@
         "eslint-plugin-import",
         "prettier"
       ]
-    },
-    {
-      "groupName": "jest",
-      "automerge": true,
-      "matchPackageNames": ["jest", "ts-jest", "@types/jest"]
     },
     {
       "groupName": "nodejs",
