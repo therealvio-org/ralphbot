@@ -93,6 +93,20 @@
       "matchManagers": ["dockerfile"],
       "matchPackageNames": ["node"],
       "matchUpdateTypes": ["minor"]
+    },
+    {
+      "groupName": "pnpm",
+      "automerge": false,
+      "matchManagers": ["regex", "asdf", "npm"],
+      "matchPackageNames": ["pnpm", "pnpm/pnpm"]
+    }
+  ],
+  "regexManagers": [
+    {
+      "fileMatch": ["^.github/(?:workflows|actions)/.+\\.ya?ml$"],
+      "matchStrings": [
+        "# renovate: datasource=(?<datasource>[a-z-]+?) depName=(?<depName>[^\\s]+?)(?: (?:lookupName|packageName)=(?<packageName>[^\\s]+?))?(?: versioning=(?<versioning>[a-z-0-9]+?))?\\s+[A-Za-z0-9_]+?_VERSION\\s*:\\s*[\"']?(?<currentValue>.+?)[\"']?\\s"
+      ]
     }
   ]
 }
