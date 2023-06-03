@@ -23,6 +23,13 @@ var (
 		GDriveLink:     "https://drive.google.com/drive/folders/1pPdtAptJMaaDYRv2i-8bfaL6l3I0WTsT?usp=sharing",
 	}
 
+	ghosts = &guide{
+		Name:           "Ghosts of the Deep",
+		SubCommandName: "dungeon-ghosts",
+		Description:    "Ghosts of the Deep Dungeon",
+		GDriveLink:     "https://drive.google.com/drive/folders/1vyJqLgcVsBkymHKMY8vYRENUWA2kESES?usp=sharing",
+	}
+
 	kingsfall = &guide{
 		Name:           "King's Fall",
 		SubCommandName: "raid-kingsfall",
@@ -76,6 +83,7 @@ var (
 	Guides = []guide{
 		*crypt,
 		*garden,
+		*ghosts,
 		*kingsfall,
 		*pit,
 		*ron,
