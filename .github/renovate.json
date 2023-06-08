@@ -96,7 +96,7 @@
     },
     {
       "groupName": "pnpm",
-      "automerge": false,
+      "automerge": true,
       "matchManagers": ["regex", "asdf", "npm"],
       "matchPackageNames": ["pnpm", "pnpm/pnpm"]
     }
