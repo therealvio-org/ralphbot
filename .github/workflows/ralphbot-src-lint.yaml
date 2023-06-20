@@ -13,6 +13,7 @@ env:
 jobs:
   check-tidy:
     runs-on: ubuntu-latest
+    name: ralphbot-source-check-deps
     steps:
       - uses: actions/checkout@v3
 
@@ -29,6 +30,7 @@ jobs:
 
   go-lint:
     runs-on: ubuntu-latest
+    name: ralphbot-source-lint
     steps:
       - uses: actions/checkout@v3
 
@@ -47,6 +49,7 @@ jobs:
 
   go-test:
     runs-on: ubuntu-latest
+    name: ralphbot-source-go-test
     steps:
       - uses: actions/checkout@v3
 
