@@ -18,11 +18,19 @@ exports[`Retrieve ralphbot ECR Stack Synths and snapshots 1`] = `
       "Type": "AWS::ECS::Cluster",
     },
     "ServiceD69D759B": {
+      "DependsOn": [
+        "TaskDefinitionTaskRoleFD40A61D",
+      ],
       "Properties": {
         "Cluster": {
           "Ref": "ClusterEB0386A7",
         },
         "DeploymentConfiguration": {
+          "Alarms": {
+            "AlarmNames": [],
+            "Enable": false,
+            "Rollback": false,
+          },
           "DeploymentCircuitBreaker": {
             "Enable": true,
             "Rollback": true,
@@ -60,6 +68,9 @@ exports[`Retrieve ralphbot ECR Stack Synths and snapshots 1`] = `
       "Type": "AWS::ECS::Service",
     },
     "ServiceSecurityGroupC96ED6A7": {
+      "DependsOn": [
+        "TaskDefinitionTaskRoleFD40A61D",
+      ],
       "Properties": {
         "GroupDescription": "ralphbot-ops/Service/SecurityGroup",
         "SecurityGroupEgress": [
