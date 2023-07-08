@@ -29,7 +29,7 @@ describe("Retrieve ralphbot ECR Stack", () => {
         region: region,
       },
     },
-    extendedProperties
+    extendedProperties,
   )
 
   const template = Template.fromStack(stack)
