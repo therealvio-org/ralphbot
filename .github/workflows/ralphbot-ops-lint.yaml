@@ -14,7 +14,7 @@ env:
 jobs:
   cdk-test:
     strategy:
-      fail-fast: true
+      fail-fast: false
       matrix:
         task: [prettier, eslint, tsc, test]
     defaults:
