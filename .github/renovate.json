@@ -26,44 +26,44 @@
   "automergeType": "pr",
   "packageRules": [
     {
-      "automerge": false,
+      "automerge": true,
       "matchManagers": ["asdf"]
     },
     {
-      "automerge": false,
+      "automerge": true,
       "matchManagers": ["github-actions"]
     },
     {
-      "automerge": false,
+      "automerge": true,
       "matchManagers": ["gomod"]
     },
     {
-      "automerge": false,
+      "automerge": true,
       "matchManagers": ["npm"],
       "excludeDepPatterns": ["node"],
       "matchUpdateTypes": ["minor", "patch", "rollback", "bump"]
     },
     {
       "groupName": "aws-cdk",
-      "automerge": false,
+      "automerge": true,
       "allowedVersions": "^2.0.0",
       "matchPackageNames": ["aws-cdk", "aws-cdk-lib"]
     },
     {
       "groupName": "golang",
-      "automerge": false,
+      "automerge": true,
       "matchDatasources": ["golang-version"],
       "matchManagers": ["asdf", "dockerfile", "gomod"],
       "rangeStrategy": "bump"
     },
     {
       "groupName": "jest",
-      "automerge": false,
+      "automerge": true,
       "matchPackageNames": ["jest", "ts-jest", "@types/jest"]
     },
     {
       "groupName": "linting",
-      "automerge": false,
+      "automerge": true,
       "matchPackageNames": [
         "@typescript-eslint/eslint-plugin",
         "@typescript-eslint/parser",
@@ -74,14 +74,14 @@
     },
     {
       "groupName": "nodejs",
-      "automerge": false,
+      "automerge": true,
       "allowedVersions": "^18.0.0",
       "matchManagers": ["npm"],
       "matchPackageNames": ["node", "@types/node"]
     },
     {
       "groupName": "nodejs",
-      "automerge": false,
+      "automerge": true,
       "allowedVersions": "^18.0.0",
       "matchDatasources": ["node"],
       "matchManagers": ["asdf"],
@@ -96,7 +96,7 @@
     },
     {
       "groupName": "pnpm",
-      "automerge": false,
+      "automerge": true,
       "matchManagers": ["regex", "asdf", "npm"],
       "matchPackageNames": ["pnpm", "pnpm/pnpm"]
     }
