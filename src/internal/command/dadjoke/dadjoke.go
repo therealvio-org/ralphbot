@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"log"
 
-	"ralphbot/internal/common"
+	"ralphbot/internal/extract"
 
 	"github.com/bwmarrin/discordgo"
 )
@@ -49,7 +49,7 @@ func GetCommandHandlers() (map[string]func(s *discordgo.Session, i *discordgo.In
 			err := s.InteractionRespond(i.Interaction, &discordgo.InteractionResponse{
 				Type: discordgo.InteractionResponseChannelMessageWithSource,
 				Data: &discordgo.InteractionResponseData{
-					Content: common.SelectRandomString(jokes), //selectDadJoke(jokes),
+					Content: extract.RandomString(jokes), //selectDadJoke(jokes),
 				},
 			})
 			if err != nil {

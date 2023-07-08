@@ -3,7 +3,7 @@ package coinflip
 import (
 	"bytes"
 	"log"
-	"ralphbot/internal/common"
+	"ralphbot/internal/extract"
 	"text/template"
 
 	"github.com/bwmarrin/discordgo"
@@ -66,7 +66,7 @@ func GetCommandHandlers() (map[string]func(s *discordgo.Session, i *discordgo.In
 			err := s.InteractionRespond(i.Interaction, &discordgo.InteractionResponse{
 				Type: discordgo.InteractionResponseChannelMessageWithSource,
 				Data: &discordgo.InteractionResponseData{
-					Content: makePhrase(common.SelectRandomString(sides), common.SelectRandomString(phrases)),
+					Content: makePhrase(extract.RandomString(sides), extract.RandomString(phrases)),
 				},
 			})
 			if err != nil {
