@@ -1,6 +1,6 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["config:recommended", ":dependencyDashboard"],
+  "extends": ["config:base", ":dependencyDashboard"],
   "timezone": "Australia/Melbourne",
   "schedule": [
     "after 8pm every weekday",
