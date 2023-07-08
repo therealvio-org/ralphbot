@@ -14,7 +14,7 @@ export class RalphbotStack extends Stack {
     scope: Construct,
     id: string,
     props?: StackProps,
-    extendedProps?: AppExtensionProps
+    extendedProps?: AppExtensionProps,
   ) {
     super(scope, id, props)
 
@@ -26,12 +26,12 @@ export class RalphbotStack extends Stack {
     const repositoryRef = ecr.Repository.fromRepositoryArn(
       this,
       "ralphbotECRRepositoryRef",
-      `arn:aws:ecr:${props?.env?.region}:${props?.env?.account}:repository/ralphbot/master`
+      `arn:aws:ecr:${props?.env?.region}:${props?.env?.account}:repository/ralphbot/master`,
     )
 
     const ralphbotImage = ecs.ContainerImage.fromEcrRepository(
       repositoryRef,
-      extendedProps?.version
+      extendedProps?.version,
     )
 
     const cluster = new ecs.Cluster(this, "Cluster", {
@@ -46,17 +46,17 @@ export class RalphbotStack extends Stack {
         runtimePlatform: {
           cpuArchitecture: ecs.CpuArchitecture.ARM64,
         },
-      }
+      },
     )
 
     const botToken = secretsmanager.Secret.fromSecretNameV2(
       this,
       "botTokenFromName",
-      "ralphbot/token"
+      "ralphbot/token",
     )
     const secretArnSuffix = ssm.StringParameter.valueForStringParameter(
       this,
-      "/ralphbot/token/arn-suffix"
+      "/ralphbot/token/arn-suffix",
     )
 
     taskDefinition.addToExecutionRolePolicy(
@@ -66,7 +66,7 @@ export class RalphbotStack extends Stack {
           "secretsmanager:DescribeSecret",
         ],
         resources: [`${botToken.secretArn}-${secretArnSuffix}`],
-      })
+      }),
     )
 
     taskDefinition.addContainer("ralphbotContainer", {

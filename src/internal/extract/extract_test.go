@@ -1,4 +1,4 @@
-package common
+package extract
 
 import (
 	"testing"
@@ -22,12 +22,12 @@ func TestSelectRandomString(t *testing.T) {
 	}
 
 	for _, test := range cases {
-		result := SelectRandomString(test.input)
+		result := RandomString(test.input)
 
 		// testing for probability i.e. does our result show up at least once? This is more of a "transparency" test
 		var resultTally []string
 		for i := 0; i < 1000; i++ {
-			resultTally = append(resultTally, SelectRandomString(test.input))
+			resultTally = append(resultTally, RandomString(test.input))
 		}
 
 		assert.Contains(t, resultTally, result)

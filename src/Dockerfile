@@ -1,7 +1,8 @@
 FROM public.ecr.aws/docker/library/golang:1.20 as build_image
 
-#Build the fargate binary when the "build-deployment-binary" argument is passed, or use "make build" target by default
-#This argument shouldn't need to be used in a local development context unless testing the use of the argument
+# Build the fargate binary when the "build-deployment-binary" argument is passed, or use "make build" target by default
+# This argument shouldn't need to be used in a local development context unless testing the use of the argument. 
+# i.e. Leave the local build outcome to Golang's cross-compilation.
 ARG MAKE_TARGET="build"
 
 WORKDIR /app
