@@ -45,5 +45,5 @@ new RalphbotStack(
       region: region,
     },
   },
-  extendedProperties,
+  extendedProperties
 )
