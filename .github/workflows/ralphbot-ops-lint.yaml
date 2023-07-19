@@ -5,7 +5,7 @@ on:
   push:
     paths:
       - "ops/**"
-      - ".github/workflows/ralphbot-ops-lint.yaml"
+      - ".github/workflows/**"
 
 env:
   # renovate: datasource=github-releases depName=pnpm/pnpm versioning=semver

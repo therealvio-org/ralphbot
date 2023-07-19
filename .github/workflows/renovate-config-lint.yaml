@@ -2,6 +2,9 @@ name: renovate-config-validator
 
 on:
   push:
+    paths:
+      - "**/renovate.json"
+      - ".github/workflows/**"
 
 jobs:
   validate:
