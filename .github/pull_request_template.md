@@ -2,12 +2,18 @@
 
 <!--
 
-* Emphasize the WHY over the WHAT
+* Emphasize WHY these changes are happening. Explaining the WHAT is already in your code ;)
 * Remember your reviewer doesn't have your context
 
 -->
 
-# Context :brain:
+<!-- 
+
+This section is optional. It refers to surrounding artifacts for this PR like a trello-card, or Github issue. If there is one of these uncomment this title and mention it here.
+
+# Context :brain: 
+
+-->
 
 <!--
 
