@@ -17,7 +17,7 @@ func main() {
 		log.Fatalf("Error executing NewDiscord(): %v", err)
 	}
 
-	// pre-flight checks
+	// pre-flight checks ✅
 	discord.CheckGuildId(ds, env.GuildID)
 	discord.CheckOnline(ds)
 
