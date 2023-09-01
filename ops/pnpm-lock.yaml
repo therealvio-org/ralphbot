@@ -6,8 +6,8 @@ settings:
 
 dependencies:
   aws-cdk-lib:
-    specifier: 2.93.0
-    version: 2.93.0(constructs@10.2.70)
+    specifier: 2.94.0
+    version: 2.94.0(constructs@10.2.70)
   constructs:
     specifier: 10.2.70
     version: 10.2.70
@@ -29,8 +29,8 @@ devDependencies:
     specifier: 6.5.0
     version: 6.5.0(eslint@8.48.0)(typescript@5.2.2)
   aws-cdk:
-    specifier: 2.93.0
-    version: 2.93.0
+    specifier: 2.94.0
+    version: 2.94.0
   eslint:
     specifier: 8.48.0
     version: 8.48.0
@@ -1173,8 +1173,8 @@ packages:
     engines: {node: '>= 0.4'}
     dev: true
 
-  /aws-cdk-lib@2.93.0(constructs@10.2.70):
-    resolution: {integrity: sha512-kKbcKkts272Ju5xjGKI3pXTOpiJxW4OQbDF8Vmw/NIkkuJLo8GlRCFfeOfoN/hilvlYQgENA67GCgSWccbvu7w==}
+  /aws-cdk-lib@2.94.0(constructs@10.2.70):
+    resolution: {integrity: sha512-pB/UzKeM+p/wY9WuFYkEewOFUh2r8qwaML63is4vUChXY2G2Bj3pGyfJ97Xir2Q5KIhgJPJz5igdouI4+F9A+g==}
     engines: {node: '>= 14.15.0'}
     peerDependencies:
       constructs: ^10.0.0
@@ -1196,8 +1196,8 @@ packages:
       - table
       - yaml
 
-  /aws-cdk@2.93.0:
-    resolution: {integrity: sha512-C0o7rzlXbQ3othvQ9uZamRwr741MSX/9eZ74zNJvpkX5Eitx/XoQYwUHeD+cbb4lKHMi7m2SwJfx3yOEkpu9OQ==}
+  /aws-cdk@2.94.0:
+    resolution: {integrity: sha512-9bJkzxFDYZDwPDfZi/DSUODn4HFRzuXWPhpFgIIgRykfT18P+iAIJ1AEhaaCmlqrrog5yQgN+2iYd9BwDsiBeg==}
     engines: {node: '>= 14.15.0'}
     hasBin: true
     optionalDependencies:
