@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     name: ralphbot-source-check-deps
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Install Go
         uses: actions/setup-go@v4
@@ -32,7 +32,7 @@ jobs:
     runs-on: ubuntu-latest
     name: ralphbot-source-lint
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Install Go
         uses: actions/setup-go@v4
@@ -51,7 +51,7 @@ jobs:
     runs-on: ubuntu-latest
     name: ralphbot-source-go-test
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Install Go
         uses: actions/setup-go@v4
