@@ -1,4 +1,4 @@
 direnv 2.32.3
-golang 1.21.0
+golang 1.21.1
 pnpm 8.7.4
 nodejs 18.17.1
