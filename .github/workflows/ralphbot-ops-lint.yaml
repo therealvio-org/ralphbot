@@ -9,7 +9,7 @@ on:
 
 env:
   # renovate: datasource=github-releases depName=pnpm/pnpm versioning=semver
-  PNPM_VERSION: v8.7.3
+  PNPM_VERSION: v8.7.4
 
 jobs:
   cdk-test:
