@@ -9,6 +9,13 @@ type guide struct {
 }
 
 var (
+	crota = &guide{
+		Name:           "Crota's End",
+		SubCommandName: "raid-crota",
+		Description:    "Crota's End Raid",
+		GDriveLink:     "https://drive.google.com/drive/folders/1PmabG2nVyRf1yLd__KNEPaaFkACkx1XC?usp=sharing",
+	}
+
 	crypt = &guide{
 		Name:           "Deep Stone Crypt",
 		SubCommandName: "raid-crypt",
@@ -81,6 +88,7 @@ var (
 	}
 
 	Guides = []guide{
+		*crota,
 		*crypt,
 		*garden,
 		*ghosts,
