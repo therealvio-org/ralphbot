@@ -25,57 +25,6 @@ env:
   PNPM_VERSION: v8.7.5
 
 jobs:
-  #Publish CDK Stack Container Image
-  cdk-publish:
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
-    defaults:
-      run:
-        working-directory: ./ops/
-    environment: production-global
-    name: ralphbot-cdk-stack-publish
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Set IMAGE_TAG env
-        run: |
-          echo "IMAGE_TAG="cdk-$(date '+%Y.%m.%d'.${GITHUB_SHA::6})"" >> $GITHUB_ENV
-
-      - name: "Configure AWS Credentials"
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-          aws-region: us-east-1
-          role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/${{ secrets.GHA_AWS_ROLE }}
-          role-session-name: ralphbot-deploy
-
-      - name: "Login to Amazon Public ECR"
-        uses: aws-actions/amazon-ecr-login@v1
-        with:
-          mask-password: "true"
-          registry-type: public
-
-      - name: "Build Ralphbot CDK Stack Container Image"
-        run: |
-          docker build --tag ${{ env.CDK_IMAGE_NAMETAG }}:$IMAGE_TAG .
-
-      - name: "Configure AWS Credentials - Change Region to Deployment Region"
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-          aws-region: ${{ secrets.AWS_REGION }}
-
-      - name: "Login to Ralphbot ECR"
-        id: login-ralphbot-ecr
-        uses: aws-actions/amazon-ecr-login@v1
-        with:
-          mask-password: "true"
-
-      - name: "Push Ralphbot CDK Stack Image to Ralphbot ECR"
-        env:
-          REGISTRY: ${{ steps.login-ralphbot-ecr.outputs.registry }}
-        run: |
-          docker tag ${{ env.CDK_IMAGE_NAMETAG }}:$IMAGE_TAG $REGISTRY/${{ env.REPOSITORY }}:$IMAGE_TAG
-          docker push $REGISTRY/${{ env.REPOSITORY }}:$IMAGE_TAG
-
   #Build and Publish Ralphbot Container Image
   ralphbot-publish:
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
@@ -135,7 +84,6 @@ jobs:
     environment: production-global
     name: ralphbot-cdk-stack-deploy
     needs:
-      - cdk-publish
       - ralphbot-publish
     runs-on: ubuntu-latest
     steps:
@@ -144,7 +92,6 @@ jobs:
       - name: Set Job envs
         run: |
           echo "VERSION=$(date '+%Y.%m.%d'.${GITHUB_SHA::6})" >> $GITHUB_ENV
-          echo "IMAGE_TAG="cdk-$(date '+%Y.%m.%d'.${GITHUB_SHA::6})"" >> $GITHUB_ENV
 
       - uses: pnpm/action-setup@v2
         with:
@@ -161,56 +108,14 @@ jobs:
           pnpm install --frozen-lockfile
 
       - name: "Configure AWS Credentials"
-        id: creds
         uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-region: ${{ secrets.AWS_REGION }}
           role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/${{ secrets.GHA_AWS_ROLE }}
           role-session-name: ralphbot-deploy
-          # we need the creds as output for when the container runs the `cdk deploy` command from the container
-          output-credentials: true
 
       - name: "Run CDK Deploy"
+        env:
+          AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
         run: |
           pnpm run ci-deploy
-
-      #
-      # Setting up OIDC broke using the container to run deployments. This needs to be looked at in isolation
-      # to better identify what the problem is and implement the fix here.
-      #
-      #- name: "Login to Ralphbot ECR"
-      #  id: login-ralphbot-ecr
-      #  uses: aws-actions/amazon-ecr-login@v1
-      #  with:
-      #    mask-password: "true"
-
-      #- name: "Pull Ralphbot CDK App Image from Ralphbot ECR"
-      #  id: pull-image
-      #  env:
-      #    REGISTRY: ${{ steps.login-ralphbot-ecr.outputs.registry }}
-      #  run: |
-      #    docker pull $REGISTRY/${{ env.REPOSITORY }}:$IMAGE_TAG
-      #    echo "cdk-image="$REGISTRY/${{ env.REPOSITORY }}:$IMAGE_TAG"" >> $GITHUB_OUTPUT
-
-      #- name: get caller identity
-      #  run: |
-      #    aws sts get-caller-identity
-      #    echo ${{ steps.creds.outputs.aws-access-key-id }}
-      #    echo $${{ steps.creds.outputs.aws-secret-access-key }}
-
-      #- name: "Run CDK Deploy"
-      #  env:
-      #    AWS_ACCESS_KEY_ID: ${{ steps.creds.outputs.aws-access-key-id }}
-      #    AWS_SECRET_ACCESS_KEY: ${{ steps.creds.outputs.aws-secret-access-key }}
-      #  run: |
-      #    docker run -i \
-      #    -e AWS_ACCESS_KEY_ID=
-      #    -e AWS_SECRET_ACCESS_KEY=
-      #    -e VERSION \
-      #    -e ENVIRONMENT \
-      #    -e COMMIT \
-      #    -e AWS_REGION=${{ secrets.AWS_REGION }} \
-      #    -e AWS_DEFAULT_REGION=${{ secrets.AWS_REGION }} \
-      #    -e AWS_ACCOUNT_ID=${{ secrets.AWS_ACCOUNT_ID }}  \
-      #    ${{ steps.pull-image.outputs.cdk-image }} \
-      #    ci-deploy
