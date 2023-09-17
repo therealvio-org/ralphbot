@@ -1,0 +1,28 @@
+# yaml-language server: $schema=https://json.schemastore.org/github-action.json
+
+name: Testing OIDC Branch Policies
+on:
+  push:
+    paths:
+      - ".github/workflows/test-oidc.yaml"
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  run-oidc-test:
+    environment: production-global
+    name: run-oidc-test
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Configure AWS Credentials"
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-region: ${{ secrets.AWS_REGION }}
+          role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/${{ secrets.GHA_AWS_ROLE }}
+          role-session-name: ralphbot-deploy
+
+      - name: "Run aws get-caller-identity"
+        run: |
+          aws sts get-caller-identity
