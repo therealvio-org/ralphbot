@@ -22,7 +22,7 @@ env:
   REPOSITORY: ralphbot/master
   ENVIRONMENT: production-global
   # renovate: datasource=github-releases depName=pnpm/pnpm versioning=semver
-  PNPM_VERSION: v8.7.5
+  PNPM_VERSION: v8.7.6
 
 jobs:
   #Build and Publish Ralphbot Container Image
