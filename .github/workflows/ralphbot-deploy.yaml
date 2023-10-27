@@ -21,8 +21,6 @@ env:
   APP_IMAGE_NAMETAG: ralphbot
   REPOSITORY: ralphbot/master
   ENVIRONMENT: production-global
-  # renovate: datasource=github-releases depName=pnpm/pnpm versioning=semver
-  PNPM_VERSION: v8.9.2
 
 jobs:
   #Build and Publish Ralphbot Container Image
@@ -95,7 +93,7 @@ jobs:
 
       - uses: pnpm/action-setup@v2
         with:
-          version: ${{ env.PNPM_VERSION }}
+          package_json_file: ./ops/package.json
 
       - uses: actions/setup-node@v4
         with:

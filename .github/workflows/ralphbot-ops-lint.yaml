@@ -7,10 +7,6 @@ on:
       - "ops/**"
       - ".github/workflows/**"
 
-env:
-  # renovate: datasource=github-releases depName=pnpm/pnpm versioning=semver
-  PNPM_VERSION: v8.9.2
-
 jobs:
   cdk-test:
     strategy:
@@ -27,7 +23,7 @@ jobs:
 
       - uses: pnpm/action-setup@v2
         with:
-          version: ${{ env.PNPM_VERSION }}
+          package_json_file: ./ops/package.json
 
       - uses: actions/setup-node@v4
         with:
