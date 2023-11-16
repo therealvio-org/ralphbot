@@ -23,7 +23,7 @@
     "@types/node": "18.18.9",
     "@typescript-eslint/eslint-plugin": "6.11.0",
     "@typescript-eslint/parser": "6.11.0",
-    "aws-cdk": "2.108.1",
+    "aws-cdk": "2.109.0",
     "eslint": "8.53.0",
     "eslint-config-prettier": "9.0.0",
     "eslint-plugin-import": "2.29.0",
@@ -36,7 +36,7 @@
     "typescript": "5.2.2"
   },
   "dependencies": {
-    "aws-cdk-lib": "2.108.1",
+    "aws-cdk-lib": "2.109.0",
     "constructs": "10.3.0",
     "source-map-support": "0.5.21"
   }
