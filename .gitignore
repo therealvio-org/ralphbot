@@ -67,3 +67,12 @@ src/bin/
 
 # Dependency directories (remove the comment below to include it)
 # vendor/
+
+# FIXME
+# For some bullshit reason, either since golang 1.21.4, or the Go VSCode extension update 
+# v0.40.0 - 15 Nov, 2023 (likely the extension) fucked up something because now modules are 
+# installing in the root of a project. Even after selecting a Go environment in vscode, the packages
+# still leave behind a pkg directory that is dependant. This will have to do until I can figure out 
+# what is going on here
+bin
+pkg
