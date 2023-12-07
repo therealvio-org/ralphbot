@@ -18,7 +18,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Install Go
-        uses: actions/setup-go@v4
+        uses: actions/setup-go@v5
         with:
           go-version-file: ${{env.WORK_DIR}}/go.mod
           cache: true
@@ -35,7 +35,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Install Go
-        uses: actions/setup-go@v4
+        uses: actions/setup-go@v5
         with:
           go-version-file: ${{env.WORK_DIR}}/go.mod
           cache: true
@@ -54,7 +54,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Install Go
-        uses: actions/setup-go@v4
+        uses: actions/setup-go@v5
         with:
           go-version-file: ${{env.WORK_DIR}}/go.mod
           cache: true
