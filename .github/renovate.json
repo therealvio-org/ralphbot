@@ -1,6 +1,6 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["config:base", ":dependencyDashboard"],
+  "extends": ["config:recommended", ":dependencyDashboard"],
   "timezone": "Australia/Melbourne",
   "schedule": [
     "after 8pm every weekday",
@@ -81,12 +81,13 @@
     },
     {
       "groupName": "pnpm",
-      "matchManagers": ["regex", "asdf", "npm"],
+      "matchManagers": ["custom.regex", "asdf", "npm"],
       "matchPackageNames": ["pnpm", "pnpm/pnpm"]
     }
   ],
-  "regexManagers": [
+  "customManagers": [
     {
+      "customType": "regex",
       "fileMatch": ["^.github/(?:workflows|actions)/.+\\.ya?ml$"],
       "matchStrings": [
         "# renovate: datasource=(?<datasource>[a-z-]+?) depName=(?<depName>[^\\s]+?)(?: (?:lookupName|packageName)=(?<packageName>[^\\s]+?))?(?: versioning=(?<versioning>[a-z-0-9]+?))?\\s+[A-Za-z0-9_]+?_VERSION\\s*:\\s*[\"']?(?<currentValue>.+?)[\"']?\\s"
