@@ -40,8 +40,10 @@
       "matchPackageNames": ["aws-cdk", "aws-cdk-lib"]
     },
     {
-      "groupName": "golang",
+      "groupName": "go",
+      "groupSlug": "golang",
       "matchDatasources": ["golang-version"],
+      "matchPackageNames": ["go", "golang"],
       "matchManagers": ["asdf", "dockerfile", "gomod"],
       "rangeStrategy": "bump"
     },
