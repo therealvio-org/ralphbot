@@ -1,6 +1,6 @@
+import * as ecr from "aws-cdk-lib/aws-ecr"
 import { Construct } from "constructs"
-import { Stack, StackProps } from "aws-cdk-lib"
-import { aws_ecr as ecr } from "aws-cdk-lib"
+import { Stack, StackProps } from "aws-cdk-lib/core"
 
 export class RalphbotEcrStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {

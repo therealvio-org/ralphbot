@@ -1,13 +1,13 @@
+import * as ec2 from "aws-cdk-lib/aws-ec2"
+import * as ecr from "aws-cdk-lib/aws-ecr"
+import * as ecs from "aws-cdk-lib/aws-ecs"
+import * as iam from "aws-cdk-lib/aws-iam"
+import * as logs from "aws-cdk-lib/aws-logs"
+import * as secretsmanager from "aws-cdk-lib/aws-secretsmanager"
+import * as ssm from "aws-cdk-lib/aws-ssm"
 import { AppExtensionProps } from "../app"
 import { Construct } from "constructs"
-import { Stack, StackProps } from "aws-cdk-lib"
-import { aws_ec2 as ec2 } from "aws-cdk-lib"
-import { aws_ecr as ecr } from "aws-cdk-lib"
-import { aws_ecs as ecs } from "aws-cdk-lib"
-import { aws_iam as iam } from "aws-cdk-lib"
-import { aws_logs as logs } from "aws-cdk-lib"
-import { aws_secretsmanager as secretsmanager } from "aws-cdk-lib"
-import { aws_ssm as ssm } from "aws-cdk-lib"
+import { Stack, StackProps } from "aws-cdk-lib/core"
 
 export class RalphbotStack extends Stack {
   constructor(

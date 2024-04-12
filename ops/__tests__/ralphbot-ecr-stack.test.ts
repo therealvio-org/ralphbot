@@ -1,4 +1,4 @@
-import * as cdk from "aws-cdk-lib"
+import * as cdk from "aws-cdk-lib/core"
 import { RalphbotEcrStack } from "../src/stacks/ralphbot-ecr-stack"
 import { Template } from "aws-cdk-lib/assertions"
 

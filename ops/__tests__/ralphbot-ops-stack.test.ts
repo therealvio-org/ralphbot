@@ -1,4 +1,4 @@
-import * as cdk from "aws-cdk-lib"
+import * as cdk from "aws-cdk-lib/core"
 import { AppExtension } from "../src/app"
 import { RalphbotStack } from "../src/stacks/ralphbot-ops-stack"
 import { Template } from "aws-cdk-lib/assertions"
