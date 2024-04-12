@@ -14,7 +14,7 @@
     "eslint": "eslint . --ext .ts --ignore-pattern '*.d.ts'",
     "prettier": "prettier --check '**/*'",
     "lint": "pnpm -s eslint && pnpm -s prettier",
-    "lint:fix": "tsc && pnpm -s eslint --fix && pnpm -s prettier --write",
+    "lint:fix": "pnpm -s eslint --fix && pnpm -s prettier --write",
     "deploy": "cdk deploy '*' --require-approval never",
     "ci-deploy": "cdk deploy '*' --require-approval never --progress events --concurrency 2"
   },
