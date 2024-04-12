@@ -7,6 +7,9 @@ on:
       - "ops/**"
       - ".github/workflows/**"
 
+env:
+  ESLINT_USE_FLAT_CONFIG: "false"
+
 jobs:
   cdk-test:
     strategy:
