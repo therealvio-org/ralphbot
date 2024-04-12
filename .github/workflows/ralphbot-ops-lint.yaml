@@ -5,7 +5,7 @@ on:
   push:
     paths:
       - "ops/**"
-      - ".github/workflows/**"
+      - ".github/workflows/ralphbot-ops-lint.yaml"
 
 env:
   ESLINT_USE_FLAT_CONFIG: "false"

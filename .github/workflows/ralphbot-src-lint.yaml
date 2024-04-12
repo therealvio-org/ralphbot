@@ -5,7 +5,7 @@ on:
   push:
     paths:
       - "src/**"
-      - ".github/workflows/**"
+      - ".github/workflows/ralphbot-src-lint.yaml"
 
 env:
   WORK_DIR: ./src
