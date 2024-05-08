@@ -42,7 +42,7 @@ jobs:
           cache-dependency-path: ${{env.WORK_DIR}}/go.sum
 
       - name: Lint
-        uses: golangci/golangci-lint-action@v5
+        uses: golangci/golangci-lint-action@v6
         with:
           working-directory: ${{env.WORK_DIR}}
           args: "--timeout=5m"
