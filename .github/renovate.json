@@ -44,7 +44,11 @@
       "groupSlug": "golang",
       "allowedVersions": "^1.17.0",
       "matchDatasources": ["golang-version"],
-      "matchPackageNames": ["go", "golang"],
+      "matchPackageNames": [
+        "go",
+        "golang",
+        "public.ecr.aws/docker/library/golang"
+      ],
       "matchManagers": ["asdf", "dockerfile", "gomod"]
     },
     {
