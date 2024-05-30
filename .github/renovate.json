@@ -42,10 +42,10 @@
     {
       "groupName": "go",
       "groupSlug": "golang",
+      "allowedVersions": "^1.17.0",
       "matchDatasources": ["golang-version"],
       "matchPackageNames": ["go", "golang"],
-      "matchManagers": ["asdf", "dockerfile", "gomod"],
-      "rangeStrategy": "bump"
+      "matchManagers": ["asdf", "dockerfile", "gomod"]
     },
     {
       "groupName": "jest",
