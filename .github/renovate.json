@@ -37,27 +37,23 @@
     {
       "groupName": "aws-cdk",
       "allowedVersions": "^2.0.0",
-      "matchPackageNames": ["aws-cdk", "aws-cdk-lib"]
+      "matchDepNames": ["aws-cdk", "aws-cdk-lib"]
     },
     {
       "groupName": "go",
       "groupSlug": "golang",
       "allowedVersions": "^1.17.0",
       "matchDatasources": ["golang-version"],
-      "matchPackageNames": [
-        "go",
-        "golang",
-        "public.ecr.aws/docker/library/golang"
-      ],
+      "matchDepNames": ["go", "golang", "public.ecr.aws/docker/library/golang"],
       "matchManagers": ["asdf", "dockerfile", "gomod"]
     },
     {
       "groupName": "jest",
-      "matchPackageNames": ["jest", "ts-jest", "@types/jest"]
+      "matchDepNames": ["jest", "ts-jest", "@types/jest"]
     },
     {
       "groupName": "linting",
-      "matchPackageNames": [
+      "matchDepNames": [
         "@typescript-eslint/eslint-plugin",
         "@typescript-eslint/parser",
         "eslint",
@@ -69,12 +65,12 @@
       "groupName": "nodejs",
       "allowedVersions": "^18.0.0",
       "matchManagers": ["npm, asdf"],
-      "matchPackageNames": ["node", "@types/node"]
+      "matchDepNames": ["node", "@types/node"]
     },
     {
       "groupName": "pnpm",
       "matchManagers": ["asdf", "npm"],
-      "matchPackageNames": ["pnpm", "pnpm/pnpm"]
+      "matchDepNames": ["pnpm", "pnpm/pnpm"]
     }
   ]
 }
