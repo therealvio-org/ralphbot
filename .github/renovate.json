@@ -64,22 +64,8 @@
     {
       "groupName": "nodejs",
       "allowedVersions": "^18.0.0",
-      "matchManagers": ["npm"],
+      "matchManagers": ["npm, asdf"],
       "matchPackageNames": ["node", "@types/node"]
-    },
-    {
-      "groupName": "nodejs",
-      "allowedVersions": "^18.0.0",
-      "matchDatasources": ["node-version"],
-      "matchManagers": ["asdf"],
-      "matchPackageNames": ["node"]
-    },
-    {
-      "groupName": "nodejs",
-      "automerge": false,
-      "matchManagers": ["dockerfile"],
-      "matchPackageNames": ["node"],
-      "matchUpdateTypes": ["minor"]
     },
     {
       "groupName": "pnpm",
