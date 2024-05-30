@@ -29,11 +29,7 @@
     { "matchManagers": ["asdf"] },
     { "matchManagers": ["github-actions"] },
     { "matchManagers": ["gomod"] },
-    {
-      "matchManagers": ["npm"],
-      "excludeDepPatterns": ["node"],
-      "matchUpdateTypes": ["minor", "patch", "rollback", "bump"]
-    },
+    { "matchManagers": ["npm"] },
     {
       "groupName": "aws-cdk",
       "allowedVersions": "^2.0.0",
