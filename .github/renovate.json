@@ -64,7 +64,7 @@
     {
       "groupName": "nodejs",
       "allowedVersions": "^18.0.0",
-      "matchManagers": ["npm, asdf"],
+      "matchManagers": ["npm", "asdf"],
       "matchDepNames": ["node", "@types/node"]
     },
     {
