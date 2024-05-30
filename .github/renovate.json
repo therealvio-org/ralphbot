@@ -37,23 +37,23 @@
     {
       "groupName": "aws-cdk",
       "allowedVersions": "^2.0.0",
-      "matchPackageNames": ["aws-cdk", "aws-cdk-lib"]
+      "matchDepNames": ["aws-cdk", "aws-cdk-lib"]
     },
     {
       "groupName": "go",
       "groupSlug": "golang",
+      "allowedVersions": "^1.17.0",
       "matchDatasources": ["golang-version"],
-      "matchPackageNames": ["go", "golang"],
-      "matchManagers": ["asdf", "dockerfile", "gomod"],
-      "rangeStrategy": "bump"
+      "matchDepNames": ["go", "golang", "public.ecr.aws/docker/library/golang"],
+      "matchManagers": ["asdf", "dockerfile", "gomod"]
     },
     {
       "groupName": "jest",
-      "matchPackageNames": ["jest", "ts-jest", "@types/jest"]
+      "matchDepNames": ["jest", "ts-jest", "@types/jest"]
     },
     {
       "groupName": "linting",
-      "matchPackageNames": [
+      "matchDepNames": [
         "@typescript-eslint/eslint-plugin",
         "@typescript-eslint/parser",
         "eslint",
@@ -64,36 +64,13 @@
     {
       "groupName": "nodejs",
       "allowedVersions": "^18.0.0",
-      "matchManagers": ["npm"],
-      "matchPackageNames": ["node", "@types/node"]
-    },
-    {
-      "groupName": "nodejs",
-      "allowedVersions": "^18.0.0",
-      "matchDatasources": ["node-version"],
-      "matchManagers": ["asdf"],
-      "matchPackageNames": ["node"]
-    },
-    {
-      "groupName": "nodejs",
-      "automerge": false,
-      "matchManagers": ["dockerfile"],
-      "matchPackageNames": ["node"],
-      "matchUpdateTypes": ["minor"]
+      "matchManagers": ["npm, asdf"],
+      "matchDepNames": ["node", "@types/node"]
     },
     {
       "groupName": "pnpm",
-      "matchManagers": ["custom.regex", "asdf", "npm"],
-      "matchPackageNames": ["pnpm", "pnpm/pnpm"]
-    }
-  ],
-  "customManagers": [
-    {
-      "customType": "regex",
-      "fileMatch": ["^.github/(?:workflows|actions)/.+\\.ya?ml$"],
-      "matchStrings": [
-        "# renovate: datasource=(?<datasource>[a-z-]+?) depName=(?<depName>[^\\s]+?)(?: (?:lookupName|packageName)=(?<packageName>[^\\s]+?))?(?: versioning=(?<versioning>[a-z-0-9]+?))?\\s+[A-Za-z0-9_]+?_VERSION\\s*:\\s*[\"']?(?<currentValue>.+?)[\"']?\\s"
-      ]
+      "matchManagers": ["asdf", "npm"],
+      "matchDepNames": ["pnpm", "pnpm/pnpm"]
     }
   ]
 }
