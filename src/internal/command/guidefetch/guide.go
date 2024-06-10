@@ -58,6 +58,13 @@ var (
 		GDriveLink:     "https://drive.google.com/drive/folders/1eR50Jt36GBegMALRkT-tmnH6Nnjc4Pqj?usp=share_link",
 	}
 
+	edge = &guide{
+		Name:           "Salvation's Edge",
+		SubCommandName: "raid-edge",
+		Description:    "Salvation's Edge Raid",
+		GDriveLink:     "https://drive.google.com/drive/folders/1JBadVi0Qk9QtP7UF1mkjlO_IpUpAXPjh?usp=sharing",
+	}
+
 	spire = &guide{
 		Name:           "Spire of the Watcher",
 		SubCommandName: "dungeon-spire",
@@ -90,6 +97,7 @@ var (
 	Guides = []guide{
 		*crota,
 		*crypt,
+		*edge,
 		*garden,
 		*ghosts,
 		*kingsfall,
