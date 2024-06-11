@@ -1,4 +1,4 @@
-package guidefetch
+package guide
 
 type guide struct {
 	Name           string

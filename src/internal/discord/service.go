@@ -8,7 +8,7 @@ import (
 
 	"ralphbot/internal/command/coinflip"
 	"ralphbot/internal/command/dadjoke"
-	"ralphbot/internal/command/guidefetch"
+	"ralphbot/internal/command/guide"
 	"ralphbot/internal/command/linkdump"
 	"ralphbot/internal/config"
 
@@ -63,11 +63,11 @@ func StartBotService(ds *DiscordSession, env *config.EnvConfig) error {
 	}
 
 	// guide fetch
-	commandOptionsGF, err := guidefetch.GenerateCommandOptions(guidefetch.Guides)
+	commandOptionsGF, err := guide.GenerateCommandOptions(guide.Guides)
 	if err != nil {
 		return fmt.Errorf("unable to generated command options for %v error: %v", "guidefetch", err)
 	}
-	_, err = registerCommand(ds, env.GuildID, guidefetch.GetCommands(commandOptionsGF), guidefetch.GetCommandHandlers())
+	_, err = registerCommand(ds, env.GuildID, guide.GetCommands(commandOptionsGF), guide.GetCommandHandlers())
 	if err != nil {
 		err = fmt.Errorf("unable to register command %v error: %v", "guidefetch", err)
 		return err

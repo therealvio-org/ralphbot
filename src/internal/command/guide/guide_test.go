@@ -1,4 +1,4 @@
-package guidefetch
+package guide
 
 import (
 	"fmt"
@@ -108,7 +108,7 @@ func TestGetCommands(t *testing.T) {
 				backrooms,
 			},
 			expect: []*discordgo.ApplicationCommand{{
-				Name:        "fetch-guide",
+				Name:        "guide",
 				Description: "Provides a link to materials for a given Destiny activity",
 				Options: []*discordgo.ApplicationCommandOption{
 					backrooms,
@@ -122,7 +122,7 @@ func TestGetCommands(t *testing.T) {
 				wax,
 			},
 			expect: []*discordgo.ApplicationCommand{{
-				Name:        "fetch-guide",
+				Name:        "guide",
 				Description: "Provides a link to materials for a given Destiny activity",
 				Options: []*discordgo.ApplicationCommandOption{
 					backrooms,

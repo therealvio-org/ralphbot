@@ -1,4 +1,4 @@
-package guidefetch
+package guide
 
 import (
 	"errors"
@@ -30,7 +30,7 @@ func GetCommands(co []*discordgo.ApplicationCommandOption) []*discordgo.Applicat
 	return []*discordgo.ApplicationCommand{
 		//https://discord.com/developers/docs/interactions/application-commands#slash-commands
 		{
-			Name:        "fetch-guide",
+			Name:        "guide",
 			Description: "Provides a link to materials for a given Destiny activity",
 			Options:     co,
 		},
@@ -39,7 +39,7 @@ func GetCommands(co []*discordgo.ApplicationCommandOption) []*discordgo.Applicat
 
 func GetCommandHandlers() map[string]func(s *discordgo.Session, i *discordgo.InteractionCreate) {
 	return map[string]func(s *discordgo.Session, i *discordgo.InteractionCreate){
-		"fetch-guide": func(s *discordgo.Session, i *discordgo.InteractionCreate) {
+		"guide": func(s *discordgo.Session, i *discordgo.InteractionCreate) {
 			resp := getInteractionResponse(i)
 			err := s.InteractionRespond(i.Interaction, resp)
 			if err != nil {
