@@ -90,6 +90,12 @@ exports[`Retrieve ralphbot ECR Stack Synths and snapshots 1`] = `
       "Properties": {
         "ContainerDefinitions": [
           {
+            "Environment": [
+              {
+                "Name": "REMOVE_COMMANDS",
+                "Value": "true",
+              },
+            ],
             "Essential": true,
             "Image": {
               "Fn::Join": [

@@ -71,6 +71,11 @@ export class RalphbotStack extends Stack {
 
     taskDefinition.addContainer("ralphbotContainer", {
       image: ralphbotImage,
+      environment: {
+        // trigger removal of registered commands on bot startup
+        // this is configured to true on the app code itself, we're surfacing it here so it remains unobscured
+        REMOVE_COMMANDS: "true",
+      },
       secrets: {
         BOT_TOKEN: ecs.Secret.fromSecretsManager(botToken, "token"),
       },

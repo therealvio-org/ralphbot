@@ -10,7 +10,7 @@
       "package*.json",
       "pnpm-lock.yaml",
       "node_modules",
-      "test"
+      "__test__"
     ]
   },
   "context": {
