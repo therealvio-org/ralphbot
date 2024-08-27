@@ -33,7 +33,7 @@ Ultimately it is up to you how you want to define the environment variable, thou
 ### Use of GUILD_ID
 
 GUILD_ID is the [ID of your discord server](https://support.discord.com/hc/en-us/articles/206346498). This value can be passed optionally.
-The benefit of passing this value as an environment variable into the bot is that command registration happens instantly for that server. This is incredibly useful for developing commands getting a faster feedback loop. When this value isn't passed, then the command is registered `globally`, meaning that it needs to propage to Discord's endpoints and can take between 40 minutes to an hour.
+The benefit of passing this value as an environment variable into the bot is that command registration happens instantly for that server. This is incredibly useful for developing commands getting a faster feedback loop. When this value isn't passed, then the command is registered `globally`, meaning that it needs to propagate to Discord's endpoints and can take between 40 minutes to an hour.
 
 For more details, refer to the [Discord docs on this](https://discord.com/developers/docs/interactions/application-commands#making-a-guild-command)
 
@@ -66,7 +66,7 @@ Below is a diagram of the infrastructure stack defined in `./ops` (this may not 
 
 ### Regarding CDK Stack as a Container Image
 
-By creating the CDK stack as a container image, it allows the CDK stack to be run in a vacuum since all the necessary `nodejs` modules, toolings, e.t.c. to be available as a portable means to deploy the CDK stack on its own. That way, to deploy the CDK stack, all that needs to be done is having a valid AWS session, and passing some environment variables into `docker run`, referencing the CDK Stack iamge along with a `ci-deploy` argument.
+By creating the CDK stack as a container image, it allows the CDK stack to be run in a vacuum since all the necessary `nodejs` modules, toolings, e.t.c. to be available as a portable means to deploy the CDK stack on its own. That way, to deploy the CDK stack, all that needs to be done is having a valid AWS session, and passing some environment variables into `docker run`, referencing the CDK Stack image along with a `ci-deploy` argument.
 
 This is especially handy when using hosted CI/CD services like Github Actions where toolings need to be specified as arguments, that can all be managed within the container - it's just a matter of telling the CI/CD services to run Docker as before (which is almost guaranteed to be available these days).
 
