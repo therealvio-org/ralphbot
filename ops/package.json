@@ -19,7 +19,7 @@
     "ci-deploy": "cdk deploy '*' --require-approval never --progress events --concurrency 2"
   },
   "devDependencies": {
-    "@types/jest": "29.5.12",
+    "@types/jest": "29.5.13",
     "@types/node": "20.12.7",
     "@typescript-eslint/eslint-plugin": "8.5.0",
     "@typescript-eslint/parser": "8.5.0",
