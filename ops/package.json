@@ -21,8 +21,8 @@
   "devDependencies": {
     "@types/jest": "29.5.13",
     "@types/node": "20.12.7",
-    "@typescript-eslint/eslint-plugin": "8.10.0",
-    "@typescript-eslint/parser": "8.10.0",
+    "@typescript-eslint/eslint-plugin": "8.11.0",
+    "@typescript-eslint/parser": "8.11.0",
     "aws-cdk": "2.162.1",
     "eslint": "9.13.0",
     "eslint-config-prettier": "9.1.0",
