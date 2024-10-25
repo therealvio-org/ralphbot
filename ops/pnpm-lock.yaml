@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       aws-cdk-lib:
-        specifier: 2.164.0
-        version: 2.164.0(constructs@10.4.2)
+        specifier: 2.164.1
+        version: 2.164.1(constructs@10.4.2)
       constructs:
         specifier: 10.4.2
         version: 10.4.2
@@ -31,8 +31,8 @@ importers:
         specifier: 8.11.0
         version: 8.11.0(eslint@9.13.0)(typescript@5.6.3)
       aws-cdk:
-        specifier: 2.164.0
-        version: 2.164.0
+        specifier: 2.164.1
+        version: 2.164.1
       eslint:
         specifier: 9.13.0
         version: 9.13.0
@@ -625,8 +625,8 @@ packages:
     resolution: {integrity: sha512-wvUjBtSGN7+7SjNpq/9M2Tg350UZD3q62IFZLbRAR1bSMlCo1ZaeW+BJ+D090e4hIIZLBcTDWe4Mh4jvUDajzQ==}
     engines: {node: '>= 0.4'}
 
-  aws-cdk-lib@2.164.0:
-    resolution: {integrity: sha512-BfiQ4hhOw1+y1fqn67UwrmSsjKVIy3BPTQV9etkoFnCofltYpIrPVrLem39TVF+mto1d+xMJ6vEHPzsm2lx1eg==}
+  aws-cdk-lib@2.164.1:
+    resolution: {integrity: sha512-jNvVmfZJbZoAYU94b5dzTlF2z6JXJ204NgcYY5haOa6mq3m2bzdYPXnPtB5kpAX3oBi++yoRdmLhqgckdEhUZA==}
     engines: {node: '>= 14.15.0'}
     peerDependencies:
       constructs: ^10.0.0
@@ -643,8 +643,8 @@ packages:
       - yaml
       - mime-types
 
-  aws-cdk@2.164.0:
-    resolution: {integrity: sha512-7+of/m/dGO8rqLAZpH4vMfZV1wFzgZBc21/yqFe4PYZ2Z9NWa98mZ2Dd28I/34CwR/aNWNPwDORiZn3/JPwCEw==}
+  aws-cdk@2.164.1:
+    resolution: {integrity: sha512-dWRViQgHLe7GHkPIQGA+8EQSm8TBcxemyCC3HHW3wbLMWUDbspio9Dktmw5EmWxlFjjWh86Dk1JWf1zKQo8C5g==}
     engines: {node: '>= 14.15.0'}
     hasBin: true
 
@@ -2783,7 +2783,7 @@ snapshots:
     dependencies:
       possible-typed-array-names: 1.0.0
 
-  aws-cdk-lib@2.164.0(constructs@10.4.2):
+  aws-cdk-lib@2.164.1(constructs@10.4.2):
     dependencies:
       '@aws-cdk/asset-awscli-v1': 2.2.205
       '@aws-cdk/asset-kubectl-v20': 2.1.2
@@ -2791,7 +2791,7 @@ snapshots:
       '@aws-cdk/cloud-assembly-schema': 38.0.1
       constructs: 10.4.2
 
-  aws-cdk@2.164.0:
+  aws-cdk@2.164.1:
     optionalDependencies:
       fsevents: 2.3.2
 
