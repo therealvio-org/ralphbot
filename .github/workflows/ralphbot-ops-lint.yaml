@@ -7,9 +7,6 @@ on:
       - "ops/**"
       - ".github/workflows/ralphbot-ops-lint.yaml"
 
-env:
-  ESLINT_USE_FLAT_CONFIG: "false"
-
 jobs:
   cdk-test:
     strategy:

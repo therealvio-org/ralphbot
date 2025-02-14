@@ -11,7 +11,7 @@
     "test": "jest",
     "cdk": "cdk",
     "clean": "pnpm build --build --clean",
-    "eslint": "eslint . --ext .ts --ignore-pattern '*.d.ts'",
+    "eslint": "eslint --ignore-pattern '*.d.ts' .",
     "prettier": "prettier --check '**/*'",
     "lint": "pnpm -s eslint && pnpm -s prettier",
     "lint:fix": "pnpm -s eslint --fix && pnpm -s prettier --write",
@@ -19,6 +19,9 @@
     "ci-deploy": "cdk deploy '*' --require-approval never --progress events --concurrency 2"
   },
   "devDependencies": {
+    "@eslint/compat": "^1.2.6",
+    "@eslint/eslintrc": "^3.2.0",
+    "@eslint/js": "^9.20.0",
     "@types/jest": "29.5.14",
     "@types/node": "20.12.7",
     "@typescript-eslint/eslint-plugin": "8.24.0",

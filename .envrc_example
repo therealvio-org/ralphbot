@@ -10,7 +10,3 @@ export COMMIT=""
 export VERSION=""
 export ENVIRONMENT=""
 export AWS_ACCOUNT_ID=""
-
-# ESlint v9 introduces a flat config option. We are currently not upgrading to this config for now,
-# this can be done later before Eslint v10 is released.
-export ESLINT_USE_FLAT_CONFIG="false"
